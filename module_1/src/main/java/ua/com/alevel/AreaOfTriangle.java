@@ -33,8 +33,13 @@ public class AreaOfTriangle {
             System.out.println("Площадь треугольника = " + square);
 
             System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
-            flag = in.nextInt();
-            if (flag != 0 && flag != 1) {
+            try {
+                flag = in.nextInt();
+                if (flag != 1 && flag != 0) {
+                    flag = 0;
+                    System.out.println("Автоматический выход из задачи");
+                }
+            } catch (Exception e) {
                 System.out.println("Автоматический выход из задачи");
                 flag = 0;
             }

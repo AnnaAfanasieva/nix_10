@@ -72,12 +72,11 @@ public class CountingNumbers {
             System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
             try {
                 flagToStart = in.nextInt();
+                if (flagToStart != 1 && flagToStart != 0) {
+                    flagToStart = 0;
+                    System.out.println("Автоматический выход из задачи");
+                }
             } catch (Exception e) {
-                System.out.println("Автоматический выход из задачи");
-                flagToStart = 0;
-            }
-
-            if (flagToStart == 0) {
                 System.out.println("Автоматический выход из задачи");
                 flagToStart = 0;
             }

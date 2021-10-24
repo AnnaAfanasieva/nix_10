@@ -29,15 +29,18 @@ public class RunClass {
 
                     if (selectedTask == 1) {
                         System.out.println("Уровень 1 - Задача №1");
-                        //выполнение задачи 1
+                        //Task 1.1
+                        AreaOfTriangle.main(null);
                     } else if (selectedTask == 2) {
                         System.out.println("Уровень 1 - Задача №2");
-                        //выполнение задачи 2
+                        //Task 1.2
+                        HorseMove.main(null);
                     } else if (selectedTask == 3) {
                         System.out.println("Уровень 1 - Задача №3");
-                        //выполнение задачи 3
+                        //Task 1.3
+                        CountingNumbers.main(null);
                     } else if (selectedTask == 0) {
-                        System.out.println("Выход из Уровня 2");
+                        System.out.println("Выход из Уровня 1");
                     } else {
                         System.out.println("Введены некорректные данные, попробуйте еще раз");
                     }
