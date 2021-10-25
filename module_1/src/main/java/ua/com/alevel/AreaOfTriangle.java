@@ -18,7 +18,6 @@ public class AreaOfTriangle {
     public static void main(String[] args) {
 
         do {
-
             System.out.println("Координаты вершины А: ");
             A = inputCoordinates();
             System.out.println("Координаты вершины B: ");
@@ -43,13 +42,10 @@ public class AreaOfTriangle {
                 System.out.println("Автоматический выход из задачи");
                 flag = 0;
             }
-
         } while (flag != 0);
-
     }
 
     private static int[] inputCoordinates() {
-
         System.out.print("Введите координату по Х: ");
         x = in.nextInt();
         System.out.print("Введите координату по Y: ");

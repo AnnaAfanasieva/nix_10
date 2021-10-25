@@ -19,16 +19,13 @@ public class HorseMove {
         startPosition = writePosition();
 
         do {
-
             System.out.println("Стартовая позиция коня: " + (char) startPosition[0] + startPosition[1]);
-
             System.out.println("\nСледующая позиция коня");
             nextPosition = writePosition();
 
             int[] distanceBetweenPositions = new int[2];
             distanceBetweenPositions[0] = Math.abs(nextPosition[0] - startPosition[0]);
             distanceBetweenPositions[1] = Math.abs(nextPosition[1] - startPosition[1]);
-
 
             if ((distanceBetweenPositions[0] == 2 && distanceBetweenPositions[1] == 1) || (distanceBetweenPositions[0] == 1 && distanceBetweenPositions[1] == 2)) {
                 System.out.println("Позиция " + (char) nextPosition[0] + nextPosition[1] + " при следующем ходе коня - возможна\nХод выполнен");
@@ -49,13 +46,10 @@ public class HorseMove {
                 flag = 0;
             }
 
-
         } while (flag != 0);
-
     }
 
     private static int[] writePosition() {
-
         //Получаем самую первую позицию коня (буква)
         System.out.print("Введите координату позиции по горизонтали от A до H (с большой буквы): ");
         int bufferSymbol;
@@ -73,7 +67,6 @@ public class HorseMove {
 
         //Получаем самую первую позицию коня (цифра)
         System.out.print("Введите координату позиции по вертикали от 1 до 8: ");
-
         try {
             bufferSymbol = in.nextInt();
             if (bufferSymbol >= 1 && bufferSymbol <= 8) {
@@ -87,7 +80,5 @@ public class HorseMove {
             System.out.println("Из-за ошибок при вводе автоматически присвоена позиция по вертикали 1");
         }
         return position;
-
     }
-
 }

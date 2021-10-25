@@ -18,10 +18,8 @@ public class CountingNumbers {
 
         //Пользовательский ввод, проверка
         do {
-
             flag = true;
             counter = 0;
-
             numbers = new int[lengthOfArray];
 
             while (flag) {
@@ -64,9 +62,7 @@ public class CountingNumbers {
                     counter++;
                 }
                 flag = true;
-
             }
-
             System.out.println("Колличество уникальных чисел: " + counter);
 
             System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
@@ -80,11 +76,6 @@ public class CountingNumbers {
                 System.out.println("Автоматический выход из задачи");
                 flagToStart = 0;
             }
-
-
         } while (flagToStart != 0);
-
-
     }
-
 }
