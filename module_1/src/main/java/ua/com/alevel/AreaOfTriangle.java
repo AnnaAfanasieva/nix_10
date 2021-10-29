@@ -5,25 +5,18 @@ import java.util.Scanner;
 //Task 1.3
 public class AreaOfTriangle {
 
-    private static int[] A = new int[3];
-    private static int[] B = new int[3];
-    private static int[] C = new int[3];
-    private static int x;
-    private static int y;
-    private static int z;
-    private static double[] triangleSides = new double[3];
-    private static int flag;
-    private static Scanner in = new Scanner(System.in);
-
     public static void main(String[] args) {
+
+        int startTaskAgain;
 
         do {
             System.out.println("Координаты вершины А: ");
-            A = inputCoordinates();
+            int[] A = inputCoordinates();
             System.out.println("Координаты вершины B: ");
-            B = inputCoordinates();
+            int[] B = inputCoordinates();
             System.out.println("Координаты вершины C: ");
-            C = inputCoordinates();
+            int[] C = inputCoordinates();
+            double[] triangleSides = new double[3];
             triangleSides[0] = distanceBetweenPoints(A, B); //длина стороны АВ
             triangleSides[1] = distanceBetweenPoints(B, C); //длина стороны ВC
             triangleSides[2] = distanceBetweenPoints(A, C); //длина стороны АC
@@ -31,27 +24,19 @@ public class AreaOfTriangle {
             double square = Math.sqrt(p * (p - triangleSides[0]) * (p - triangleSides[1]) * (p - triangleSides[2]));
             System.out.println("Площадь треугольника = " + square);
 
-            System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
-            try {
-                flag = in.nextInt();
-                if (flag != 1 && flag != 0) {
-                    flag = 0;
-                    System.out.println("Автоматический выход из задачи");
-                }
-            } catch (Exception e) {
-                System.out.println("Автоматический выход из задачи");
-                flag = 0;
-            }
-        } while (flag != 0);
+            startTaskAgain = MenuForTaskUtil.menu();
+            System.out.println();
+        } while (startTaskAgain != 0);
     }
 
     private static int[] inputCoordinates() {
+        Scanner in = new Scanner(System.in);
         System.out.print("Введите координату по Х: ");
-        x = in.nextInt();
+        int x = in.nextInt();
         System.out.print("Введите координату по Y: ");
-        y = in.nextInt();
+        int y = in.nextInt();
         System.out.print("Введите координату по Z: ");
-        z = in.nextInt();
+        int z = in.nextInt();
         return new int[]{x, y, z};
     }
 

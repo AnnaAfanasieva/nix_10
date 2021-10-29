@@ -6,76 +6,67 @@ import java.util.Scanner;
 //Task 1.1
 public class CountingNumbers {
 
-    private static int[] numbers = new int[]{};
     private static int lengthOfArray = 5;
-    private static Scanner in = new Scanner(System.in);
-    private static int flagToStart;
 
     public static void main(String[] args) {
 
-        boolean flag;
-        int counter;
+        int[] numbers;
+        boolean continueWritingArray;
+        int startTaskAgain;
+        int SymbolIndex;
+        Scanner in = new Scanner(System.in);
 
-        //Пользовательский ввод, проверка
         do {
-            flag = true;
-            counter = 0;
+            continueWritingArray = true;
+            SymbolIndex = 0;
             numbers = new int[lengthOfArray];
 
-            while (flag) {
+            while (continueWritingArray) {
                 System.out.print("Введите элемент массива (для выхода введите exit): ");
                 if (in.hasNextInt()) {
-                    numbers[counter] = in.nextInt();
-                    counter++;
+                    numbers[SymbolIndex] = in.nextInt();
+                    SymbolIndex++;
                 } else {
                     String strToExit = in.next();
                     if (strToExit.equals("exit")) {
                         System.out.println("Запись потока чисел завершена");
-                        flag = false;
+                        continueWritingArray = false;
                     }
                 }
 
-                if (counter == lengthOfArray) {
+                if (SymbolIndex == lengthOfArray) {
                     lengthOfArray += 5;
                     numbers = Arrays.copyOf(numbers, lengthOfArray);
                 }
             }
 
-            lengthOfArray = counter;
+            lengthOfArray = SymbolIndex;
             numbers = Arrays.copyOf(numbers, lengthOfArray);
-            if (lengthOfArray != 0) {
-                counter = 1;
-            } else {
-                counter = 0;
-            }
-            flag = true;
+            int numberOfUniqueSymbols;
 
-            //Подсчет колличества уникальных символов
+            if (lengthOfArray != 0) {
+                numberOfUniqueSymbols = 1;
+            } else {
+                numberOfUniqueSymbols = 0;
+            }
+
+            boolean isUniqueSymbol = true;
+
             for (int i = 1; i < numbers.length; i++) {
                 for (int j = i - 1; j >= 0; j--) {
                     if (numbers[i] == numbers[j]) {
-                        flag = false;
+                        isUniqueSymbol = false;
                     }
                 }
 
-                if (flag) {
-                    counter++;
+                if (isUniqueSymbol) {
+                    numberOfUniqueSymbols++;
                 }
-                flag = true;
+                isUniqueSymbol = true;
             }
-            System.out.println("Колличество уникальных чисел: " + counter);
+            System.out.println("Колличество уникальных чисел: " + numberOfUniqueSymbols);
 
-            System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
-            try {
-                flagToStart = in.nextInt();
-                if (flagToStart != 1 && flagToStart != 0) {
-                    flagToStart = 0;
-                    System.out.println("Автоматический выход из задачи");
-                }
-            } catch (Exception e) {
-                System.out.println("Автоматический выход из задачи");
-                flagToStart = 0;
-            }
-        } while (flagToStart != 0);
+            startTaskAgain = MenuForTaskUtil.menu();
+        } while (startTaskAgain != 0);
     }
 }
