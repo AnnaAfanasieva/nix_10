@@ -7,7 +7,6 @@ public class RunClass {
     private static int levelNumber = 1;
 
     public static void main(String[] args) {
-
         int selectedTask;
         Scanner in = new Scanner(System.in);
 
@@ -22,7 +21,6 @@ public class RunClass {
             }
 
             if (levelNumber == 1) {
-
                 selectedTask = 1;
 
                 while (selectedTask != 0) {
@@ -34,7 +32,6 @@ public class RunClass {
                         selectedTask = 1;
                         System.out.println("Из-за ошибок при вводе автоматически выбрана Задача №1");
                     }
-
                     if (selectedTask == 1) {
                         System.out.println("Уровень 1 - Задача №1");
                         //Task 1.1
@@ -52,10 +49,8 @@ public class RunClass {
                     } else {
                         System.out.println("Введены некорректные данные, попробуйте еще раз");
                     }
-
                 }
             } else if (levelNumber == 2) {
-
                 selectedTask = 1;
 
                 while (selectedTask != 0) {
@@ -83,7 +78,6 @@ public class RunClass {
                     }
                 }
             } else if (levelNumber == 3) {
-
                 selectedTask = 1;
 
                 while (selectedTask != 0) {

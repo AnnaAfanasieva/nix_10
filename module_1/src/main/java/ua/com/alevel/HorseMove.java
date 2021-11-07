@@ -9,7 +9,6 @@ public class HorseMove {
     private final static int POSITION_H = 72;
 
     public static void main(String[] args) {
-
         int[] startPosition;
         int[] nextPosition;
         int startTaskAgain;
@@ -38,7 +37,6 @@ public class HorseMove {
     }
 
     private static int[] writePosition() {
-
         System.out.print("Введите координату позиции по горизонтали от A до H (с большой буквы): ");
         int numberOfLetterCoordinate;
         int[] position = new int[2];

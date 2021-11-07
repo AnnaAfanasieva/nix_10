@@ -1,6 +1,7 @@
 package ua.com.alevel;
 
 public class TreeNode {
+
     private int value;
     private TreeNode leftChild;
     private TreeNode rightChild;

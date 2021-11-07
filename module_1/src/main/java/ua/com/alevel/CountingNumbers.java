@@ -9,7 +9,6 @@ public class CountingNumbers {
     private static int lengthOfArray = 5;
 
     public static void main(String[] args) {
-
         int[] numbers;
         boolean continueWritingArray;
         int startTaskAgain;

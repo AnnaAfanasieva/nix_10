@@ -4,12 +4,9 @@ import java.util.Scanner;
 
 public final class MenuForTaskUtil {
 
-    private MenuForTaskUtil () {
-
-    }
+    private MenuForTaskUtil () { }
 
     public static int menu () {
-
         int startTaskAgain;
         System.out.println("\nВыполнить задачу еще раз?\n1 - Да\n0 - Нет");
         Scanner in = new Scanner(System.in);

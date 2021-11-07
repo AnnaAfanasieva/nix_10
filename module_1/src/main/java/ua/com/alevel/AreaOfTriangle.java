@@ -43,5 +43,4 @@ public class AreaOfTriangle {
     private static double distanceBetweenPoints(int[] A1, int[] A2) {
         return Math.sqrt(Math.pow((A1[0] - A2[0]), 2) + Math.pow((A1[1] - A2[1]), 2) + Math.pow((A1[2] - A2[2]), 2));
     }
-
 }

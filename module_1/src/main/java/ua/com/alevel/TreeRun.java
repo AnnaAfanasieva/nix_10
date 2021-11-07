@@ -3,7 +3,6 @@ package ua.com.alevel;
 public class TreeRun {
 
     public static void main(String[] args) {
-
         Tree tree = new Tree();
         double doubleNodeValue;
 
