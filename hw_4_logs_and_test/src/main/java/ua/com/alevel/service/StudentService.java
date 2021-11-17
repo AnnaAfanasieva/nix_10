@@ -7,28 +7,27 @@ public class StudentService {
 
     private final StudentDao studentDao = new StudentDao();
 
-    public void create(Student student) {
+    public int create(Student student) {
         Student currentStudent = new Student();
-        currentStudent.setId(student.getId());
         currentStudent.setName(student.getName());
-        currentStudent.setGroup(student.getGroup());
+        currentStudent.setIdGroup(student.getIdGroup());
         int age = ageCheck(student.getAge());
         currentStudent.setAge(age);
-        studentDao.create(currentStudent);
+        return studentDao.create(currentStudent);
     }
 
     public void update(Student student) {
         Student currentStudent = new Student();
         currentStudent.setId(student.getId());
         currentStudent.setName(student.getName());
-        currentStudent.setGroup(student.getGroup());
+        currentStudent.setIdGroup(student.getIdGroup());
         int age = ageCheck(student.getAge());
         currentStudent.setAge(age);
         studentDao.update(currentStudent);
     }
 
-    public void delete(int id) {
-        studentDao.delete(id);
+    public boolean delete(int id) {
+        return studentDao.delete(id);
     }
 
     public Student findById(int id) {
@@ -45,5 +44,9 @@ public class StudentService {
             actualAge = 1;
         }
         return actualAge;
+    }
+
+    public void deleteStudentsFromDeletedGroup(int[] studentsToDelete) {
+        studentDao.deleteStudentsFromDeletedGroup(studentsToDelete);
     }
 }

@@ -1,9 +1,9 @@
 package ua.com.alevel;
 
-import ua.com.alevel.controller.StudentController;
+import ua.com.alevel.controller.GroupController;
 
 public class RunStartOOP {
     public static void main(String[] args) {
-        new StudentController().run();
+        new GroupController().run();
     }
 }

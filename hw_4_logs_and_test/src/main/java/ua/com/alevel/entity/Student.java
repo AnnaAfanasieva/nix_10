@@ -5,7 +5,7 @@ public class Student {
     private int id;
     private String name;
     private int age;
-    private String group;
+    private int idGroup;
 
     public int getId() {
         return id;
@@ -31,21 +31,22 @@ public class Student {
         this.age = age;
     }
 
-    public String getGroup() {
-        return group;
+    public int getIdGroup() {
+        return idGroup;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setIdGroup(int idGroup) {
+        this.idGroup = idGroup;
     }
 
+    //поменять вывод id группы на имя группы
     @Override
     public String toString() {
         return "Student{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", group='" + group + '\'' +
+                ", group='" + idGroup + '\'' +
                 '}';
     }
 }

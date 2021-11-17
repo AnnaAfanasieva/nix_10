@@ -5,16 +5,16 @@ import ua.com.alevel.entity.Student;
 
 public class StudentDao {
 
-    public void create(Student student) {
-        StudentDB.getInstance().create(student);
+    public int create(Student student) {
+        return StudentDB.getInstance().create(student);
     }
 
     public void update(Student student) {
         StudentDB.getInstance().update(student);
     }
 
-    public void delete(int id) {
-        StudentDB.getInstance().delete(id);
+    public boolean delete(int id) {
+        return StudentDB.getInstance().delete(id);
     }
 
     public Student findById(int id) {
@@ -23,5 +23,9 @@ public class StudentDao {
 
     public Student[] findAll() {
         return StudentDB.getInstance().findAll();
+    }
+
+    public void deleteStudentsFromDeletedGroup(int[] studentsToDelete) {
+        StudentDB.getInstance().deleteStudentsFromDeletedGroup(studentsToDelete);
     }
 }

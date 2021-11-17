@@ -1,6 +1,7 @@
 package ua.com.alevel.controller;
 
 import ua.com.alevel.entity.Student;
+import ua.com.alevel.service.GroupService;
 import ua.com.alevel.service.StudentService;
 
 import java.io.BufferedReader;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 public class StudentController {
 
     private final StudentService studentService = new StudentService();
+    private final GroupService groupService = new GroupService();
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,6 +38,7 @@ public class StudentController {
         System.out.println("3 - Удалить студента");
         System.out.println("4 - Найти студента по его ID");
         System.out.println("5 - Вывести список всех студентов");
+        System.out.println("6 - Перейти к работе с группами");
         System.out.println("0 - Выйти\n");
     }
 
@@ -56,6 +59,8 @@ public class StudentController {
             case "5":
                 findAll(reader);
                 break;
+            case "6":
+                new GroupController().run();
         }
         runNavigation();
     }
@@ -69,11 +74,14 @@ public class StudentController {
             int age = tryParseAgeStringToInt(ageString);
             System.out.print("Введите группу студента: ");
             String group = reader.readLine();
+            // По итогу вернуть id группы
+            int idGroup = groupService.getIdGroupByName(group);
             Student student = new Student();
             student.setAge(age);
             student.setName(name);
-            student.setGroup(group);
-            studentService.create(student);
+            student.setIdGroup(idGroup);
+            int studentID = studentService.create(student);
+            groupService.addStudentToGroup(studentID, groupService.findById(idGroup));
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -91,11 +99,13 @@ public class StudentController {
             int age = tryParseAgeStringToInt(ageString);
             System.out.print("Введите группу студента: ");
             String group = reader.readLine();
+            // По итогу вернуть id группы
+            int idGroup = groupService.getIdGroupByName(group);
             Student student = new Student();
             student.setId(id);
             student.setAge(age);
             student.setName(name);
-            student.setGroup(group);
+            student.setIdGroup(idGroup);
             studentService.update(student);
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
@@ -107,7 +117,10 @@ public class StudentController {
             System.out.print("Введите id студента: ");
             String stringId = reader.readLine();
             int id = tryParseStringToInt(stringId);
-            studentService.delete(id);
+            boolean studentDeleted = studentService.delete(id);
+            if (studentDeleted) {
+                groupService.deleteStudentFromStudentList(id);
+            }
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -161,4 +174,6 @@ public class StudentController {
         }
         return resultParsing;
     }
+
+
 }

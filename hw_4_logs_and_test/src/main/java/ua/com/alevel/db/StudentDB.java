@@ -23,7 +23,7 @@ public class StudentDB {
         return instance;
     }
 
-    public void create(Student student) {
+    public int create(Student student) {
         if (students.length == lengthOfStudentsArray) {
             students = updateStudentsArray(students);
         }
@@ -31,6 +31,7 @@ public class StudentDB {
         students[actualIndexInStudentsArray] = student;
         counterID++;
         actualIndexInStudentsArray++;
+        return counterID - 1;
     }
 
     public void update(Student student) {
@@ -38,11 +39,11 @@ public class StudentDB {
         if (current != null) {
             current.setName(student.getName());
             current.setAge(student.getAge());
-            current.setGroup(student.getGroup());
+            current.setIdGroup(student.getIdGroup());
         }
     }
 
-    public void delete(int id) {
+    public boolean delete(int id) {
         boolean studentDeleted = false;
         if (students[0] != null) {
             for (int i = 0; i < students.length; i++) {
@@ -69,6 +70,7 @@ public class StudentDB {
         } else {
             System.out.println("Студент с таким ID не найден");
         }
+        return studentDeleted;
     }
 
     public Student findById(int id) {
@@ -89,5 +91,19 @@ public class StudentDB {
         lengthOfStudentsArray = lengthOfStudentsArray * 3 / 2 + 1;
         students = Arrays.copyOf(students, lengthOfStudentsArray);
         return students;
+    }
+
+    public void deleteStudentsFromDeletedGroup(int[] studentsToDelete) {
+        for (int i = 0; i < studentsToDelete.length; i++) {
+            for (int j = 0; j < actualIndexInStudentsArray; j++) {
+                if (studentsToDelete[i] == students[j].getId()) {
+                    try {
+                        delete(studentsToDelete[i]);
+                    } catch (Exception ignored) {
+
+                    }
+                }
+            }
+        }
     }
 }
