@@ -50,7 +50,6 @@ public class Group {
         this.lengthOfStudentsListArray = lengthOfStudentsListArray;
     }
 
-    //добавить получение имен студентов через их id
     @Override
     public String toString() {
         return "Group{" +

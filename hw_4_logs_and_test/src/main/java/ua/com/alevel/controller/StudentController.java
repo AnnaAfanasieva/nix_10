@@ -74,7 +74,6 @@ public class StudentController {
             int age = tryParseAgeStringToInt(ageString);
             System.out.print("Введите группу студента: ");
             String group = reader.readLine();
-            // По итогу вернуть id группы
             int idGroup = groupService.getIdGroupByName(group);
             Student student = new Student();
             student.setAge(age);
@@ -99,7 +98,6 @@ public class StudentController {
             int age = tryParseAgeStringToInt(ageString);
             System.out.print("Введите группу студента: ");
             String group = reader.readLine();
-            // По итогу вернуть id группы
             int idGroup = groupService.getIdGroupByName(group);
             Student student = new Student();
             student.setId(id);
