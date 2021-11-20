@@ -9,3 +9,28 @@ hw_3 = 8
 где пом 3 задания??
 
 module_1 = 8
+
+hw_4 = 8
+
+Аня, Аня, Аня ...
+
+sh /home/ania/IdeaProjects/nix_10/hw_4_logs_and_test/clean.sh
+sh /home/ania/IdeaProjects/nix_10/hw_4_logs_and_test/installAndRunWithTests.sh
+java -jar /home/ania/IdeaProjects/nix_10/hw_4_logs_and_test/target/hw_4_logs_and_test.jar
+sh /home/ania/IdeaProjects/nix_10/hw_4_logs_and_test/runTests.sh
+sh /home/ania/IdeaProjects/nix_10/hw_4_logs_and_test/installAndRun.sh
+
+??? - понимаешь мое негодование ???)
+
+hw_5 = 8
+
+sh /home/ania/IdeaProjects/nix_10/mathset/cleanAndInstall.sh
+mvn install
+java -jar /home/ania/IdeaProjects/nix_10/hw_5_collection/target/hw_5_collection.jar
+
+sh /home/ania/IdeaProjects/nix_10/hw_5_collection/clean.sh
+sh /home/ania/IdeaProjects/nix_10/hw_5_collection/installAndRun.sh
+
+вот нет вопросов по коду, и рука тянется поставить больше, но ...
+
+за такое сисадминов за грати садят))
