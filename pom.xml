@@ -17,6 +17,7 @@
         <module>hw_4_logs_and_test</module>
         <module>hw_5_collection</module>
         <module>mathset</module>
+        <module>module_2</module>
     </modules>
 
     <properties>
