@@ -31,7 +31,7 @@ public class ReadFromFile {
         return names;
     }
 
-    static String[] stringToArray(String string) {
+    private static String[] stringToArray(String string) {
         String newInput = string.replaceAll(" ", "\n");
         Pattern pattern = Pattern.compile("\n");
         return pattern.split(newInput);
