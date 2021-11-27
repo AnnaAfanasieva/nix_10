@@ -15,19 +15,8 @@ public class City {
         cityID = generateCityID();
     }
 
-    public City(String name, int numberOfNeighbors, List<CostTable> costTables) {
-        cityID = generateCityID();
-        this.name = name;
-        this.numberOfNeighbors = numberOfNeighbors;
-        this.costTables = costTables;
-    }
-
     public int getCityID() {
         return cityID;
-    }
-
-    public void setCityID(int cityID) {
-        this.cityID = cityID;
     }
 
     public List<CostTable> getCostTables() {
@@ -44,10 +33,6 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getNumberOfNeighbors() {
-        return numberOfNeighbors;
     }
 
     public void setNumberOfNeighbors(int numberOfNeighbors) {

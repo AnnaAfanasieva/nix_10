@@ -1,11 +1,10 @@
 package ua.com.alevel.cities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CitiesAndWays {
 
-    private List<City> cities = new ArrayList<>();
+    private List<City> cities;
     private int numberOfWaysSought;
     private String[][] soughtWays;
 

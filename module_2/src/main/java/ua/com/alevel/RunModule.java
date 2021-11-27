@@ -1,5 +1,6 @@
 package ua.com.alevel;
 
+import ua.com.alevel.cities.FindingTheCheapestWay;
 import ua.com.alevel.date.TransformDates;
 import ua.com.alevel.name.FindFirstUniqueName;
 
@@ -12,6 +13,6 @@ public class RunModule {
         System.out.println(separator + "\nTask 2");
         FindFirstUniqueName.main(null);
         System.out.println(separator + "\nTask 3");
-        //ClassForTask3
+        FindingTheCheapestWay.main(null);
     }
 }
