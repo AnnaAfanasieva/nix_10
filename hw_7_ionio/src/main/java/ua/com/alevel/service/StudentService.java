@@ -3,6 +3,8 @@ package ua.com.alevel.service;
 import ua.com.alevel.dao.StudentDao;
 import ua.com.alevel.entity.Student;
 
+import java.util.List;
+
 public class StudentService {
 
     private final StudentDao studentDao = new StudentDao();
@@ -26,15 +28,15 @@ public class StudentService {
         studentDao.update(currentStudent);
     }
 
-    public boolean delete(int id) {
-        return studentDao.delete(id);
+    public void delete(int id) {
+        studentDao.delete(id);
     }
 
     public Student findById(int id) {
         return studentDao.findById(id);
     }
 
-    public Student[] findAll() {
+    public List<Student> findAll() {
         return studentDao.findAll();
     }
 
@@ -42,12 +44,7 @@ public class StudentService {
         if (actualAge <= 0 || actualAge > 200) {
             System.out.println("Возраст не может иметь данное значение, по умолчанию записан возраст 1 год");
             actualAge = 1;
-        } else {
         }
         return actualAge;
-    }
-
-    public void deleteStudentsFromDeletedGroup(int[] studentsToDelete) {
-        studentDao.deleteStudentsFromDeletedGroup(studentsToDelete);
     }
 }

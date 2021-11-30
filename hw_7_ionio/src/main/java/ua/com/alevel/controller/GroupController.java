@@ -2,16 +2,15 @@ package ua.com.alevel.controller;
 
 import ua.com.alevel.entity.Group;
 import ua.com.alevel.service.GroupService;
-import ua.com.alevel.service.StudentService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class GroupController {
 
     private final GroupService groupService = new GroupService();
-    private final StudentService studentService = new StudentService();
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -99,8 +98,10 @@ public class GroupController {
             System.out.print("Введите id группы: ");
             String stringId = reader.readLine();
             int id = tryParseStringToInt(stringId);
-            int[] studentsToDelete = groupService.delete(id);
-            studentService.deleteStudentsFromDeletedGroup(studentsToDelete);
+            groupService.delete(id);
+            //TODO удаление студентов при удалении группы
+//            int[] studentsToDelete = groupService.delete(id);
+//            studentService.deleteStudentsFromDeletedGroup(studentsToDelete);
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -121,15 +122,13 @@ public class GroupController {
     }
 
     private void findAll(BufferedReader reader) {
-        Group[] groups = groupService.findAll();
-        if (groups[0] != null) {
-            for (int i = 0; i < groups.length; i++) {
-                if (groups[i] != null) {
-                    System.out.println("Группа" + (i + 1) + " = " + groups[i]);
-                }
-            }
-        } else {
+        List<Group> groups = groupService.findAll();
+        if (groups.size() == 0) {
             System.out.println("Групп в списке нет");
+        } else {
+            for (int i = 0; i < groups.size(); i++) {
+                System.out.println("Группа №" + (i + 1) + " = " + groups.get(i));
+            }
         }
     }
 
@@ -143,5 +142,4 @@ public class GroupController {
         }
         return resultParsing;
     }
-
 }

@@ -39,7 +39,7 @@ public class Student {
         this.idGroup = idGroup;
     }
 
-    //поменять вывод id группы на имя группы
+    //TODO добавить вывод группы
     @Override
     public String toString() {
         return "Student{" +

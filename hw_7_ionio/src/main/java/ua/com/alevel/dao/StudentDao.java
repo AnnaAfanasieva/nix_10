@@ -1,31 +1,32 @@
 package ua.com.alevel.dao;
 
-import ua.com.alevel.db.StudentDB;
+
+import ua.com.alevel.csv.StudentCSV;
 import ua.com.alevel.entity.Student;
+
+import java.util.List;
 
 public class StudentDao {
 
+    private final StudentCSV studentCSV = new StudentCSV();
+
     public int create(Student student) {
-        return StudentDB.getInstance().create(student);
+        return studentCSV.create(student);
     }
 
     public void update(Student student) {
-        StudentDB.getInstance().update(student);
+        studentCSV.update(student);
     }
 
-    public boolean delete(int id) {
-        return StudentDB.getInstance().delete(id);
+    public void delete(int id) {
+        studentCSV.delete(id);
     }
 
     public Student findById(int id) {
-        return StudentDB.getInstance().findById(id);
+        return studentCSV.findById(id);
     }
 
-    public Student[] findAll() {
-        return StudentDB.getInstance().findAll();
-    }
-
-    public void deleteStudentsFromDeletedGroup(int[] studentsToDelete) {
-        StudentDB.getInstance().deleteStudentsFromDeletedGroup(studentsToDelete);
+    public List<Student> findAll() {
+        return studentCSV.findAll();
     }
 }

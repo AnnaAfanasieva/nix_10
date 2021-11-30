@@ -7,6 +7,7 @@ import ua.com.alevel.service.StudentService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class StudentController {
 
@@ -80,7 +81,8 @@ public class StudentController {
             student.setName(name);
             student.setIdGroup(idGroup);
             int studentID = studentService.create(student);
-            groupService.addStudentToGroup(studentID, groupService.findById(idGroup));
+            //TODO добавление студента в группу при создании
+//            groupService.addStudentToGroup(studentID, groupService.findById(idGroup));
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -105,6 +107,7 @@ public class StudentController {
             student.setName(name);
             student.setIdGroup(idGroup);
             studentService.update(student);
+            //TODO обновление в таблице связей
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -115,10 +118,11 @@ public class StudentController {
             System.out.print("Введите id студента: ");
             String stringId = reader.readLine();
             int id = tryParseStringToInt(stringId);
-            boolean studentDeleted = studentService.delete(id);
-            if (studentDeleted) {
-                groupService.deleteStudentFromStudentList(id);
-            }
+            studentService.delete(id);
+//            boolean studentDeleted = studentService.delete(id);
+//            if (studentDeleted) {
+//                groupService.deleteStudentFromStudentList(id);
+//            }
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -139,15 +143,13 @@ public class StudentController {
     }
 
     private void findAll(BufferedReader reader) {
-        Student[] students = studentService.findAll();
-        if (students[0] != null) {
-            for (int i = 0; i < students.length; i++) {
-                if (students[i] != null) {
-                    System.out.println("Студент" + (i + 1) + " = " + students[i]);
-                }
-            }
-        } else {
+        List<Student> students = studentService.findAll();
+        if (students.size() == 0) {
             System.out.println("Студентов в списке нет");
+        } else {
+            for (int i = 0; i < students.size(); i++) {
+                System.out.println("Студент №" + (i + 1) + " = " + students.get(i));
+            }
         }
     }
 
@@ -172,6 +174,4 @@ public class StudentController {
         }
         return resultParsing;
     }
-
-
 }
