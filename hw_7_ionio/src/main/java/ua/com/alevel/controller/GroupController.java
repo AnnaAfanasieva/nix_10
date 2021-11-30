@@ -99,9 +99,6 @@ public class GroupController {
             String stringId = reader.readLine();
             int id = tryParseStringToInt(stringId);
             groupService.delete(id);
-            //TODO удаление студентов при удалении группы
-//            int[] studentsToDelete = groupService.delete(id);
-//            studentService.deleteStudentsFromDeletedGroup(studentsToDelete);
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }

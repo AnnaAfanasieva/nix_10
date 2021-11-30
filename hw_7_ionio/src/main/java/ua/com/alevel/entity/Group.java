@@ -1,9 +1,12 @@
 package ua.com.alevel.entity;
 
+import ua.com.alevel.csv.StudentCSV;
+
 public class Group {
 
     private int id;
     private String name;
+    private final StudentCSV studentCSV = new StudentCSV();
 
     public int getId() {
         return id;
@@ -21,12 +24,13 @@ public class Group {
         this.name = name;
     }
 
-    //TODO добавить вывод студентов
     @Override
     public String toString() {
+        String studentsList = studentCSV.studentListByGroupID(id);
         return "Group{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", student names='" + studentsList + '\'' +
                 '}';
     }
 }

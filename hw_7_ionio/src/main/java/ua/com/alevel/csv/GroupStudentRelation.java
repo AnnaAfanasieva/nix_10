@@ -27,10 +27,26 @@ public class GroupStudentRelation {
         updateCSVFile(relations);
     }
 
-    public void delete(int studentID, int groupID) {
+    public void deleteByStudentID(int studentID) {
         Map<Integer, Integer> relations = findAll();
-        relations.remove(studentID, groupID);
+        relations.remove(studentID);
         updateCSVFile(relations);
+    }
+
+    public List<Integer> deleteByGroupID(int groupID) {
+        Map<Integer, Integer> relations = findAll();
+        List<Integer> studentIDsToRemove = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> relation : relations.entrySet()) {
+            if (relation.getValue() == groupID) {
+                studentIDsToRemove.add(relation.getKey());
+            }
+        }
+
+        for (int studentID : studentIDsToRemove) {
+            relations.remove(studentID);
+        }
+        updateCSVFile(relations);
+        return studentIDsToRemove;
     }
 
     public Map<Integer, Integer> findAll() {
@@ -65,7 +81,7 @@ public class GroupStudentRelation {
         return 0;
     }
 
-    public List<Integer> findAllByGroupID(int groupID) {
+    public List<Integer> findStudentsByGroupID(int groupID) {
         List<Integer> allStudentsByGroupID = new ArrayList<>();
         Map<Integer, Integer> relations = findAll();
         for (Map.Entry<Integer, Integer> relation : relations.entrySet()) {
@@ -75,11 +91,6 @@ public class GroupStudentRelation {
         }
         return allStudentsByGroupID;
     }
-
-    //TODO возвращать имя группы по студенту
-//    public void showGroupByStudentID(int studentID) {
-//
-//    }
 
     private static String createStringFromMap(Map.Entry<Integer, Integer> relation) {
         return relation.getKey() + SEPARATOR + relation.getValue();

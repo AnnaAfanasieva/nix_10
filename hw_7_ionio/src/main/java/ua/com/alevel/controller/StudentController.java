@@ -81,8 +81,6 @@ public class StudentController {
             student.setName(name);
             student.setIdGroup(idGroup);
             int studentID = studentService.create(student);
-            //TODO добавление студента в группу при создании
-//            groupService.addStudentToGroup(studentID, groupService.findById(idGroup));
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }
@@ -107,7 +105,6 @@ public class StudentController {
             student.setName(name);
             student.setIdGroup(idGroup);
             studentService.update(student);
-            //TODO обновление в таблице связей
         } catch (IOException e) {
             System.out.println("problem: = " + e.getMessage());
         }

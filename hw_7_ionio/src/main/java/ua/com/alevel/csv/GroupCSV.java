@@ -12,6 +12,8 @@ public class GroupCSV {
     private static final String PATH = "files/groups.csv";
     private static final String SEPARATOR = ",";
     private static int counterID = 1;
+    private final GroupStudentRelation groupStudentRelation = new GroupStudentRelation();
+    private final StudentCSV studentCSV = new StudentCSV();
 
     public void create(Group group) {
         CSV.writeStringToCSVFile(PATH, counterID + SEPARATOR + group.getName());
@@ -37,8 +39,9 @@ public class GroupCSV {
             if (group != null) {
                 for (int i = 0; i < groups.size(); i++) {
                     if (groups.get(i).getId() == id) {
-                        // TODO Удалить студентов, которые привязаны к группе, мб убрать return
+                        List<Integer> studentIDsToRemove = groupStudentRelation.deleteByGroupID(id);
                         groups.remove(i);
+                        studentCSV.deleteListStudents(studentIDsToRemove);
                     }
                 }
                 updateCSVFile(groups);
@@ -59,7 +62,6 @@ public class GroupCSV {
         return null;
     }
 
-    //TODO при выводе группы выводить список студентов
     public List<Group> findAll() {
         List<Group> groups = new ArrayList<>();
         List<String> groupsListString = CSV.readStringListFromCSVFile(PATH);
@@ -71,8 +73,12 @@ public class GroupCSV {
         return groups;
     }
 
+    public String groupNameByStudentID(int studentID) {
+        int groupID = groupStudentRelation.findGroupByStudentID(studentID);
+        return findById(groupID).getName();
+    }
+
     public int getIdGroupByName(String name) {
-        //Если нет группы, то создаем для студента
         List<Group> groups = findAll();
         for (Group group : groups) {
             if (group.getName().equals(name)) {
@@ -84,45 +90,6 @@ public class GroupCSV {
         create(newGroupToStudent);
         return (counterID - 1);
     }
-
-//    public void addStudentToGroup(int studentID, Group group) {
-//        int[] studentList = group.getStudentsList();
-//        int actualIndexInStudentsListArray = group.getActualIndexInStudentsListArray();
-//        int lengthOfStudentsListArray = group.getLengthOfStudentsListArray();
-//        if (actualIndexInStudentsListArray == lengthOfStudentsListArray) {
-//            lengthOfStudentsListArray = lengthOfStudentsListArray * 3 / 2 + 1;
-//            studentList = Arrays.copyOf(studentList, lengthOfStudentsListArray);
-//        }
-//        studentList[actualIndexInStudentsListArray] = studentID;
-//        actualIndexInStudentsListArray++;
-//        group.setStudentsList(studentList);
-//        group.setActualIndexInStudentsListArray(actualIndexInStudentsListArray);
-//        group.setLengthOfStudentsListArray(lengthOfStudentsListArray);
-//    }
-//
-//    public void deleteStudentFromStudentList(int studentID) {
-//        for (int i = 0; i < groups_array.length; i++) {
-//            int[] studentList = groups_array[i].getStudentsList();
-//            int actualIndexInStudentsListArray = groups_array[i].getActualIndexInStudentsListArray();
-//            for (int j = 0; j < actualIndexInStudentsListArray; j++) {
-//                if (studentList[j] == studentID) {
-//                    for (int k = j; k < actualIndexInStudentsListArray - 1; k++) {
-//                        studentList[k] = studentList[k + 1];
-//                    }
-//                    try {
-//                        if (studentList[actualIndexInStudentsListArray - 1] != 0) {
-//                            studentList[actualIndexInStudentsListArray - 1] = 0;
-//                        }
-//                    } catch (Exception ignored) {
-//
-//                    }
-//                    i = groups_array.length;
-//                    j = actualIndexInStudentsListArray;
-//                    actualIndexInStudentsListArray--;
-//                }
-//            }
-//        }
-//    }
 
     private static Group createGroup(String[] groupElements) {
         Group group = new Group();
