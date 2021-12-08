@@ -54,7 +54,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ua.com.alevel.CalendarApplication</mainClass>
+                                    <mainClass>ua.com.alevel.DateApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
