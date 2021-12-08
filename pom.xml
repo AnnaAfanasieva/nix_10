@@ -19,6 +19,8 @@
         <module>mathset</module>
         <module>module_2</module>
         <module>hw_7_ionio</module>
+        <module>hw_6_exception</module>
+        <module>date</module>
     </modules>
 
     <properties>
