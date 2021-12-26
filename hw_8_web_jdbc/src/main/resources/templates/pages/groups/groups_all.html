@@ -34,10 +34,10 @@
                             <td th:text="${group.getName()}"></td>
                             <td th:text="${#calendars.format(group.getCreated(),'dd MMMM yyyy')}"></td>
                             <td>
-                                <a th:href="@{'/departments/details/' + ${group.getId()}}" type="button" class="btn btn-primary">details</a>
+                                <a th:href="@{'/groups/details/' + ${group.getId()}}" type="button" class="btn btn-primary">details</a>
                             </td>
                             <td>
-                                <a th:href="@{'/departments/delete/' + ${group.getId()}}" type="button" class="btn btn-danger">delete</a>
+                                <a th:href="@{'/groups/delete/' + ${group.getId()}}" type="button" class="btn btn-danger">delete</a>
                             </td>
                         </tr>
                         </tbody>
