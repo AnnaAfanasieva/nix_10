@@ -52,7 +52,6 @@ public class GroupController {
 
     @GetMapping("/details/{id}")
     public String details(@PathVariable @Valid @Min(value = 1, message = "idiot!!!") @NotNull() Long id, Model model) {
-        System.out.println("DepartmentController.details");
         GroupResponseDto dto = groupFacade.findById(id);
         model.addAttribute("group", dto);
         return "pages/groups/group_details";

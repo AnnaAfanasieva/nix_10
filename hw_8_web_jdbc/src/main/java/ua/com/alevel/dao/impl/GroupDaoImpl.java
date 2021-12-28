@@ -26,7 +26,7 @@ public class GroupDaoImpl implements GroupDao {
     private final static String UPDATE_GROUP_QUERY = "update groups_table set updated = ?, name = ? where id = ";
     private final static String DELETE_GROUP_BY_ID_QUERY = "delete from groups_table where id = ";
     private final static String EXIST_GROUP_BY_ID_QUERY = "select count(*) from groups_table where id = ";
-    private final static String FIND_GROUP_BY_ID_QUERY = "select * from groups_table where id = ";
+    public final static String FIND_GROUP_BY_ID_QUERY = "select * from groups_table where id = ";
     private final static String FIND_ALL_GROUPS_QUERY = "select * from groups_table";
 
     @Override
@@ -99,7 +99,7 @@ public class GroupDaoImpl implements GroupDao {
         return groups;
     }
 
-    private Group convertResultSetToGroup(ResultSet resultSet) throws SQLException {
+    public Group convertResultSetToGroup(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         Timestamp created = resultSet.getTimestamp("created");
         Timestamp updated = resultSet.getTimestamp("updated");

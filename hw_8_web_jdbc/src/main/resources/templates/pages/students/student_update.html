@@ -5,7 +5,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="utf-8">
-    <title>Update Group</title>
+    <title>Edit Student</title>
 </head>
 <body>
 
@@ -15,13 +15,24 @@
         <div class="col-12">
             <div class="card mt-2">
                 <div class="card-header">
-                    <h4>New Group</h4>
+                    <h4>Edit Student</h4>
                 </div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/groups/update}" th:object="${group}" method="post">
+                    <form action="#" th:action="@{/students/update}" th:object="${student}" method="post">
                         <div class="form-group">
                             <label for="name">name</label>
                             <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter new name" th:field="*{name}">
+                            <label for="age">age</label>
+                            <input type="number" class="form-control" id="age" aria-describedby="age" placeholder="Enter new age" th:field="*{age}">
+                            <div class="form-group">
+                                <label for="group">Example select</label>
+                                <select class="form-control" id="group" th:field="*{groupId}">
+                                    <option th:each="group : ${groupsList}"
+                                            th:value="${group.getId()}"
+                                            th:text="${group.getName()}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

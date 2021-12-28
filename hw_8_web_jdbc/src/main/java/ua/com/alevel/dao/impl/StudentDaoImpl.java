@@ -6,10 +6,7 @@ import ua.com.alevel.dao.StudentDao;
 import ua.com.alevel.entity.Group;
 import ua.com.alevel.entity.Student;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,36 +20,48 @@ public class StudentDaoImpl implements StudentDao {
         this.jpaConfig = jpaConfig;
     }
 
-    private final static String CREATE_STUDENT_QUERY = "insert into students values (default,?,?,?,?,?)";
-    private final static String UPDATE_STUDENT_QUERY = "update students set updated = ?, name = ?, age = ?, groupId = ? where id = ";
-    private final static String DELETE_STUDENT_BY_ID_QUERY = "delete from students where id = ";
-    private final static String DELETE_STUDENT_BY_GROUP_QUERY = "delete from students where group_id = ";
-    private final static String EXIST_STUDENT_BY_ID_QUERY = "select count(*) from students where id = ";
-    private final static String FIND_STUDENT_BY_ID_QUERY = "select * from students as st join groups as gr on gr.id = st.group_id where st.id = ";
-    private final static String FIND_ALL_STUDENTS_QUERY = "select * from students as st join groups as gr on gr.id = st.group_id";
-    private final static String FIND_ALL_STUDENTS_BY_DEPARTMENT_QUERY = "select * from students as st join groups as gr on gr.id = st.group_id where st.group_id = ";
+    private final static String CREATE_STUDENT_QUERY = "insert into students_table values (default,?,?,?,?)";
+    private final static String CREATE_RELATION_GROUP_STUDENT_QUERY = "insert into groups_students_table values (?,?)";
+    private final static String UPDATE_STUDENT_QUERY = "update students_table, groups_students_table set updated = ?, name = ?, age = ?, group_id = ? where students_table.id = ? AND groups_students_table.student_id = ?";
+    private final static String DELETE_STUDENT_BY_ID_QUERY = "delete from students_table where id = ";
+    private final static String DELETE_STUDENT_BY_GROUP_QUERY = "delete from students_table where id in (select student_id from groups_students_table where group_id = ";
+    private final static String EXIST_STUDENT_BY_ID_QUERY = "select count(*) from students_table where id = ";
+    private final static String FIND_STUDENT_BY_ID_QUERY = "select * from students_table as st join groups_students_table gst on st.id = gst.student_id join groups_table gt on gt.id = gst.group_id where st.id = ";
+    private final static String FIND_ALL_STUDENTS_QUERY = "select * from students_table as st join groups_students_table gst on st.id = gst.student_id join groups_table gt on gt.id = gst.group_id";
+    private final static String FIND_ALL_STUDENTS_BY_GROUP_QUERY = "select * from students_table as st join groups_students_table gst on st.id = gst.student_id join groups_table gt on gt.id = gst.group_id where gt.id = ";
 
     @Override
     public void create(Student entity) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(CREATE_STUDENT_QUERY)) {
+        long studentId = 0;
+        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(CREATE_STUDENT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setTimestamp(1, new Timestamp(entity.getCreated().getTime()));
             preparedStatement.setTimestamp(2, new Timestamp(entity.getUpdated().getTime()));
             preparedStatement.setString(3, entity.getName());
             preparedStatement.setInt(4, entity.getAge());
-            preparedStatement.setLong(5, entity.getGroup().getId());
             preparedStatement.executeUpdate();
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    studentId = generatedKeys.getLong(1);
+                }
+                else {
+                    throw new SQLException("Creating student failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        createRelationGroupStudent(studentId, entity.getGroup().getId());
     }
 
     @Override
     public void update(Student entity) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(UPDATE_STUDENT_QUERY + entity.getId())) {
+        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(UPDATE_STUDENT_QUERY)) {
             preparedStatement.setTimestamp(1, new Timestamp(entity.getUpdated().getTime()));
             preparedStatement.setString(2, entity.getName());
             preparedStatement.setInt(3, entity.getAge());
             preparedStatement.setLong(4, entity.getGroup().getId());
+            preparedStatement.setLong(5, entity.getId());
+            preparedStatement.setLong(6, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +117,7 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public void deleteAllByGroupId(Long groupId) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(DELETE_STUDENT_BY_GROUP_QUERY + groupId)) {
+        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(DELETE_STUDENT_BY_GROUP_QUERY + groupId + ")")) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,7 +127,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> findAllByGroupId(Long groupId) {
         List<Student> students = new ArrayList<>();
-        try (ResultSet resultSet = jpaConfig.getStatement().executeQuery(FIND_ALL_STUDENTS_BY_DEPARTMENT_QUERY + groupId)) {
+        try (ResultSet resultSet = jpaConfig.getStatement().executeQuery(FIND_ALL_STUDENTS_BY_GROUP_QUERY + groupId)) {
             while (resultSet.next()) {
                 students.add(convertResultSetToStudent(resultSet));
             }
@@ -128,6 +137,16 @@ public class StudentDaoImpl implements StudentDao {
         return students;
     }
 
+    private void createRelationGroupStudent (Long studentId, Long groupId) {
+        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(CREATE_RELATION_GROUP_STUDENT_QUERY)) {
+            preparedStatement.setLong(1, studentId);
+            preparedStatement.setLong(2, groupId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Student convertResultSetToStudent(ResultSet resultSet) throws SQLException {
         Long studentId = resultSet.getLong("st.id");
         Timestamp employeeCreated = resultSet.getTimestamp("st.created");
@@ -135,10 +154,10 @@ public class StudentDaoImpl implements StudentDao {
         String studentName = resultSet.getString("st.name");
         int age = resultSet.getInt("age");
 
-        Long groupId = resultSet.getLong("gr.id");
-        Timestamp groupCreated = resultSet.getTimestamp("gr.created");
-        Timestamp groupUpdated = resultSet.getTimestamp("gr.updated");
-        String groupName = resultSet.getString("gr.name");
+        Long groupId = resultSet.getLong("gt.id");
+        Timestamp groupCreated = resultSet.getTimestamp("gt.created");
+        Timestamp groupUpdated = resultSet.getTimestamp("gt.updated");
+        String groupName = resultSet.getString("gt.name");
 
         Group group = new Group();
         group.setId(groupId);

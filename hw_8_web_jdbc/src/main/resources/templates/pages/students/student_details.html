@@ -5,7 +5,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="utf-8">
-    <title>Details Group</title>
+    <title>Details Student</title>
 </head>
 <body>
 
@@ -15,31 +15,37 @@
         <div class="col-12">
             <div class="card mb-2 mt-2">
                 <div class="card-header">
-                    Details Group
+                    Details Student
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <tr>
                             <th>id</th>
-                            <td th:text="${group.getId()}"></td>
+                            <td th:text="${student.getId()}"></td>
                         </tr>
                         <tr>
                             <th>name</th>
-                            <td th:text="${group.getName()}"></td>
+                            <td th:text="${student.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>age</th>
+                            <td th:text="${student.getAge()}"></td>
+                        </tr>
+                        <tr>
+                            <th>group</th>
+                            <td th:text="${student.getGroup().getName()}"></td>
                         </tr>
                         <tr>
                             <th>created</th>
-                            <td th:text="${#calendars.format(group.getCreated(),'dd MMMM yyyy')}"></td>
+                            <td th:text="${#calendars.format(student.getCreated(),'dd MMMM yyyy')}"></td>
                         </tr>
                         <tr>
                             <th>updated</th>
-                            <td th:text="${#calendars.format(group.getUpdated(),'dd MMMM yyyy')}"></td>
+                            <td th:text="${#calendars.format(student.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
                     <hr>
-                    <a th:href="@{'/groups/update/' + ${group.getId()}}" type="button" class="btn btn-primary">Edit group</a>
-                    <hr>
-                    <a th:href="@{'/students/groups/' + ${group.getId()}}" type="button" class="btn btn-primary">Show all students</a>
+                    <a th:href="@{'/students/update/' + ${student.getId()}}" type="button" class="btn btn-primary">Edit student</a>
                 </div>
             </div>
         </div>
