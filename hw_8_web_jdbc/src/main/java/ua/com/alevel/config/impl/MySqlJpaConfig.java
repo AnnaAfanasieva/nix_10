@@ -1,7 +1,7 @@
 package ua.com.alevel.config.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.alevel.config.DataSourceProperties;
+import ua.com.alevel.config.DatasourceProperties;
 import ua.com.alevel.config.JpaConfig;
 
 import java.sql.Connection;
@@ -12,22 +12,22 @@ import java.sql.Statement;
 @Service
 public class MySqlJpaConfig implements JpaConfig {
 
-    private final DataSourceProperties dataSourceProperties;
+    private final DatasourceProperties datasourceProperties;
     private Statement statement;
     private Connection connection;
 
-    public MySqlJpaConfig(DataSourceProperties dataSourceProperties) {
-        this.dataSourceProperties = dataSourceProperties;
+    public MySqlJpaConfig(DatasourceProperties datasourceProperties) {
+        this.datasourceProperties = datasourceProperties;
     }
 
     @Override
     public void connect() {
         try {
-            Class.forName(dataSourceProperties.getDriverClassName());
+            Class.forName(datasourceProperties.getDriverClassName());
             connection = DriverManager.getConnection(
-                    dataSourceProperties.getUrl(),
-                    dataSourceProperties.getUsername(),
-                    dataSourceProperties.getPassword()
+                    datasourceProperties.getUrl(),
+                    datasourceProperties.getUsername(),
+                    datasourceProperties.getPassword()
             );
             statement = connection.createStatement();
         } catch (ClassNotFoundException | SQLException e) {

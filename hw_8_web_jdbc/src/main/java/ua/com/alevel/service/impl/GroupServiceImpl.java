@@ -1,12 +1,13 @@
 package ua.com.alevel.service.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.alevel.dao.GroupDao;
-import ua.com.alevel.dao.StudentDao;
-import ua.com.alevel.entity.Group;
+import ua.com.alevel.persistence.dao.GroupDao;
+import ua.com.alevel.persistence.dao.StudentDao;
+import ua.com.alevel.persistence.datatable.DataTableRequest;
+import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.Group;
 import ua.com.alevel.service.GroupService;
-
-import java.util.List;
+import ua.com.alevel.util.WebResponseUtil;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -26,31 +27,25 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void update(Group entity) {
-        if (groupDao.existById(entity.getId())) {
-            groupDao.update(entity);
-        }
+        groupDao.update(entity);
     }
 
     @Override
     public void delete(Long id) {
-        if (groupDao.existById(id)) {
-            studentDao.deleteAllByGroupId(id);
-            groupDao.delete(id);
-        }
+        studentDao.deleteAllByGroupId(id);
+        groupDao.delete(id);
     }
 
     @Override
     public Group findById(Long id) {
-        Group groupByCurrentId = groupDao.findById(id);
-        if (groupByCurrentId == null) {
-//            throw new EntityNotFoundException("not found, please ...");
-            return null;
-        }
-        return groupByCurrentId;
+        return groupDao.findById(id);
     }
 
     @Override
-    public List<Group> findAll() {
-        return groupDao.findAll();
+    public DataTableResponse<Group> findAll(DataTableRequest request) {
+        DataTableResponse<Group> dataTableResponse = groupDao.findAll(request);
+        long count = groupDao.count();
+        WebResponseUtil.initDataTableResponse(request, dataTableResponse, count);
+        return dataTableResponse;
     }
 }

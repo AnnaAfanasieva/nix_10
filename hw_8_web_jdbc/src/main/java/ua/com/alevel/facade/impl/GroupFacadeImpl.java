@@ -1,11 +1,17 @@
 package ua.com.alevel.facade.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.alevel.dto.group.GroupRequestDto;
-import ua.com.alevel.dto.group.GroupResponseDto;
-import ua.com.alevel.entity.Group;
+import org.springframework.web.context.request.WebRequest;
 import ua.com.alevel.facade.GroupFacade;
+import ua.com.alevel.persistence.datatable.DataTableRequest;
+import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.Group;
 import ua.com.alevel.service.GroupService;
+import ua.com.alevel.util.WebRequestUtil;
+import ua.com.alevel.util.WebResponseUtil;
+import ua.com.alevel.view.dto.request.GroupRequestDto;
+import ua.com.alevel.view.dto.response.GroupResponseDto;
+import ua.com.alevel.view.dto.response.PageData;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +20,7 @@ import java.util.stream.Collectors;
 public class GroupFacadeImpl implements GroupFacade {
 
     private final GroupService groupService;
+
 
     public GroupFacadeImpl(GroupService groupService) {
         this.groupService = groupService;
@@ -46,10 +53,16 @@ public class GroupFacadeImpl implements GroupFacade {
     }
 
     @Override
-    public List<GroupResponseDto> findAll() {
-        return groupService.findAll()
-                .stream()
-                .map(GroupResponseDto::new)
-                .collect(Collectors.toList());
+    public PageData<GroupResponseDto> findAll(WebRequest request) {
+        DataTableRequest dataTableRequest = WebRequestUtil.initDataTableRequest(request);
+        DataTableResponse<Group> tableResponse = groupService.findAll(dataTableRequest);
+
+        List<GroupResponseDto> products = tableResponse.getItems().stream().
+                map(GroupResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<GroupResponseDto> pageData = (PageData<GroupResponseDto>) WebResponseUtil.initPageData(tableResponse);
+        pageData.setItems(products);
+        return pageData;
     }
 }

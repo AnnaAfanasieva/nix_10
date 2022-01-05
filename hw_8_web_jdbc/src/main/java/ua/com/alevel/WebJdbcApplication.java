@@ -3,13 +3,10 @@ package ua.com.alevel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.event.EventListener;
-import ua.com.alevel.config.DataSourceProperties;
 import ua.com.alevel.config.JpaConfig;
 
 @SpringBootApplication
-//@EnableConfigurationProperties(DataSourceProperties.class)
 public class WebJdbcApplication {
 
     private final JpaConfig jpaConfig;

@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label for="group">Example select</label>
                                 <select class="form-control" id="group" th:field="*{groupId}">
-                                    <option th:each="group : ${groupsList}"
+                                    <option th:each="group : ${groupsList.items}"
                                             th:value="${group.getId()}"
                                             th:text="${group.getName()}">
                                     </option>

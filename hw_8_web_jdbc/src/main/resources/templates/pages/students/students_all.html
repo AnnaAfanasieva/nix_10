@@ -2,52 +2,28 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{fragments/data_table}">
 <head>
     <meta charset="utf-8">
     <title>Students</title>
 </head>
 <body>
 
-<div layout:fragment="content">
+<div layout:fragment="data_table_content">
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-2 mt-2">
-                <div class="card-header">
-                    All Students
-                </div>
-                <div class="card-body">
-                    <table class="table table-sm table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>name</th>
-                            <th>age</th>
-                            <th>created</th>
-                            <th>details</th>
-                            <th>delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="student,iter : ${students}">
-                            <td th:text="${iter.count}"></td>
-                            <td th:text="${student.getName()}"></td>
-                            <td th:text="${student.getAge()}"></td>
-                            <td th:text="${#calendars.format(student.getCreated(),'dd MMMM yyyy')}"></td>
-                            <td>
-                                <a th:href="@{'/students/details/' + ${student.getId()}}" type="button" class="btn btn-primary">details</a>
-                            </td>
-                            <td>
-                                <a th:href="@{'/students/delete/' + ${student.getId()}}" type="button" class="btn btn-danger">delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <tr th:each="student,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${student.getName()}"></td>
+        <td th:text="${student.getAge()}"></td>
+        <td th:text="${#calendars.format(student.getCreated(),'dd MMMM yyyy')}"></td>
+        <td>
+            <a th:href="@{'/students/details/' + ${student.getId()}}" type="button" class="btn btn-primary">details</a>
+        </td>
+        <td>
+            <a th:href="@{'/students/delete/' + ${student.getId()}}" type="button" class="btn btn-danger">delete</a>
+        </td>
+    </tr>
+
 
 </div>
 

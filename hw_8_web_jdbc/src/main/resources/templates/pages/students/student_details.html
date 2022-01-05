@@ -33,7 +33,9 @@
                         </tr>
                         <tr>
                             <th>group</th>
-                            <td th:text="${student.getGroup().getName()}"></td>
+                            <td>
+                                <a th:href="@{'/groups/details/' + ${student.getGroup().getId()}}" type="button" class="btn btn-link" th:text="${student.getGroup().getName()}"></a>
+                            </td>
                         </tr>
                         <tr>
                             <th>created</th>
