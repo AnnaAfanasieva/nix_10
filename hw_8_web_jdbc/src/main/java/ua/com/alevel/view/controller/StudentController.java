@@ -19,7 +19,7 @@ import javax.validation.constraints.Min;
 
 @Controller
 @RequestMapping("/students")
-public class StudentController extends BaseController{
+public class StudentController extends BaseController {
 
     private long update_id;
     private final GroupFacade groupFacade;
@@ -91,8 +91,6 @@ public class StudentController extends BaseController{
 
     @GetMapping("/new/{id}")
     public String redirectToNewStudentPage(Model model, @PathVariable Long id) {
-//        List<GroupResponseDto> groups = groupFacade.findAll();
-//        model.addAttribute("groupsList", groups);
         StudentRequestDto student = new StudentRequestDto();
         student.setGroupId(id);
         model.addAttribute("student", student);

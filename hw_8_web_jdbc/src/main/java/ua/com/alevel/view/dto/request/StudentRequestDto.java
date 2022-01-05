@@ -29,13 +29,4 @@ public class StudentRequestDto extends RequestDto {
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
-
-    @Override
-    public String toString() {
-        return "StudentRequestDto{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", groupId=" + groupId +
-                '}';
-    }
 }

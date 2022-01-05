@@ -14,11 +14,10 @@ import ua.com.alevel.view.dto.response.PageData;
 
 @Controller
 @RequestMapping("/groups")
-public class GroupController extends BaseController{
+public class GroupController extends BaseController {
 
     private long new_id;
     private final GroupFacade groupFacade;
-    private final StudentFacade studentFacade;
     private final HeaderName[] columnNames = new HeaderName[]{
             new HeaderName("#", null, null),
             new HeaderName("name", "name", "name"),
@@ -26,9 +25,8 @@ public class GroupController extends BaseController{
             new HeaderName("delete", null, null)
     };
 
-    public GroupController(GroupFacade groupFacade, StudentFacade studentFacade) {
+    public GroupController(GroupFacade groupFacade) {
         this.groupFacade = groupFacade;
-        this.studentFacade = studentFacade;
     }
 
     @GetMapping
@@ -45,6 +43,7 @@ public class GroupController extends BaseController{
     public ModelAndView findAllRedirect(WebRequest request, ModelMap model) {
         return findAllRedirect(request, model, "groups");
     }
+
     @GetMapping("/new")
     public String redirectToNewGroupPage(Model model) {
         model.addAttribute("group", new GroupRequestDto());

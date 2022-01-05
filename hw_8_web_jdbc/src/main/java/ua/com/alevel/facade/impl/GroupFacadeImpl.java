@@ -21,7 +21,6 @@ public class GroupFacadeImpl implements GroupFacade {
 
     private final GroupService groupService;
 
-
     public GroupFacadeImpl(GroupService groupService) {
         this.groupService = groupService;
     }

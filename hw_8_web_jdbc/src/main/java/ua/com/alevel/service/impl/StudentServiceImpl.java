@@ -13,11 +13,9 @@ import ua.com.alevel.util.WebResponseUtil;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentDao studentDao;
-    private final GroupDao groupDao;
 
-    public StudentServiceImpl(StudentDao studentDao, GroupDao groupDao) {
+    public StudentServiceImpl(StudentDao studentDao) {
         this.studentDao = studentDao;
-        this.groupDao = groupDao;
     }
 
     @Override
@@ -27,14 +25,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void update(Student entity) {
-        if(studentDao.existById(entity.getId())){
+        if (studentDao.existById(entity.getId())) {
             studentDao.update(entity);
         }
     }
 
     @Override
     public void delete(Long id) {
-        if(studentDao.existById(id)) {
+        if (studentDao.existById(id)) {
             studentDao.delete(id);
         }
     }
@@ -59,12 +57,4 @@ public class StudentServiceImpl implements StudentService {
         WebResponseUtil.initDataTableResponse(request, dataTableResponse, count);
         return dataTableResponse;
     }
-
-//    @Override
-//    public List<Student> findAllByGroupId(Long groupId) {
-//        if(groupDao.existById(groupId)) {
-//            return studentDao.findAllByGroupId(groupId);
-//        }
-//        return Collections.emptyList();
-//    }
 }

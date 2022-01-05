@@ -34,7 +34,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void create(Group entity) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(CREATE_GROUP_QUERY)) {
+        try (PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(CREATE_GROUP_QUERY)) {
             preparedStatement.setTimestamp(1, new Timestamp(entity.getCreated().getTime()));
             preparedStatement.setTimestamp(2, new Timestamp(entity.getUpdated().getTime()));
             preparedStatement.setString(3, entity.getName());
@@ -46,7 +46,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void update(Group entity) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(UPDATE_GROUP_QUERY + entity.getId())) {
+        try (PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(UPDATE_GROUP_QUERY + entity.getId())) {
             preparedStatement.setTimestamp(1, new Timestamp(entity.getUpdated().getTime()));
             preparedStatement.setString(2, entity.getName());
             preparedStatement.executeUpdate();
@@ -57,7 +57,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void delete(Long id) {
-        try(PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(DELETE_GROUP_BY_ID_QUERY + id)) {
+        try (PreparedStatement preparedStatement = jpaConfig.getConnection().prepareStatement(DELETE_GROUP_BY_ID_QUERY + id)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class GroupDaoImpl implements GroupDao {
     @Override
     public boolean existById(Long id) {
         int count = 0;
-        try(ResultSet resultSet = jpaConfig.getStatement().executeQuery(EXIST_GROUP_BY_ID_QUERY + id)) {
+        try (ResultSet resultSet = jpaConfig.getStatement().executeQuery(EXIST_GROUP_BY_ID_QUERY + id)) {
             if (resultSet.next()) {
                 count = resultSet.getInt("count(*)");
             }
@@ -79,7 +79,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public Group findById(Long id) {
-        try(ResultSet resultSet = jpaConfig.getStatement().executeQuery(FIND_GROUP_BY_ID_QUERY + id)) {
+        try (ResultSet resultSet = jpaConfig.getStatement().executeQuery(FIND_GROUP_BY_ID_QUERY + id)) {
             if (resultSet.next()) {
                 return convertResultSetToGroup(resultSet);
             }

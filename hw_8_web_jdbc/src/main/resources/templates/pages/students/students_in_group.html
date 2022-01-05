@@ -11,8 +11,6 @@
 
 <div layout:fragment="data_table_content">
 
-
-
     <tr th:each="student,iter : ${pageData.getItems()}">
         <td th:text="${iter.count}"></td>
         <td th:text="${student.getName()}"></td>
@@ -26,20 +24,7 @@
         </td>
     </tr>
 
-<!--    <div class="col-12">-->
-<!--        <div class="card mt-2 mb-2">-->
-<!--            <div class="card-header">-->
-<!--                <a type="button" class="btn btn-primary" th:href="@{'/students/new/' + ${group.getId()}}">Create new student</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <tr>-->
-<!--        <hr>-->
-<!--        <a th:href="@{'/students/new/' + ${group.getId()}}" type="button" class="btn btn-primary">Create new student</a>-->
-<!--    </tr>-->
-
 </div>
-
 
 </body>
 
