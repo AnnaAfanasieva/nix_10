@@ -37,6 +37,10 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void delete(Long id) {
+        List<Student> students = findById(id).getStudents().stream().toList();
+        for (Student student : students) {
+
+        }
         entityManager.createQuery("delete from Group where id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
@@ -87,5 +91,9 @@ public class GroupDaoImpl implements GroupDao {
         DataTableResponse<Student> dataTableResponse = new DataTableResponse<>();
         dataTableResponse.setItems(students);
         return dataTableResponse;
+    }
+
+    public Set<Student> findSetStudents(Long groupId) {
+        return findById(groupId).getStudents();
     }
 }

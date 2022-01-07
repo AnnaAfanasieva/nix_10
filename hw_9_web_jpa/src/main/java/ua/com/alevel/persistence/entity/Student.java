@@ -17,13 +17,12 @@ public class Student extends BaseEntity {
 //            name = "groups_students_table",
 //            joinColumns = @JoinColumn(name = "student_id"),
 //            inverseJoinColumns = @JoinColumn(name = "group_id"))
-    @ManyToOne(cascade = {
-            CascadeType.ALL
-    })
-    @JoinTable(
-            name = "groups_students_table",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToOne()
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
+//    @JoinTable(
+//            name = "groups_students_table",
+//            joinColumns = @JoinColumn(name = "student_id"),
+//            inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Group group;
 
     public Student() {
@@ -52,17 +51,5 @@ public class Student extends BaseEntity {
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    //TODO реализовать удаление группы от студента
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", group=" + group +
-                '}';
     }
 }

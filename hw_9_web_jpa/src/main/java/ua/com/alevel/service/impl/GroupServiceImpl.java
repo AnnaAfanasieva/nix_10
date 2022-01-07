@@ -10,6 +10,8 @@ import ua.com.alevel.persistence.entity.Student;
 import ua.com.alevel.service.GroupService;
 import ua.com.alevel.util.WebResponseUtil;
 
+import java.util.Set;
+
 @Service
 public class GroupServiceImpl implements GroupService {
 
@@ -34,6 +36,10 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void delete(Long id) {
 //        studentDao.deleteAllByGroupId(id);
+        Set<Student> students = groupDao.findSetStudents(id);
+        for (Student student : students) {
+            studentDao.delete(student.getId());
+        }
         groupDao.delete(id);
     }
 
@@ -53,7 +59,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public DataTableResponse<Student> findAllStudentsByGroup(DataTableRequest request, Long groupId) {
         DataTableResponse<Student> dataTableResponse = groupDao.findAllStudentsByGroup(request, groupId);
-        long count = studentDao.count();
+        long count = groupDao.findSetStudents(groupId).size();
         WebResponseUtil.initDataTableResponse(request, dataTableResponse, count);
         return dataTableResponse;
     }

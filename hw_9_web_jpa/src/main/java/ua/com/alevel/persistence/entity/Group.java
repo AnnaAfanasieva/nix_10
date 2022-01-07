@@ -23,9 +23,7 @@ public class Group extends BaseEntity {
 //@ManyToMany(mappedBy = "groups_table", cascade = {
 //        CascadeType.MERGE,
 //})
-    @OneToMany(cascade = {
-            CascadeType.ALL
-    })
+    @OneToMany(cascade = { CascadeType.ALL}, mappedBy = "group")
     private Set<Student> students;
 
     public Group() {
@@ -47,14 +45,6 @@ public class Group extends BaseEntity {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
-    }
-
-    @Override
-    public String toString() {
-        return "Group{" +
-                "name='" + name + '\'' +
-                ", students=" + students +
-                '}';
     }
 }
 
