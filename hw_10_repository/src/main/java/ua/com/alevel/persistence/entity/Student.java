@@ -12,8 +12,6 @@ public class Student extends BaseEntity{
     private int age;
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.REFRESH,
             CascadeType.MERGE
     })
     @JoinTable(
