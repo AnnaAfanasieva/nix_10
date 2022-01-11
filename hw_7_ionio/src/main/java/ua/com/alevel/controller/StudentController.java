@@ -1,6 +1,6 @@
 package ua.com.alevel.controller;
 
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 import ua.com.alevel.service.GroupService;
 import ua.com.alevel.service.StudentService;
 

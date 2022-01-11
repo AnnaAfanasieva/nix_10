@@ -1,4 +1,4 @@
-package ua.com.alevel.entity;
+package ua.com.alevel.persistence.entity;
 
 import ua.com.alevel.csv.StudentCSV;
 

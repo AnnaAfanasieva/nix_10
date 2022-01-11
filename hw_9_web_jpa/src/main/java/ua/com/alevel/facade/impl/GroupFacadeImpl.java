@@ -27,7 +27,6 @@ public class GroupFacadeImpl implements GroupFacade {
         this.groupService = groupService;
     }
 
-    //TODO добавление, обновление списка студентов
     @Override
     public void create(GroupRequestDto groupRequestDto) {
         Group group = new Group();

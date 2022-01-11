@@ -1,6 +1,6 @@
 package ua.com.alevel.db;
 
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 
 import java.util.Arrays;
 

@@ -1,7 +1,7 @@
 package ua.com.alevel;
 
 import org.junit.jupiter.api.*;
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 import ua.com.alevel.service.GroupService;
 import ua.com.alevel.service.StudentService;
 

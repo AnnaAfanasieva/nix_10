@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Details Group</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Details Group
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>id</th>
+                            <td th:text="${subject.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>name</th>
+                            <td th:text="${subject.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>created</th>
+                            <td th:text="${#calendars.format(subject.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>updated</th>
+                            <td th:text="${#calendars.format(subject.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Students</th>
+                            <td>
+                                <ul th:each="student : ${students}">
+                                    <li>
+                                        <a role="button" class="btn btn-link" th:href="@{'/students/details/' + ${student.getId()}}" th:text="${student.getName()}"></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <a th:href="@{'/subjects/update/' + ${subject.getId()}}" type="button" class="btn btn-primary">Edit group</a>
+                    <hr>
+                    <a th:href="@{'/students/new/' + ${subject.getId()}}" type="button" class="btn btn-primary">Add new student</a>
+                    <hr>
+                    <a th:href="@{'/subjects/add/' + ${subject.getId()}}" type="button" class="btn btn-primary">Add existing student</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

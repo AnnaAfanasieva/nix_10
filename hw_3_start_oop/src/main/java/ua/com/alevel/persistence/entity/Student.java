@@ -1,11 +1,11 @@
-package ua.com.alevel.entity;
+package ua.com.alevel.persistence.entity;
 
 public class Student {
 
     private int id;
     private String name;
     private int age;
-    private int idGroup;
+    private String group;
 
     public int getId() {
         return id;
@@ -31,22 +31,21 @@ public class Student {
         this.age = age;
     }
 
-    public int getIdGroup() {
-        return idGroup;
+    public String getGroup() {
+        return group;
     }
 
-    public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
-    //поменять вывод id группы на имя группы
     @Override
     public String toString() {
         return "Student{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", group='" + idGroup + '\'' +
+                ", group='" + group + '\'' +
                 '}';
     }
 }

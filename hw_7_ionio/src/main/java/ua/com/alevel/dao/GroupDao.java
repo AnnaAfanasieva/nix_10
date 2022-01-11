@@ -1,7 +1,7 @@
 package ua.com.alevel.dao;
 
 import ua.com.alevel.csv.GroupCSV;
-import ua.com.alevel.entity.Group;
+import ua.com.alevel.persistence.entity.Group;
 
 import java.util.List;
 

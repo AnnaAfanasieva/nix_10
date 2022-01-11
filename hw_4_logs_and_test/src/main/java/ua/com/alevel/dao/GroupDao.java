@@ -1,7 +1,7 @@
 package ua.com.alevel.dao;
 
 import ua.com.alevel.db.GroupDB;
-import ua.com.alevel.entity.Group;
+import ua.com.alevel.persistence.entity.Group;
 
 public class GroupDao {
 
