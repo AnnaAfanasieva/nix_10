@@ -28,8 +28,6 @@ public class StudentFacadeImpl implements StudentFacade {
         this.studentService = studentService;
     }
 
-    //TODO проверить на правильность
-
     @Override
     public void create(StudentRequestDto studentRequestDto) {
         Student student = new Student();

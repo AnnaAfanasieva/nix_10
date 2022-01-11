@@ -9,7 +9,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.StudentFacade;
 import ua.com.alevel.facade.SubjectFacade;
-import ua.com.alevel.persistence.entity.Student;
 import ua.com.alevel.persistence.entity.Subject;
 import ua.com.alevel.view.dto.request.StudentRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
@@ -19,7 +18,6 @@ import ua.com.alevel.view.dto.response.SubjectResponseDto;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -117,9 +115,6 @@ public class StudentController extends BaseController {
     public String redirectToNewStudentPage(Model model, @PathVariable Long id) {
         StudentRequestDto student = new StudentRequestDto();
         Set<Subject> subjects = new HashSet<>();
-
-        //TODO сделать создание нового студента
-
         SubjectResponseDto subjectResponseDto = subjectFacade.findById(id);
         if (subjectResponseDto != null) {
             Subject subject = new Subject();
@@ -138,8 +133,6 @@ public class StudentController extends BaseController {
 
     @PostMapping("/new")
     public String createNewStudent(@ModelAttribute("subject") StudentRequestDto dto) {
-        //TODO не создает нового студента
-
         studentFacade.create(dto);
         String url = "redirect:/students";
         return url;

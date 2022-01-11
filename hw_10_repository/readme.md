@@ -1,0 +1,36 @@
+## HW 10 (JpaRepository)
+
+### Task
+
+1. Take any two entities and realize the relation between them
+2. Implement a web UI layer to interact with your database. You must be able to view all entities, create a new entity, update an existing entity, and delete an entity
+3. It must be possible to view all entities A in entity B and entity B in entity A
+4. Implement the data table concept - pagination and sorting by table fields must be provided
+6. As a data source we take MySql
+7. Provide a script to initialize your database
+8. As a source of communication with a DB use JpaRepository
+
+### Solution
+
+Before starting work with the application, run two sql scripts:
+1. schema.sql (src/main/resources/sql/schema.sql) - creates a database with the required tables
+2. data.sql (src/main/resources/sql/data.sql) - fills tables created by the previous script
+
+After that, to run the program, run the script **startWitClean.sh**
+
+I have implemented the Student-Subject relationship system, in which:
+- A student cannot exist without a subject
+- A group can exist without students
+- A student can have many subjects, and a some students can have many students
+- When a student is created, he is added to the subject and a link appears between the student and the subject
+- When updating a student or group, the information is updated wherever the changed object is mentioned
+
+The following layers are implemented for each entity in the project:
+- Controller
+- Facade
+- Service
+- DAO
+
+As a source of communication with a DB I used JpaRepository
+
+When starting the program, we refer to the subject controller by default

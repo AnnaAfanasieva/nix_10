@@ -13,10 +13,10 @@ public class Subject extends BaseEntity {
 
     private String name;
 
-    @ManyToMany( mappedBy = "subjects",
+    @ManyToMany(mappedBy = "subjects",
             cascade = {
-            CascadeType.ALL
-    })
+                    CascadeType.ALL
+            })
     private Set<Student> students;
 
     public Subject() {
@@ -39,6 +39,4 @@ public class Subject extends BaseEntity {
     public void setStudents(Set<Student> students) {
         this.students = students;
     }
-
-    //TODO add and delete student from subject
 }

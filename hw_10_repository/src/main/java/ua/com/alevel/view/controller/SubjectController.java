@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.StudentFacade;
 import ua.com.alevel.facade.SubjectFacade;
 import ua.com.alevel.persistence.entity.Student;
-import ua.com.alevel.persistence.entity.Subject;
 import ua.com.alevel.view.dto.request.SubjectRequestDto;
 import ua.com.alevel.view.dto.response.SubjectResponseDto;
 
@@ -17,7 +16,7 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/subjects")
-public class SubjectController extends BaseController{
+public class SubjectController extends BaseController {
 
     private long new_id;
     private final SubjectFacade subjectFacade;

@@ -4,7 +4,7 @@ import ua.com.alevel.persistence.entity.Student;
 
 import java.util.Set;
 
-public class SubjectRequestDto extends RequestDto{
+public class SubjectRequestDto extends RequestDto {
 
     private String name;
     private Set<Student> students;

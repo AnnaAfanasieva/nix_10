@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "students")
-public class Student extends BaseEntity{
+public class Student extends BaseEntity {
 
     private String name;
     private int age;
@@ -49,13 +49,8 @@ public class Student extends BaseEntity{
         this.subjects = subjects;
     }
 
-    public void addSubject (Subject subject) {
+    public void addSubject(Subject subject) {
         subjects.add(subject);
         subject.getStudents().add(this);
     }
-//
-//    public void deleteSubject (Subject subject) {
-//        subject.getStudents().remove(this);
-//        subjects.remove(subject);
-//    }
 }

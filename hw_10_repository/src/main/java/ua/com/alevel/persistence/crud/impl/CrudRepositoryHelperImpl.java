@@ -37,8 +37,7 @@ public class CrudRepositoryHelperImpl<
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void update(R repository, E entity) {
         checkById(repository, entity.getId());
-        E entityInMemory = repository.save(entity);
-        System.out.println("entityInMemory");
+        repository.save(entity);
     }
 
     @Override
