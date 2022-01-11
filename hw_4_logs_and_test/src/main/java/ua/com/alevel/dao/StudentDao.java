@@ -1,7 +1,7 @@
 package ua.com.alevel.dao;
 
 import ua.com.alevel.db.StudentDB;
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 
 public class StudentDao {
 

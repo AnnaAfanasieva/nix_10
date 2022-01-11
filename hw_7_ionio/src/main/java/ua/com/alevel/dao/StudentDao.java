@@ -2,7 +2,7 @@ package ua.com.alevel.dao;
 
 
 import ua.com.alevel.csv.StudentCSV;
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ua.com.alevel.dao.StudentDao;
-import ua.com.alevel.entity.Student;
+import ua.com.alevel.persistence.entity.Student;
 
 public class StudentService {
 

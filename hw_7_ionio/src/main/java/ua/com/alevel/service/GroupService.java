@@ -1,7 +1,7 @@
 package ua.com.alevel.service;
 
 import ua.com.alevel.dao.GroupDao;
-import ua.com.alevel.entity.Group;
+import ua.com.alevel.persistence.entity.Group;
 
 import java.util.List;
 

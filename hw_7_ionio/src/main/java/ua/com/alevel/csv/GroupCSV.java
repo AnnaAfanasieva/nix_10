@@ -1,6 +1,6 @@
 package ua.com.alevel.csv;
 
-import ua.com.alevel.entity.Group;
+import ua.com.alevel.persistence.entity.Group;
 import ua.com.alevel.util.CSV;
 import ua.com.alevel.util.ConvertingStringToArray;
 

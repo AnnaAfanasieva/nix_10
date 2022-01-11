@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Details Student</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Details Student
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>id</th>
+                            <td th:text="${student.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>name</th>
+                            <td th:text="${student.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>age</th>
+                            <td th:text="${student.getAge()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Subjects</th>
+                            <td>
+                                <ul th:each="subject : ${subjects}">
+                                    <li>
+                                        <a role="button" class="btn btn-link" th:href="@{'/subjects/details/' + ${subject.getId()}}" th:text="${subject.getName()}"></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>created</th>
+                            <td th:text="${#calendars.format(student.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>updated</th>
+                            <td th:text="${#calendars.format(student.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <a th:href="@{'/students/update/' + ${student.getId()}}" type="button" class="btn btn-primary">Edit student</a>
+                    <hr>
+                    <a th:href="@{'/students/add/' + ${student.getId()}}" type="button" class="btn btn-primary">Add subject</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
