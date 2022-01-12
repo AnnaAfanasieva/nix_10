@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "transaction_table")
+@Table(name = "transactions_table")
 public class Transaction extends BaseEntity {
 
     @ManyToOne()

@@ -1,5 +1,7 @@
 package ua.com.alevel.persistence.entity;
 
+import ua.com.alevel.persistence.util.CategoryType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,8 +14,7 @@ public class Category extends BaseEntity {
     private String categoryName;
 
     @Column(name = "category_type")
-    private Boolean categoryType;
-    //true - доход      false - расходы
+    private CategoryType categoryType;
 
     public Category() {
         super();
@@ -27,11 +28,11 @@ public class Category extends BaseEntity {
         this.categoryName = categoryName;
     }
 
-    public Boolean getCategoryType() {
+    public CategoryType getCategoryType() {
         return categoryType;
     }
 
-    public void setCategoryType(Boolean categoryType) {
+    public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
     }
 }
