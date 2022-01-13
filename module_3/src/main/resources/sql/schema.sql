@@ -34,7 +34,7 @@ create table category_table
     created      datetime(6)  null,
     updated      datetime(6)  null,
     category_name varchar(255) not null,
-    category_type varchar(255) not null
+    category_type int not null
 );
 
 create table transactions_table

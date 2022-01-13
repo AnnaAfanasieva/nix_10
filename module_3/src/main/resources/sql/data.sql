@@ -36,33 +36,33 @@ insert into account_table
 values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 7, 403000);
 
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Food', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Food', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Cinema', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Cinema', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Travels', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Travels', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Books', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Books', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Hospital', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Hospital', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Flowers', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Flowers', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Pharmacy', 'expense');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Pharmacy', 1);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Salary', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Salary', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Scholarship', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Scholarship', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Transfer from another account', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Transfer from another account', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Present', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Present', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Selling', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Selling', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Part-time job', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Part-time job', 0);
 insert into category_table
-values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Lottery', 'income');
+values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'Lottery', 0);
 
 insert into transactions_table
 values (default, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 1, 1, 52000);

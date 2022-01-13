@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class ResponseDto {
 
-    //TODO realize all ResponseDto
-
     private Long id;
     private Date created;
     private Date updated;
