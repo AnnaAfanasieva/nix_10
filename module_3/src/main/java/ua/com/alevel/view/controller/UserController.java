@@ -1,9 +1,11 @@
 package ua.com.alevel.view.controller;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -41,5 +43,12 @@ public class UserController extends BaseController {
     @PostMapping("/all")
     public ModelAndView findAllRedirect(WebRequest request, ModelMap model) {
         return findAllRedirect(request, model, "users");
+    }
+
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable @NotNull() Long id, Model model) {
+        model.addAttribute("user", userFacade.findById(id));
+        //TODO add model with all accounts
+        return "pages/users/user_details";
     }
 }

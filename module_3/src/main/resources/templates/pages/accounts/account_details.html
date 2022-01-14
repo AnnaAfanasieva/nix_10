@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Details Account</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Details Account
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${account.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td th:text="${account.getUser().getUserName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Balance</th>
+                            <td th:text="${account.getBalance()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Created</th>
+                            <td th:text="${#calendars.format(account.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Updated</th>
+                            <td th:text="${#calendars.format(account.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+<!--                    <hr>-->
+<!--                    <a th:href="@{'/accounts/groups/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
