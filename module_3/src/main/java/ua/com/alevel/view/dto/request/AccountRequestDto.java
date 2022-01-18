@@ -2,7 +2,6 @@ package ua.com.alevel.view.dto.request;
 
 public class AccountRequestDto extends RequestDto {
 
-    //TODO под вопросом
     private Long userId;
     private Long balance;
 

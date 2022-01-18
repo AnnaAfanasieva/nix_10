@@ -24,12 +24,16 @@
                             <td th:text="${transaction.getId()}"></td>
                         </tr>
                         <tr>
-                            <th>User</th>
-                            <td th:text="${transaction.getAccount().getUser().getUserName()}"></td>
+                            <th>User name</th>
+                            <td>
+                                <a th:href="@{'/users/details/' + ${transaction.getAccount().getUser().getId()}}" type="button" class="btn btn-link" th:text="${transaction.getAccount().getUser().getUserName()}"></a>
+                            </td>
                         </tr>
                         <tr>
                             <th>Category</th>
-                            <td th:text="${transaction.getCategory().getCategoryName()}"></td>
+                            <td>
+                                <a th:href="@{'/categories/details/' + ${transaction.getCategory().getId()}}" type="button" class="btn btn-link" th:text="${transaction.getCategory().getCategoryName()}"></a>
+                            </td>
                         </tr>
                         <tr>
                             <th>Sum</th>

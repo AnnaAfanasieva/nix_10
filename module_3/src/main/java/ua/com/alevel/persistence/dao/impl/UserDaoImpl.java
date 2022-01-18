@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.alevel.persistence.dao.UserDao;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.Account;
 import ua.com.alevel.persistence.entity.User;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -74,5 +76,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public long count() {
         Query query = entityManager.createQuery("select count(id) from User ");
-        return (Long) query.getSingleResult();    }
+        return (Long) query.getSingleResult();
+    }
+
+    @Override
+    public Set<Account> findSetAccountsByUserId(Long userId) {
+        return findById(userId).getAccounts();
+    }
 }

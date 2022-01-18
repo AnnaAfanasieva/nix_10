@@ -13,15 +13,22 @@ import ua.com.alevel.service.CategoryService;
 import ua.com.alevel.service.TransactionService;
 import ua.com.alevel.util.WebRequestUtil;
 import ua.com.alevel.util.WebResponseUtil;
+import ua.com.alevel.util.csv.CSV;
+import ua.com.alevel.util.csv.ConvertingSetToString;
 import ua.com.alevel.view.dto.request.TransactionRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.TransactionResponseDto;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class TransactionFacadeImpl implements TransactionFacade {
+
+    private static final String PATH_START = "module_3/files/transaction";
 
     private final TransactionService transactionService;
     private final AccountService accountService;
@@ -86,5 +93,37 @@ public class TransactionFacadeImpl implements TransactionFacade {
         transaction.setCategory(category);
         transaction.setSum(transactionRequestDto.getSum());
         return transaction;
+    }
+
+    @Override
+    public PageData<TransactionResponseDto> findAllTransactionsByAccount(WebRequest request, Long accountId) {
+        DataTableRequest dataTableRequest = WebRequestUtil.initDataTableRequest(request);
+        DataTableResponse<Transaction> tableResponse = transactionService.findAllTransactionsByAccount(dataTableRequest, accountId);
+
+        List<TransactionResponseDto> transactions = tableResponse.getItems().stream().
+                map(TransactionResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<TransactionResponseDto> pageData = (PageData<TransactionResponseDto>) WebResponseUtil.initPageData(tableResponse);
+        pageData.setItems(transactions);
+
+        return pageData;
+    }
+
+    @Override
+    public void downloadAllTransactionsByAccount(Long accountId) {
+        Set<Transaction> transactions = transactionService.findSetTransactionsByAccountId(accountId);
+        String path = PATH_START + accountId + ".csv";
+        File file = new File(path);
+        if(!file.isFile()){
+            try {
+                boolean newFile = file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        CSV.cleanCSVFile(path);
+        String transactionsStringToFile = ConvertingSetToString.setTransactionsToString(transactions);
+        CSV.writeStringToCSVFile(path, transactionsStringToFile);
     }
 }

@@ -74,4 +74,10 @@ public class CategoryDaoImpl implements CategoryDao {
     public long count() {
         Query query = entityManager.createQuery("select count(id) from Category ");
         return (Long) query.getSingleResult();    }
+
+    @Override
+    public List<Category> findMapCategories() {
+        Query query = entityManager.createNativeQuery("select id, created, updated, category_name, category_type from category_table", Category.class);
+        return query.getResultList();
+    }
 }

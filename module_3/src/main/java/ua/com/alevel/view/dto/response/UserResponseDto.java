@@ -1,16 +1,11 @@
 package ua.com.alevel.view.dto.response;
 
-import ua.com.alevel.persistence.entity.Account;
 import ua.com.alevel.persistence.entity.User;
-
-import java.util.Set;
 
 public class UserResponseDto extends ResponseDto {
 
     private String userName;
     private String email;
-    //TODO под вопросом
-//    private Set<Account> accounts;
 
     public UserResponseDto() {
     }

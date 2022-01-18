@@ -6,7 +6,6 @@ import ua.com.alevel.facade.CategoryFacade;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Category;
-import ua.com.alevel.persistence.util.CategoryType;
 import ua.com.alevel.service.CategoryService;
 import ua.com.alevel.util.WebRequestUtil;
 import ua.com.alevel.util.WebResponseUtil;
@@ -68,7 +67,12 @@ public class CategoryFacadeImpl implements CategoryFacade {
 
     private Category createCategoryEntity(CategoryRequestDto categoryRequestDto, Category category) {
         category.setCategoryName(categoryRequestDto.getCategoryName());
-        category.setCategoryType(CategoryType.valueOf(categoryRequestDto.getCategoryType()));
+        category.setCategoryType(categoryRequestDto.getCategoryType());
         return category;
+    }
+
+    @Override
+    public List<Category> findMapCategories() {
+        return categoryService.findMapCategories();
     }
 }

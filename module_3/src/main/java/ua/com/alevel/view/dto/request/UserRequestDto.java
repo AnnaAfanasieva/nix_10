@@ -4,8 +4,6 @@ public class UserRequestDto extends RequestDto {
 
     private String userName;
     private String email;
-    //TODO под вопросом
-//    private Set<Account> accounts;
 
     public String getUserName() {
         return userName;

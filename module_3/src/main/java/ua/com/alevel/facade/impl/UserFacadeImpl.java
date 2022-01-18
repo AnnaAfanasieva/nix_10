@@ -5,6 +5,7 @@ import org.springframework.web.context.request.WebRequest;
 import ua.com.alevel.facade.UserFacade;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.Account;
 import ua.com.alevel.persistence.entity.User;
 import ua.com.alevel.service.UserService;
 import ua.com.alevel.util.WebRequestUtil;
@@ -14,6 +15,7 @@ import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.UserResponseDto;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,5 +71,10 @@ public class UserFacadeImpl implements UserFacade {
         user.setUserName(userRequestDto.getUserName());
         user.setEmail(userRequestDto.getEmail());
         return user;
+    }
+
+    @Override
+    public Set<Account> findSetAccountsByUserId(Long userId) {
+        return userService.findSetAccountsByUserId(userId);
     }
 }

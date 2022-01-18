@@ -5,7 +5,7 @@ import ua.com.alevel.persistence.util.CategoryType;
 public class CategoryRequestDto extends RequestDto {
 
     private String categoryName;
-    private String categoryType;
+    private CategoryType categoryType;
 
     public String getCategoryName() {
         return categoryName;
@@ -15,11 +15,11 @@ public class CategoryRequestDto extends RequestDto {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryType() {
+    public CategoryType getCategoryType() {
         return categoryType;
     }
 
-    public void setCategoryType(String categoryType) {
+    public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
     }
 }

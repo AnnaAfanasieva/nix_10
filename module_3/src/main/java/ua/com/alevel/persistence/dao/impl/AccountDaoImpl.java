@@ -6,6 +6,7 @@ import ua.com.alevel.persistence.dao.AccountDao;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Account;
+import ua.com.alevel.persistence.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

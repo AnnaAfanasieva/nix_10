@@ -2,6 +2,7 @@ package ua.com.alevel.service.impl;
 
 import org.springframework.stereotype.Service;
 import ua.com.alevel.persistence.dao.AccountDao;
+import ua.com.alevel.persistence.dao.TransactionDao;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Account;
@@ -12,9 +13,11 @@ import ua.com.alevel.util.WebResponseUtil;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountDao accountDao;
+    private final TransactionDao transactionDao;
 
-    public AccountServiceImpl(AccountDao accountDao) {
+    public AccountServiceImpl(AccountDao accountDao, TransactionDao transactionDao) {
         this.accountDao = accountDao;
+        this.transactionDao = transactionDao;
     }
 
     @Override
@@ -29,6 +32,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void delete(Long id) {
+        Account account = findById(id);
+        transactionDao.deleteAllByAccount(account);
         accountDao.delete(id);
     }
 

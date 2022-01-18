@@ -24,8 +24,10 @@
                             <td th:text="${account.getId()}"></td>
                         </tr>
                         <tr>
-                            <th>Name</th>
-                            <td th:text="${account.getUser().getUserName()}"></td>
+                            <th>User name</th>
+                            <td>
+                                <a th:href="@{'/users/details/' + ${account.getUser().getId()}}" type="button" class="btn btn-link" th:text="${account.getUser().getUserName()}"></a>
+                            </td>
                         </tr>
                         <tr>
                             <th>Balance</th>
@@ -40,8 +42,12 @@
                             <td th:text="${#calendars.format(account.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
-<!--                    <hr>-->
-<!--                    <a th:href="@{'/accounts/groups/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
+                    <hr>
+                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>
+                    <hr>
+                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>
+                    <hr>
+                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>
                 </div>
             </div>
         </div>
