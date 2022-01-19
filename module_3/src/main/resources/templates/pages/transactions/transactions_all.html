@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table}">
+<head>
+    <meta charset="utf-8">
+    <title>Transactions</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+
+    <tr th:each="transaction,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${transaction.getAccount.getUser.getUserName}"></td>
+        <td th:text="${transaction.getCategory.getCategoryName}"></td>
+        <td th:text="${transaction.getSum}"></td>
+        <td>
+            <a th:href="@{'/transactions/details/' + ${transaction.getId()}}" type="button" class="btn btn-primary">details</a>
+        </td>
+    </tr>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Details Transaction</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Details Transaction
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${transaction.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>User name</th>
+                            <td>
+                                <a th:href="@{'/users/details/' + ${transaction.getAccount().getUser().getId()}}" type="button" class="btn btn-link" th:text="${transaction.getAccount().getUser().getUserName()}"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td>
+                                <a th:href="@{'/categories/details/' + ${transaction.getCategory().getId()}}" type="button" class="btn btn-link" th:text="${transaction.getCategory().getCategoryName()}"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sum</th>
+                            <td th:text="${transaction.getSum()}"></td>
+                        </tr>
+                        <tr>
+                            <th>created</th>
+                            <td th:text="${#calendars.format(transaction.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>updated</th>
+                            <td th:text="${#calendars.format(transaction.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

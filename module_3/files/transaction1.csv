@@ -1,0 +1,5 @@
+Transaction number,Created,User,Category,Sum
+1,2022-01-19 03:51:34.0,Alice,Food,52000
+2,2022-01-19 03:51:34.0,Alice,Travels,34090
+3,2022-01-19 03:51:34.0,Alice,Transfer from another account,5000
+

@@ -78,20 +78,4 @@ public class StudentFacadeImpl implements StudentFacade {
 
         return pageData;
     }
-
-
-//    @Override
-//    public PageData<StudentResponseDto> findAllStudentsByGroup(WebRequest request, Long groupId) {
-//        DataTableRequest dataTableRequest = WebRequestUtil.initDataTableRequest(request);
-//        DataTableResponse<Student> tableResponse = studentService.findAllStudentsByGroup(dataTableRequest, groupId);
-//
-//        List<StudentResponseDto> students = tableResponse.getItems().stream().
-//                map(StudentResponseDto::new).
-//                collect(Collectors.toList());
-//
-//        PageData<StudentResponseDto> pageData = (PageData<StudentResponseDto>) WebResponseUtil.initPageData(tableResponse);
-//        pageData.setItems(students);
-//
-//        return pageData;
-//    }
 }
