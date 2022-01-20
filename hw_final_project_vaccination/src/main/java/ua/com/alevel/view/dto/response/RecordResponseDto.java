@@ -1,34 +1,39 @@
-package ua.com.alevel.persistence.entity;
+package ua.com.alevel.view.dto.response;
 
+import ua.com.alevel.persistence.entity.Doctor;
+import ua.com.alevel.persistence.entity.Record;
 import ua.com.alevel.persistence.util.Vaccine;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "records_table")
-public class Record extends BaseEntity {
+public class RecordResponseDto extends ResponseDto {
 
     private String surname;
     private String name;
     private String patronymic;
     private String phone;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfBirth;
-
     private Long numberInLine;
     private Vaccine vaccine;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private Date vaccineDateAndTime;
-
-    @ManyToOne()
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 
-    public Record() {
-        super();
+    public RecordResponseDto() {
+    }
+
+    public RecordResponseDto(Record record) {
+        setId(record.getId());
+        setCreated(record.getCreated());
+        setUpdated(record.getUpdated());
+        this.surname = record.getSurname();
+        this.name = record.getName();
+        this.patronymic = record.getPatronymic();
+        this.phone = record.getPhone();
+        this.dateOfBirth = record.getDateOfBirth();
+        this.numberInLine = record.getNumberInLine();
+        this.vaccine = record.getVaccine();
+        this.vaccineDateAndTime = record.getVaccineDateAndTime();
+        this.doctor = record.getDoctor();
     }
 
     public String getSurname() {

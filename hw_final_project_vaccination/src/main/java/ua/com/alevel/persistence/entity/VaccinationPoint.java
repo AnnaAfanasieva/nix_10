@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,7 @@ public class VaccinationPoint extends BaseEntity {
 
     public VaccinationPoint() {
        super();
+       this.doctors = new HashSet<>();
     }
 
     public String getAddress() {
@@ -25,5 +27,13 @@ public class VaccinationPoint extends BaseEntity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Set<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }

@@ -1,27 +1,31 @@
-package ua.com.alevel.persistence.entity;
+package ua.com.alevel.view.dto.response;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import ua.com.alevel.persistence.entity.Doctor;
+import ua.com.alevel.persistence.entity.Record;
+import ua.com.alevel.persistence.entity.VaccinationPoint;
+
 import java.util.Set;
 
-@Entity
-@Table(name = "doctors_table")
-public class Doctor extends BaseEntity {
+public class DoctorResponseDto extends ResponseDto {
 
     private String surname;
     private String name;
     private String patronymic;
-
-    @ManyToOne()
-    @JoinColumn(name = "vaccination_point_id", referencedColumnName = "id")
     private VaccinationPoint vaccinationPoint;
-
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "doctor")
     private Set<Record> records;
 
-    public Doctor() {
-        super();
-        this.records = new HashSet<>();
+    public DoctorResponseDto() {
+    }
+
+    public DoctorResponseDto(Doctor doctor) {
+        setId(doctor.getId());
+        setCreated(doctor.getCreated());
+        setUpdated(doctor.getUpdated());
+        this.surname = doctor.getSurname();
+        this.name = doctor.getName();
+        this.patronymic = doctor.getPatronymic();
+        this.vaccinationPoint = doctor.getVaccinationPoint();
+        this.records = doctor.getRecords();
     }
 
     public String getSurname() {
