@@ -1,26 +1,35 @@
 package ua.com.alevel.persistence.datatable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DataTableRequest {
 
-    private String sort;
+    private int page;
+    private int size;
     private String order;
-    private int currentPage;
-    private int pageSize;
-    private Map<String, Object> queryParam;
+    private String sort;
+    private Map<String, String[]> requestParamMap;
 
     public DataTableRequest() {
-        queryParam = new HashMap<>();
+        requestParamMap = Collections.emptyMap();
     }
 
-    public String getSort() {
-        return sort;
+    public int getPage() {
+        return page;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort;
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getOrder() {
@@ -31,38 +40,19 @@ public class DataTableRequest {
         this.order = order;
     }
 
-    public int getCurrentPage() {
-        return currentPage;
+    public String getSort() {
+        return sort;
     }
 
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public Map<String, String[]> getRequestParamMap() {
+        return requestParamMap;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Map<String, Object> getQueryParam() {
-        return queryParam;
-    }
-
-    public void setQueryParam(Map<String, Object> queryParam) {
-        this.queryParam = queryParam;
-    }
-
-    @Override
-    public String toString() {
-        return "DataTableRequest{" +
-                "sort='" + sort + '\'' +
-                ", order='" + order + '\'' +
-                ", currentPage=" + currentPage +
-                ", pageSize=" + pageSize +
-                ", queryParam=" + queryParam +
-                '}';
+    public void setRequestParamMap(Map<String, String[]> requestParamMap) {
+        this.requestParamMap = requestParamMap;
     }
 }

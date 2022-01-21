@@ -1,47 +1,56 @@
 package ua.com.alevel.service.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.alevel.persistence.dao.DoctorDao;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import ua.com.alevel.persistence.crud.CrudRepositoryHelper;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Doctor;
+import ua.com.alevel.persistence.repository.items.DoctorRepository;
 import ua.com.alevel.service.DoctorService;
-import ua.com.alevel.util.WebResponseUtil;
+
+import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
-    private final DoctorDao doctorDao;
+    private final DoctorRepository doctorRepository;
+    private final CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper;
 
-    public DoctorServiceImpl(DoctorDao doctorDao) {
-        this.doctorDao = doctorDao;
+    public DoctorServiceImpl(DoctorRepository doctorRepository, CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper) {
+        this.doctorRepository = doctorRepository;
+        this.crudRepositoryHelper = crudRepositoryHelper;
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void create(Doctor entity) {
-        doctorDao.create(entity);
+        crudRepositoryHelper.create(doctorRepository, entity);
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void update(Doctor entity) {
-        doctorDao.update(entity);
+        crudRepositoryHelper.update(doctorRepository, entity);
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
-        doctorDao.delete(id);
+        crudRepositoryHelper.delete(doctorRepository, id);
     }
 
     @Override
-    public Doctor findById(Long id) {
-        return doctorDao.findById(id);
+    @Transactional(readOnly = true)
+    public Optional<Doctor> findById(Long id) {
+        return crudRepositoryHelper.findById(doctorRepository, id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public DataTableResponse<Doctor> findAll(DataTableRequest request) {
-        DataTableResponse<Doctor> dataTableResponse = doctorDao.findAll(request);
-        long count = doctorDao.count();
-        WebResponseUtil.initDataTableResponse(request, dataTableResponse, count);
-        return dataTableResponse;
+        return crudRepositoryHelper.findAll(doctorRepository, request);
     }
 }

@@ -7,14 +7,14 @@ import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Record;
 import ua.com.alevel.service.RecordService;
-import ua.com.alevel.util.WebRequestUtil;
-import ua.com.alevel.util.WebResponseUtil;
+import ua.com.alevel.util.WebUtil;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +34,9 @@ public class RecordFacadeImpl implements RecordFacade {
 
     @Override
     public void update(RecordRequestDto recordRequestDto, Long id) {
-        Record record = recordService.findById(id);
-        if (record != null) {
+        Optional<Record> optionalRecord = recordService.findById(id);
+        if (optionalRecord.isPresent()) {
+            Record record = optionalRecord.get();
             record.setUpdated(new Timestamp(System.currentTimeMillis()));
             record = createRecordEntity(recordRequestDto, record);
             recordService.update(record);
@@ -49,19 +50,19 @@ public class RecordFacadeImpl implements RecordFacade {
 
     @Override
     public RecordResponseDto findById(Long id) {
-        return new RecordResponseDto(recordService.findById(id));
+        return new RecordResponseDto(recordService.findById(id).get());
     }
 
     @Override
     public PageData<RecordResponseDto> findAll(WebRequest request) {
-        DataTableRequest dataTableRequest = WebRequestUtil.initDataTableRequest(request);
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
         DataTableResponse<Record> tableResponse = recordService.findAll(dataTableRequest);
 
         List<RecordResponseDto> recordResponseDtos = tableResponse.getItems().stream().
                 map(RecordResponseDto::new).
                 collect(Collectors.toList());
 
-        PageData<RecordResponseDto> pageData = (PageData<RecordResponseDto>) WebResponseUtil.initPageData(tableResponse);
+        PageData<RecordResponseDto> pageData = (PageData<RecordResponseDto>) WebUtil.initPageData(tableResponse);
         pageData.setItems(recordResponseDtos);
 
         return pageData;

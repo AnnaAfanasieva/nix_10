@@ -7,14 +7,14 @@ import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.Doctor;
 import ua.com.alevel.service.DoctorService;
-import ua.com.alevel.util.WebRequestUtil;
-import ua.com.alevel.util.WebResponseUtil;
+import ua.com.alevel.util.WebUtil;
 import ua.com.alevel.view.dto.request.DoctorRequestDto;
 import ua.com.alevel.view.dto.response.DoctorResponseDto;
 import ua.com.alevel.view.dto.response.PageData;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +34,9 @@ public class DoctorFacadeImpl implements DoctorFacade {
 
     @Override
     public void update(DoctorRequestDto doctorRequestDto, Long id) {
-        Doctor doctor = doctorService.findById(id);
-        if (doctor != null) {
+        Optional<Doctor> optionalDoctor = doctorService.findById(id);
+        if (optionalDoctor.isPresent()) {
+            Doctor doctor = optionalDoctor.get();
             doctor.setUpdated(new Timestamp(System.currentTimeMillis()));
             doctor = createDoctorEntity(doctorRequestDto, doctor);
             doctorService.update(doctor);
@@ -49,19 +50,19 @@ public class DoctorFacadeImpl implements DoctorFacade {
 
     @Override
     public DoctorResponseDto findById(Long id) {
-        return new DoctorResponseDto(doctorService.findById(id));
+        return new DoctorResponseDto(doctorService.findById(id).get());
     }
 
     @Override
     public PageData<DoctorResponseDto> findAll(WebRequest request) {
-        DataTableRequest dataTableRequest = WebRequestUtil.initDataTableRequest(request);
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
         DataTableResponse<Doctor> tableResponse = doctorService.findAll(dataTableRequest);
 
         List<DoctorResponseDto> doctorResponseDtos = tableResponse.getItems().stream().
                 map(DoctorResponseDto::new).
                 collect(Collectors.toList());
 
-        PageData<DoctorResponseDto> pageData = (PageData<DoctorResponseDto>) WebResponseUtil.initPageData(tableResponse);
+        PageData<DoctorResponseDto> pageData = (PageData<DoctorResponseDto>) WebUtil.initPageData(tableResponse);
         pageData.setItems(doctorResponseDtos);
 
         return pageData;
