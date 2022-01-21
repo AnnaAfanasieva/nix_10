@@ -1,7 +1,7 @@
 package ua.com.alevel.view.dto.response;
 
-import ua.com.alevel.persistence.entity.Doctor;
-import ua.com.alevel.persistence.entity.VaccinationPoint;
+import ua.com.alevel.persistence.entity.item.VaccinationPoint;
+import ua.com.alevel.persistence.entity.user.Doctor;
 
 import java.util.Set;
 

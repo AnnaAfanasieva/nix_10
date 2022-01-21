@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import ua.com.alevel.config.security.SecurityService;
 import ua.com.alevel.persistence.entity.user.User;
-import ua.com.alevel.persistence.repository.users.UserRepository;
+import ua.com.alevel.persistence.repository.user.UserRepository;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {

@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.com.alevel.persistence.entity.user.User;
-import ua.com.alevel.persistence.repository.users.UserRepository;
+import ua.com.alevel.persistence.repository.user.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;

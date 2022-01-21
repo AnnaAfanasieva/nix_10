@@ -9,7 +9,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ua.com.alevel.persistence.entity.user.Admin;
-import ua.com.alevel.persistence.repository.users.AdminRepository;
+import ua.com.alevel.persistence.repository.user.AdminRepository;
 
 @SpringBootApplication (exclude = {
         DataSourceAutoConfiguration.class,

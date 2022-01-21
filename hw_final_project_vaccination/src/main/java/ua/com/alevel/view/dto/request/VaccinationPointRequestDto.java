@@ -1,6 +1,6 @@
 package ua.com.alevel.view.dto.request;
 
-import ua.com.alevel.persistence.entity.Doctor;
+import ua.com.alevel.persistence.entity.user.Doctor;
 
 import java.util.Set;
 

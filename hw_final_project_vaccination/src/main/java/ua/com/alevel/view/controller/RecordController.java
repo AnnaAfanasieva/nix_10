@@ -2,7 +2,7 @@ package ua.com.alevel.view.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.com.alevel.facade.RecordFacade;
+import ua.com.alevel.facade.item.RecordFacade;
 
 @Controller
 @RequestMapping("/records")

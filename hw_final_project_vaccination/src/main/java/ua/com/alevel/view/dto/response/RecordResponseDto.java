@@ -1,7 +1,7 @@
 package ua.com.alevel.view.dto.response;
 
-import ua.com.alevel.persistence.entity.Doctor;
-import ua.com.alevel.persistence.entity.Record;
+import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.util.Vaccine;
 
 import java.util.Date;
