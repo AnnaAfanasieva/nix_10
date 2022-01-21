@@ -14,12 +14,15 @@ public class Record extends BaseEntity {
     private String patronymic;
     private String phone;
 
+    @Column(name = "date_of_birth")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfBirth;
 
+    @Column(name = "number_in_line")
     private Long numberInLine;
     private Vaccine vaccine;
 
+    @Column(name = "vaccine_date_and_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date vaccineDateAndTime;
 
