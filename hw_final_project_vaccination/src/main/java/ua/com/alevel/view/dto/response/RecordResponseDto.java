@@ -1,6 +1,7 @@
 package ua.com.alevel.view.dto.response;
 
 import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.RecordTime;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.util.Vaccine;
 
@@ -15,7 +16,8 @@ public class RecordResponseDto extends ResponseDto {
     private Date dateOfBirth;
     private Long numberInLine;
     private Vaccine vaccine;
-    private Date vaccineDateAndTime;
+    private Date vaccineDate;
+    private RecordTime recordTime;
     private Doctor doctor;
 
     public RecordResponseDto() {
@@ -32,7 +34,8 @@ public class RecordResponseDto extends ResponseDto {
         this.dateOfBirth = record.getDateOfBirth();
         this.numberInLine = record.getNumberInLine();
         this.vaccine = record.getVaccine();
-        this.vaccineDateAndTime = record.getVaccineDateAndTime();
+        this.vaccineDate = record.getVaccineDate();
+        this.recordTime = record.getRecordTime();
         this.doctor = record.getDoctor();
     }
 
@@ -92,12 +95,20 @@ public class RecordResponseDto extends ResponseDto {
         this.vaccine = vaccine;
     }
 
-    public Date getVaccineDateAndTime() {
-        return vaccineDateAndTime;
+    public Date getVaccineDate() {
+        return vaccineDate;
     }
 
-    public void setVaccineDateAndTime(Date vaccineDateAndTime) {
-        this.vaccineDateAndTime = vaccineDateAndTime;
+    public void setVaccineDate(Date vaccineDate) {
+        this.vaccineDate = vaccineDate;
+    }
+
+    public RecordTime getRecordTime() {
+        return recordTime;
+    }
+
+    public void setRecordTime(RecordTime recordTime) {
+        this.recordTime = recordTime;
     }
 
     public Doctor getDoctor() {

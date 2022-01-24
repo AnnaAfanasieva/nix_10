@@ -16,26 +16,25 @@
             <form id="logoutForm" method="POST" th:action="@{/logout}">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <div sec:authorize="hasRole('ADMIN')">
                 <nav class="navbar navbar-dark bg-dark">
-                    <a class="nav-item nav-link" th:href="@{/admin/dashboard}">Dashboard</a>
-                    <a class="nav-item nav-link" th:href="@{/admin/books}">Books</a>
-                    <a class="nav-item nav-link" th:href="@{/admin/orders}">Orders</a>
-                    <a class="nav-item nav-link" th:href="@{/admin/cards}">Cards</a>
-                    <a class="nav-item nav-link" th:href="@{/admin/personals}">Personals</a>
-                    <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Logout</a>
+                    <a class="nav-item nav-link" th:href="@{/admin/dashboard}">Головна</a>
+                    <a class="nav-item nav-link" th:href="@{/admin/records}">Записи</a>
+                    <a class="nav-item nav-link" th:href="@{/admin/doctors}">Лікарі</a>
+                    <a class="nav-item nav-link" th:href="@{/admin/vaccination_points}">Пункти вакцинації</a>
+                    <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вийти</a>
                 </nav>
             </div>
 
-            <div sec:authorize="hasRole('ROLE_PERSONAL')">
+            <div sec:authorize="hasRole('DOCTOR')">
                 <nav class="navbar navbar-dark bg-dark">
-                    <a class="nav-item nav-link" th:href="@{/personal/dashboard}">Dashboard</a>
-                    <a class="nav-item nav-link" th:href="@{/personal/books}">Books</a>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Logout</a>
+                    <a class="nav-item nav-link" th:href="@{/doctor/dashboard}">Головна</a>
+                    <a class="nav-item nav-link" th:href="@{/doctor/records}">Записи</a>
+<!--                    <form class="d-flex">-->
+<!--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                        <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                    </form>-->
+                    <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вийти</a>
                 </nav>
             </div>
 

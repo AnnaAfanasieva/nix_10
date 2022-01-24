@@ -24,13 +24,17 @@ public class Record extends BaseEntity {
     private Long numberInLine;
     private Vaccine vaccine;
 
-    @Column(name = "vaccine_date_and_time")
+    @Column(name = "vaccine_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date vaccineDateAndTime;
+    private Date vaccineDate;
 
     @ManyToOne()
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
+
+    @ManyToOne()
+    @JoinColumn(name = "record_time_id", referencedColumnName = "id")
+    private RecordTime recordTime;
 
     public Record() {
         super();
@@ -92,12 +96,12 @@ public class Record extends BaseEntity {
         this.vaccine = vaccine;
     }
 
-    public Date getVaccineDateAndTime() {
-        return vaccineDateAndTime;
+    public Date getVaccineDate() {
+        return vaccineDate;
     }
 
-    public void setVaccineDateAndTime(Date vaccineDateAndTime) {
-        this.vaccineDateAndTime = vaccineDateAndTime;
+    public void setVaccineDate(Date vaccineDate) {
+        this.vaccineDate = vaccineDate;
     }
 
     public Doctor getDoctor() {
@@ -106,5 +110,13 @@ public class Record extends BaseEntity {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public RecordTime getRecordTime() {
+        return recordTime;
+    }
+
+    public void setRecordTime(RecordTime recordTime) {
+        this.recordTime = recordTime;
     }
 }

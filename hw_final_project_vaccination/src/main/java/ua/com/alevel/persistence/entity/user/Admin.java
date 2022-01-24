@@ -11,6 +11,6 @@ public class Admin extends User {
 
     public Admin() {
         super();
-        setRoleType(RoleType.ADMIN);
+        setRoleType(RoleType.ROLE_ADMIN);
     }
 }

@@ -1,5 +1,5 @@
 package ua.com.alevel.util;
 
 public enum RoleType {
-    ADMIN, DOCTOR
+    ROLE_ADMIN, ROLE_DOCTOR
 }

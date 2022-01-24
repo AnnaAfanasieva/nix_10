@@ -11,13 +11,13 @@ import ua.com.alevel.util.SecurityUtil;
 @Controller
 public class AuthController extends BaseController {
 
-    private final AuthValidatorFacade authValidatorFacade;
+//    private final AuthValidatorFacade authValidatorFacade;
     private final SecurityService securityService;
 
     public AuthController(
-            AuthValidatorFacade authValidatorFacade,
+//            AuthValidatorFacade authValidatorFacade,
             SecurityService securityService) {
-        this.authValidatorFacade = authValidatorFacade;
+//        this.authValidatorFacade = authValidatorFacade;
         this.securityService = securityService;
     }
 
@@ -26,10 +26,10 @@ public class AuthController extends BaseController {
         showMessage(model, false);
         boolean authenticated = securityService.isAuthenticated();
         if (authenticated) {
-            if (SecurityUtil.hasRole(RoleType.ADMIN.name())) {
+            if (SecurityUtil.hasRole(RoleType.ROLE_ADMIN.name())) {
                 return "redirect:/admin/dashboard";
             }
-            if (SecurityUtil.hasRole(RoleType.DOCTOR.name())) {
+            if (SecurityUtil.hasRole(RoleType.ROLE_DOCTOR.name())) {
                 return "redirect:/personal/dashboard";
             }
         }
@@ -63,14 +63,14 @@ public class AuthController extends BaseController {
 //        return redirectProcess(model);
 //    }
 
-    private String redirectProcess(Model model) {
-        showMessage(model, false);
-        if (SecurityUtil.hasRole(RoleType.ADMIN.name())) {
-            return "redirect:/admin/dashboard";
-        }
-        if (SecurityUtil.hasRole(RoleType.DOCTOR.name())) {
-            return "redirect:/doctor/dashboard";
-        }
-        return "redirect:/login";
-    }
+//    private String redirectProcess(Model model) {
+//        showMessage(model, false);
+//        if (SecurityUtil.hasRole(RoleType.ADMIN.name())) {
+//            return "redirect:/admin/dashboard";
+//        }
+//        if (SecurityUtil.hasRole(RoleType.DOCTOR.name())) {
+//            return "redirect:/doctor/dashboard";
+//        }
+//        return "redirect:/login";
+//    }
 }

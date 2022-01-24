@@ -25,7 +25,7 @@ public class Doctor extends User {
 
     public Doctor() {
         super();
-        setRoleType(RoleType.DOCTOR);
+        setRoleType(RoleType.ROLE_DOCTOR);
         this.records = new HashSet<>();
     }
 

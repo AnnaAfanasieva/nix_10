@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}">
+<head>
+  <meta charset="utf-8">
+  <title>records</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+  <tr th:each="record,iter : ${pageData.getItems()}">
+    <td th:text="${iter.count}"></td>
+<!--    <td>-->
+<!--      <img th:src="@{${record.getImageUrl()}}" width="45" height="45"/>-->
+<!--    </td>-->
+    <td th:text="${record.getBookName()}"></td>
+    <td th:text="${record.getPageSize()}"></td>
+    <td th:text="${record.getPublicationDate()}"></td>
+    <td th:text="${#calendars.format(record.getCreated(),'dd MMMM yyyy')}"></td>
+    <td th:text="${record.getPrice()}"></td>
+    <td th:text="${record.getQuantity()}"></td>
+    <td>
+      <a th:href="@{'/admin/books/details/' + ${record.getId()}}" type="button" class="btn btn-primary">details</a>
+    </td>
+    <td>
+      <a th:href="@{'/admin/books/delete/' + ${record.getId()}}" type="button" class="btn btn-danger">delete</a>
+    </td>
+  </tr>
+</div>
+
+</body>
+</html>
