@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>vaccination points</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+    <tr th:each="vaccination_point ,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${vaccination_point.getAddress()}"></td>
+
+        <td>
+            <a th:href="@{'/admin/vaccination_points/details/' + ${vaccination_point.getId()}}" type="button" class="btn btn-primary">Деталі</a>
+        </td>
+        <td>
+            <a th:href="@{'/admin/vaccination_points/delete/' + ${vaccination_point.getId()}}" type="button" class="btn btn-danger">Видалити</a>
+        </td>
+    </tr>
+</div>
+
+</body>
+</html>

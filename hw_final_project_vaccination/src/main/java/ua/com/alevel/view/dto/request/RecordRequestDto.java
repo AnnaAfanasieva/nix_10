@@ -13,7 +13,6 @@ public class RecordRequestDto extends RequestDto {
     private String patronymic;
     private String phone;
     private Date dateOfBirth;
-    private Long numberInLine;
     private Vaccine vaccine;
     private Date vaccineDate;
     private RecordTime recordTime;
@@ -57,14 +56,6 @@ public class RecordRequestDto extends RequestDto {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getNumberInLine() {
-        return numberInLine;
-    }
-
-    public void setNumberInLine(Long numberInLine) {
-        this.numberInLine = numberInLine;
     }
 
     public Vaccine getVaccine() {

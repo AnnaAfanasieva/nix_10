@@ -15,7 +15,6 @@ import ua.com.alevel.persistence.repository.user.UserRepository;
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-    //TODO доделать
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
     private final UserRepository<User> userRepository;

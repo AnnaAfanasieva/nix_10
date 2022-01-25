@@ -20,8 +20,6 @@ public class Record extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfBirth;
 
-    @Column(name = "number_in_line")
-    private Long numberInLine;
     private Vaccine vaccine;
 
     @Column(name = "vaccine_date")
@@ -78,14 +76,6 @@ public class Record extends BaseEntity {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getNumberInLine() {
-        return numberInLine;
-    }
-
-    public void setNumberInLine(Long numberInLine) {
-        this.numberInLine = numberInLine;
     }
 
     public Vaccine getVaccine() {

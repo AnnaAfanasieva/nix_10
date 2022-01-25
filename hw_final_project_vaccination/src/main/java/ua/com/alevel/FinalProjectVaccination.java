@@ -13,6 +13,7 @@ import ua.com.alevel.persistence.entity.user.Admin;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.repository.item.VaccinationPointRepository;
 import ua.com.alevel.persistence.repository.user.AdminRepository;
+import ua.com.alevel.persistence.repository.user.DoctorRepository;
 
 import java.util.List;
 
@@ -25,11 +26,13 @@ public class FinalProjectVaccination {
     private final BCryptPasswordEncoder encoder;
     private final AdminRepository adminRepository;
     private final VaccinationPointRepository vaccinationPointRepository;
+    private final DoctorRepository doctorRepository;
 
-    public FinalProjectVaccination(BCryptPasswordEncoder encoder, AdminRepository adminRepository, VaccinationPointRepository vaccinationPointRepository) {
+    public FinalProjectVaccination(BCryptPasswordEncoder encoder, AdminRepository adminRepository, VaccinationPointRepository vaccinationPointRepository, DoctorRepository doctorRepository) {
         this.encoder = encoder;
         this.adminRepository = adminRepository;
         this.vaccinationPointRepository = vaccinationPointRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     public static void main(String[] args) {
@@ -57,7 +60,7 @@ public class FinalProjectVaccination {
         doctor1.setVaccinationPoint(vaccinationPoints.get(0));
         doctor1.setEmail("drobenko@gmail.com");
         doctor1.setPassword(encoder.encode("drobenko@gmail.com"));
-
+        doctorRepository.save(doctor1);
 
         Doctor doctor2 = new Doctor();
         doctor2.setSurname("Перелигіна");
@@ -66,6 +69,7 @@ public class FinalProjectVaccination {
         doctor2.setVaccinationPoint(vaccinationPoints.get(0));
         doctor2.setEmail("perelygina@gmail.com");
         doctor2.setPassword(encoder.encode("perelygina@gmail.com"));
+        doctorRepository.save(doctor2);
 
         Doctor doctor3 = new Doctor();
         doctor3.setSurname("Слісарчук");
@@ -74,6 +78,7 @@ public class FinalProjectVaccination {
         doctor3.setVaccinationPoint(vaccinationPoints.get(0));
         doctor3.setEmail("slisarchuk@gmail.com");
         doctor3.setPassword(encoder.encode("slisarchuk@gmail.com"));
+        doctorRepository.save(doctor3);
 
         Doctor doctor4 = new Doctor();
         doctor4.setSurname("Бакшеєв");
@@ -82,6 +87,7 @@ public class FinalProjectVaccination {
         doctor4.setVaccinationPoint(vaccinationPoints.get(1));
         doctor4.setEmail("bacshev@gmail.com");
         doctor4.setPassword(encoder.encode("bacshev@gmail.com"));
+        doctorRepository.save(doctor4);
 
         Doctor doctor5 = new Doctor();
         doctor5.setSurname("Поліщук");
@@ -90,6 +96,7 @@ public class FinalProjectVaccination {
         doctor5.setVaccinationPoint(vaccinationPoints.get(1));
         doctor5.setEmail("polishuk@gmail.com");
         doctor5.setPassword(encoder.encode("polishuk@gmail.com"));
+        doctorRepository.save(doctor5);
 
         Doctor doctor6 = new Doctor();
         doctor6.setSurname("Скакун");
@@ -98,6 +105,7 @@ public class FinalProjectVaccination {
         doctor6.setVaccinationPoint(vaccinationPoints.get(1));
         doctor6.setEmail("skakun@gmail.com");
         doctor6.setPassword(encoder.encode("skakun@gmail.com"));
+        doctorRepository.save(doctor6);
 
         Doctor doctor7 = new Doctor();
         doctor7.setSurname("Лабик");
@@ -106,6 +114,7 @@ public class FinalProjectVaccination {
         doctor7.setVaccinationPoint(vaccinationPoints.get(2));
         doctor7.setEmail("labuk@gmail.com");
         doctor7.setPassword(encoder.encode("labuk@gmail.com"));
+        doctorRepository.save(doctor7);
 
         Doctor doctor8 = new Doctor();
         doctor8.setSurname("Шелист");
@@ -114,6 +123,7 @@ public class FinalProjectVaccination {
         doctor8.setVaccinationPoint(vaccinationPoints.get(2));
         doctor8.setEmail("shelyst@gmail.com");
         doctor8.setPassword(encoder.encode("shelyst@gmail.com"));
+        doctorRepository.save(doctor8);
 
         Doctor doctor9 = new Doctor();
         doctor9.setSurname("Коваль");
@@ -122,6 +132,7 @@ public class FinalProjectVaccination {
         doctor9.setVaccinationPoint(vaccinationPoints.get(2));
         doctor9.setEmail("koval@gmail.com");
         doctor9.setPassword(encoder.encode("koval@gmail.com"));
+        doctorRepository.save(doctor9);
 
         Doctor doctor10 = new Doctor();
         doctor10.setSurname("Свиноус");
@@ -130,6 +141,7 @@ public class FinalProjectVaccination {
         doctor10.setVaccinationPoint(vaccinationPoints.get(3));
         doctor10.setEmail("svinoys@gmail.com");
         doctor10.setPassword(encoder.encode("svinoys@gmail.com"));
+        doctorRepository.save(doctor10);
 
         Doctor doctor11 = new Doctor();
         doctor11.setSurname("Заболотня");
@@ -138,6 +150,7 @@ public class FinalProjectVaccination {
         doctor11.setVaccinationPoint(vaccinationPoints.get(3));
         doctor11.setEmail("zabolothya@gmail.com");
         doctor11.setPassword(encoder.encode("zabolothya@gmail.com"));
+        doctorRepository.save(doctor11);
 
         Doctor doctor12 = new Doctor();
         doctor12.setSurname("Романюк");
@@ -146,6 +159,7 @@ public class FinalProjectVaccination {
         doctor12.setVaccinationPoint(vaccinationPoints.get(3));
         doctor12.setEmail("romanuk@gmail.com");
         doctor12.setPassword(encoder.encode("romanuk@gmail.com"));
+        doctorRepository.save(doctor12);
 
         Doctor doctor13 = new Doctor();
         doctor13.setSurname("Юшкевич");
@@ -154,6 +168,7 @@ public class FinalProjectVaccination {
         doctor13.setVaccinationPoint(vaccinationPoints.get(4));
         doctor13.setEmail("yushkevich@gmail.com");
         doctor13.setPassword(encoder.encode("yushkevich@gmail.com"));
+        doctorRepository.save(doctor13);
 
         Doctor doctor14 = new Doctor();
         doctor14.setSurname("Шейко");
@@ -162,6 +177,7 @@ public class FinalProjectVaccination {
         doctor14.setVaccinationPoint(vaccinationPoints.get(4));
         doctor14.setEmail("sheiko@gmail.com");
         doctor14.setPassword(encoder.encode("sheiko@gmail.com"));
+        doctorRepository.save(doctor14);
 
         Doctor doctor15 = new Doctor();
         doctor15.setSurname("Федоренко");
@@ -170,6 +186,7 @@ public class FinalProjectVaccination {
         doctor15.setVaccinationPoint(vaccinationPoints.get(4));
         doctor15.setEmail("fedorchenko@gmail.com");
         doctor15.setPassword(encoder.encode("fedorchenko@gmail.com"));
+        doctorRepository.save(doctor15);
 
         Doctor doctor16 = new Doctor();
         doctor16.setSurname("Ляшко");
@@ -178,6 +195,7 @@ public class FinalProjectVaccination {
         doctor16.setVaccinationPoint(vaccinationPoints.get(5));
         doctor16.setEmail("lyashko@gmail.com");
         doctor16.setPassword(encoder.encode("lyashko@gmail.com"));
+        doctorRepository.save(doctor16);
 
         Doctor doctor17 = new Doctor();
         doctor17.setSurname("Цімох");
@@ -186,6 +204,7 @@ public class FinalProjectVaccination {
         doctor17.setVaccinationPoint(vaccinationPoints.get(5));
         doctor17.setEmail("cimoh@gmail.com");
         doctor17.setPassword(encoder.encode("cimoh@gmail.com"));
+        doctorRepository.save(doctor17);
 
         Doctor doctor18 = new Doctor();
         doctor18.setSurname("Кулак");
@@ -194,6 +213,7 @@ public class FinalProjectVaccination {
         doctor18.setVaccinationPoint(vaccinationPoints.get(5));
         doctor18.setEmail("kulak@gmail.com");
         doctor18.setPassword(encoder.encode("kulak@gmail.com"));
+        doctorRepository.save(doctor18);
 
         Doctor doctor19 = new Doctor();
         doctor19.setSurname("Совтус");
@@ -202,6 +222,7 @@ public class FinalProjectVaccination {
         doctor19.setVaccinationPoint(vaccinationPoints.get(6));
         doctor19.setEmail("sovtus@gmail.com");
         doctor19.setPassword(encoder.encode("sovtus@gmail.com"));
+        doctorRepository.save(doctor19);
 
         Doctor doctor20 = new Doctor();
         doctor20.setSurname("Грамотний");
@@ -210,6 +231,7 @@ public class FinalProjectVaccination {
         doctor20.setVaccinationPoint(vaccinationPoints.get(6));
         doctor20.setEmail("gramotny@gmail.com");
         doctor20.setPassword(encoder.encode("gramotny@gmail.com"));
+        doctorRepository.save(doctor20);
 
         Doctor doctor21 = new Doctor();
         doctor21.setSurname("Федак");
@@ -218,6 +240,7 @@ public class FinalProjectVaccination {
         doctor21.setVaccinationPoint(vaccinationPoints.get(6));
         doctor21.setEmail("fedak@gmail.com");
         doctor21.setPassword(encoder.encode("fedak@gmail.com"));
+        doctorRepository.save(doctor21);
 
         Doctor doctor22 = new Doctor();
         doctor22.setSurname("Коцюба");
@@ -226,6 +249,7 @@ public class FinalProjectVaccination {
         doctor22.setVaccinationPoint(vaccinationPoints.get(7));
         doctor22.setEmail("kocuba@gmail.com");
         doctor22.setPassword(encoder.encode("kocuba@gmail.com"));
+        doctorRepository.save(doctor22);
 
         Doctor doctor23 = new Doctor();
         doctor23.setSurname("Вдовиченко");
@@ -234,6 +258,7 @@ public class FinalProjectVaccination {
         doctor23.setVaccinationPoint(vaccinationPoints.get(7));
         doctor23.setEmail("vdovychenko@gmail.com");
         doctor23.setPassword(encoder.encode("vdovychenko@gmail.com"));
+        doctorRepository.save(doctor23);
 
         Doctor doctor24 = new Doctor();
         doctor24.setSurname("Самойленко");
@@ -242,5 +267,6 @@ public class FinalProjectVaccination {
         doctor24.setVaccinationPoint(vaccinationPoints.get(7));
         doctor24.setEmail("samoylenko@gmail.com");
         doctor24.setPassword(encoder.encode("samoylenko@gmail.com"));
+        doctorRepository.save(doctor24);
     }
 }

@@ -14,7 +14,6 @@ public class RecordResponseDto extends ResponseDto {
     private String patronymic;
     private String phone;
     private Date dateOfBirth;
-    private Long numberInLine;
     private Vaccine vaccine;
     private Date vaccineDate;
     private RecordTime recordTime;
@@ -32,7 +31,6 @@ public class RecordResponseDto extends ResponseDto {
         this.patronymic = record.getPatronymic();
         this.phone = record.getPhone();
         this.dateOfBirth = record.getDateOfBirth();
-        this.numberInLine = record.getNumberInLine();
         this.vaccine = record.getVaccine();
         this.vaccineDate = record.getVaccineDate();
         this.recordTime = record.getRecordTime();
@@ -77,14 +75,6 @@ public class RecordResponseDto extends ResponseDto {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Long getNumberInLine() {
-        return numberInLine;
-    }
-
-    public void setNumberInLine(Long numberInLine) {
-        this.numberInLine = numberInLine;
     }
 
     public Vaccine getVaccine() {

@@ -74,7 +74,6 @@ public class RecordFacadeImpl implements RecordFacade {
         record.setPatronymic(recordRequestDto.getPatronymic());
         record.setPhone(recordRequestDto.getPhone());
         record.setDateOfBirth(recordRequestDto.getDateOfBirth());
-        record.setNumberInLine(recordRequestDto.getNumberInLine());
         record.setVaccine(recordRequestDto.getVaccine());
         record.setVaccineDate(recordRequestDto.getVaccineDate());
         record.setRecordTime(recordRequestDto.getRecordTime());

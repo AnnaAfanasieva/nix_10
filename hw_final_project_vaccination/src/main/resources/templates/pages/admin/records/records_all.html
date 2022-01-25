@@ -12,20 +12,19 @@
 <div layout:fragment="data_table_content">
   <tr th:each="record,iter : ${pageData.getItems()}">
     <td th:text="${iter.count}"></td>
-<!--    <td>-->
-<!--      <img th:src="@{${record.getImageUrl()}}" width="45" height="45"/>-->
-<!--    </td>-->
-    <td th:text="${record.getBookName()}"></td>
-    <td th:text="${record.getPageSize()}"></td>
-    <td th:text="${record.getPublicationDate()}"></td>
-    <td th:text="${#calendars.format(record.getCreated(),'dd MMMM yyyy')}"></td>
-    <td th:text="${record.getPrice()}"></td>
-    <td th:text="${record.getQuantity()}"></td>
+    <td th:text="${record.getSurname()}"></td>
+    <td th:text="${record.getName()}"></td>
+    <td th:text="${record.getPatronymic()}"></td>
+    <td th:text="${record.getVaccine()}"></td>
+    <td th:text="${record.getDoctor().getSurname()}"></td>
+    <td th:text="${#calendars.format(record.getVaccineDate(),'dd MMMM yyyy')}"></td>
+    <td th:text="${record.getRecordTime().getTime()}"></td>
+
     <td>
-      <a th:href="@{'/admin/books/details/' + ${record.getId()}}" type="button" class="btn btn-primary">details</a>
+      <a th:href="@{'/admin/records/details/' + ${record.getId()}}" type="button" class="btn btn-primary">Деталі</a>
     </td>
     <td>
-      <a th:href="@{'/admin/books/delete/' + ${record.getId()}}" type="button" class="btn btn-danger">delete</a>
+      <a th:href="@{'/admin/records/delete/' + ${record.getId()}}" type="button" class="btn btn-danger">Видалити</a>
     </td>
   </tr>
 </div>
