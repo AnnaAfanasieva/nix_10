@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Деталі локації</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Деталі локації
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${vaccinationPoint.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Адреса</th>
+                            <td th:text="${vaccinationPoint.getAddress()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Створений</th>
+                            <td th:text="${#calendars.format(vaccinationPoint.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Редагований</th>
+                            <td th:text="${#calendars.format(vaccinationPoint.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>-->
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

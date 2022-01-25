@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Деталі запису</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Деталі запису
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${record.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Прізвище пацієнта</th>
+                            <td th:text="${record.getSurname()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Ім'я пацієнта</th>
+                            <td th:text="${record.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>По батькові пацієнта</th>
+                            <td th:text="${record.getPatronymic()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Дата народження</th>
+                            <td th:text="${#calendars.format(record.getDateOfBirth(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Номер телефону пацієнта</th>
+                            <td th:text="${record.getPhone()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Локація</th>
+                            <td>
+                                <a th:href="@{'/admin/vaccination_points/details/' + ${record.getDoctor().getVaccinationPoint().getId()}}" type="button" class="btn btn-link" th:text="${record.getDoctor().getVaccinationPoint().getAddress()}"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Лікар</th>
+                            <td>
+                                <a th:href="@{'/admin/doctors/details/' + ${record.getDoctor().getId()}}" type="button" class="btn btn-link" th:text="${record.getDoctor().getSurname() + ' ' +record.getDoctor().getName() + ' ' + record.getDoctor().getPatronymic()}"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Вакцина</th>
+                            <td th:text="${record.getVaccine().name()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Дата вакцинації</th>
+                            <td th:text="${#calendars.format(record.getVaccineDate(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Час вакцинації</th>
+                            <td th:text="${record.getRecordTime().getTime()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Створений</th>
+                            <td th:text="${#calendars.format(record.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Редагований</th>
+                            <td th:text="${#calendars.format(record.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>-->
+                    <!--                    <hr>-->
+                    <!--                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

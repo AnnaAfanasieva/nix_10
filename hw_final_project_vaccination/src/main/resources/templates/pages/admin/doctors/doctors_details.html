@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Деталі лікаря</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Деталі лікаря
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id</th>
+                            <td th:text="${doctor.getId()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Прізвище</th>
+                            <td th:text="${doctor.getSurname()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Ім'я</th>
+                            <td th:text="${doctor.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>По батькові</th>
+                            <td th:text="${doctor.getPatronymic()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Локація</th>
+                            <td>
+                                <a th:href="@{'/admin/vaccination_points/details/' + ${doctor.getVaccinationPoint().getId()}}" type="button" class="btn btn-link" th:text="${doctor.getVaccinationPoint().getAddress()}"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Створений</th>
+                            <td th:text="${#calendars.format(doctor.getCreated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                        <tr>
+                            <th>Редагований</th>
+                            <td th:text="${#calendars.format(doctor.getUpdated(),'dd MMMM yyyy')}"></td>
+                        </tr>
+                    </table>
+<!--                    <hr>-->
+<!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
+<!--                    <hr>-->
+<!--                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>-->
+<!--                    <hr>-->
+<!--                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

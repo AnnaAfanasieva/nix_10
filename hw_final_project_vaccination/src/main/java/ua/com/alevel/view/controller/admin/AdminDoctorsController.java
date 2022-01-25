@@ -1,9 +1,11 @@
 package ua.com.alevel.view.controller.admin;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -12,7 +14,6 @@ import ua.com.alevel.facade.user.DoctorFacade;
 import ua.com.alevel.view.controller.BaseController;
 import ua.com.alevel.view.dto.response.DoctorResponseDto;
 import ua.com.alevel.view.dto.response.PageData;
-import ua.com.alevel.view.dto.response.RecordResponseDto;
 
 @Controller
 @RequestMapping("/admin/doctors")
@@ -41,12 +42,18 @@ public class AdminDoctorsController extends BaseController {
         initDataTable(response, columnNames, model);
         model.addAttribute("createUrl", "/admin/doctors/all");
         model.addAttribute("createNew", "/admin/doctors/new");
-        model.addAttribute("cardHeader", "All Doctors");
+        model.addAttribute("cardHeader", "Усі лікарі");
         return "pages/admin/doctors/doctors_all";
     }
 
     @PostMapping("/all")
     public ModelAndView findAllRedirect(WebRequest request, ModelMap model) {
         return findAllRedirect(request, model, "admin/doctors");
+    }
+
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable @NotNull() Long id, Model model) {
+        model.addAttribute("doctor", doctorFacade.findById(id));
+        return "pages/admin/doctors/doctors_details";
     }
 }

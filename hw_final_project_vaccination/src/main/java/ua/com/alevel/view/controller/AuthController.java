@@ -30,7 +30,7 @@ public class AuthController extends BaseController {
                 return "redirect:/admin/dashboard";
             }
             if (SecurityUtil.hasRole(RoleType.ROLE_DOCTOR.name())) {
-                return "redirect:/personal/dashboard";
+                return "redirect:/doctor/dashboard";
             }
         }
         if (error != null) {
