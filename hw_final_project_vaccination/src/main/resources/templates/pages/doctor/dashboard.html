@@ -6,15 +6,42 @@
       layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="utf-8">
-    <title>Create an account</title>
+    <title>Інформація</title>
 </head>
 <body>
 
 <div layout:fragment="doctor_content">
-    <h1>
-        Admin
-<!--        Logged user: <span sec:authentication="name"></span>-->
-    </h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Інформація
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Прізвище</th>
+                            <td th:text="${doctor.getSurname()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Ім'я</th>
+                            <td th:text="${doctor.getName()}"></td>
+                        </tr>
+                        <tr>
+                            <th>По батькові</th>
+                            <td th:text="${doctor.getPatronymic()}"></td>
+                        </tr>
+                        <tr>
+                            <th>Локація</th>
+                            <td>
+                                <a th:href="@{'/doctor/vaccination_points/details/' + ${doctor.getVaccinationPoint().getId()}}" type="button" class="btn btn-link" th:text="${doctor.getVaccinationPoint().getAddress()}"></a>
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -4,14 +4,13 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.item.RecordFacade;
+import ua.com.alevel.persistence.repository.user.DoctorRepository;
 import ua.com.alevel.view.controller.BaseController;
+import ua.com.alevel.view.dto.request.RecordRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
 
@@ -19,6 +18,7 @@ import ua.com.alevel.view.dto.response.RecordResponseDto;
 @RequestMapping("/admin/records")
 public class AdminRecordsController extends BaseController {
 
+    private long update_id;
     private final HeaderName[] columnNames = new HeaderName[] {
             new HeaderName("№", null, null),
             new HeaderName("Прізвище", "surname", "surname"),
@@ -33,9 +33,11 @@ public class AdminRecordsController extends BaseController {
     };
 
     private final RecordFacade recordFacade;
+    private final DoctorRepository doctorRepository;
 
-    public AdminRecordsController(RecordFacade recordFacade) {
+    public AdminRecordsController(RecordFacade recordFacade, DoctorRepository doctorRepository) {
         this.recordFacade = recordFacade;
+        this.doctorRepository = doctorRepository;
     }
 
     @GetMapping
@@ -57,5 +59,19 @@ public class AdminRecordsController extends BaseController {
     public String details(@PathVariable @NotNull() Long id, Model model) {
         model.addAttribute("record", recordFacade.findById(id));
         return "pages/admin/records/records_details";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateRecordPage(@PathVariable Long id, Model model) {
+        update_id = id;
+        model.addAttribute("doctors", doctorRepository.findAll());
+        model.addAttribute("record", recordFacade.findById(id));
+        return "pages/admin/records/record_update";
+    }
+
+    @PostMapping("/update")
+    public String updateRecord(@ModelAttribute("record") RecordRequestDto dto) {
+        recordFacade.update(dto, update_id);
+        return "redirect:/admin/records/details/" + update_id;
     }
 }

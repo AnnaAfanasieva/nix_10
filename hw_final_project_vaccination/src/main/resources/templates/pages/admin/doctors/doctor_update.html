@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Редагування лікаря</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Редагування лікаря</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/doctors/update}" th:object="${doctor}" method="post">
+                        <div class="form-group">
+                            <label for="surname">Прізвище</label>
+                            <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="Введіть нове прізвище" th:field="*{surname}">
+                            <label for="name">Ім'я</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Введіть нове ім'я" th:field="*{name}">
+                            <label for="patronymic">По батькові</label>
+                            <input type="text" class="form-control" id="patronymic" aria-describedby="patronymic" placeholder="Введіть нове по батькові" th:field="*{patronymic}">
+
+                            <div class="form-group">
+                                <label for="type">Оберіть нову локацію</label>
+                                <select class="form-control" id="type" th:field="*{vaccinationPoint}">
+                                    <option th:each="type : ${vaccinationPoints}"
+                                            th:value="${type.getId()}"
+                                            th:text="${type.getAddress()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

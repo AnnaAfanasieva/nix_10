@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Редагування запису</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Редагування запису</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/records/update}" th:object="${record}" method="post">
+                        <div class="form-group">
+                            <label for="surname">Прізвище пацієнта</label>
+                            <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="Введіть нове прізвище" th:field="*{surname}">
+                            <label for="name">Ім'я пацієнта</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Введіть нове ім'я" th:field="*{name}">
+                            <label for="patronymic">По батькові пацієнта</label>
+                            <input type="text" class="form-control" id="patronymic" aria-describedby="patronymic" placeholder="Введіть нове по батькові" th:field="*{patronymic}">
+                            <label for="phone">Номер телефона пацієнта</label>
+                            <input type="tel" minlength="10" maxlength="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Введіть новий номер телефона" th:field="*{phone}">
+<!--дописать-->
+                            <div class="form-group">
+                                <label for="type">Оберіть нового лікаря</label>
+                                <select class="form-control" id="type" th:field="*{doctor}">
+                                    <option th:each="type : ${doctors}"
+                                            th:value="${type.getId()}"
+                                            th:text="${type.getSurname() + ' ' + type.getName() + ' ' + type.getPatronymic()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

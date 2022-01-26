@@ -36,12 +36,12 @@
                             <td th:text="${#calendars.format(vaccinationPoint.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
-                    <!--                    <hr>-->
-                    <!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
-                    <!--                    <hr>-->
-                    <!--                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>-->
-                    <!--                    <hr>-->
-                    <!--                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>-->
+                    <hr>
+                    <a th:href="@{'/admin/vaccination_points/update/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-primary">Редагувати</a>
+                    <hr>
+                    <a th:href="@{'/admin/doctors/point/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-primary">Список лікарів у цій локації</a>
+                    <hr>
+                    <a th:href="@{'/admin/records/point/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-primary">Список записів у цій локації</a>
                 </div>
             </div>
         </div>

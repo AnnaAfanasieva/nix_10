@@ -76,6 +76,8 @@
                             <td th:text="${#calendars.format(record.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
+                    <hr>
+                    <a th:href="@{'/admin/records/update/' + ${record.getId()}}" type="button" class="btn btn-primary">Редагувати</a>
                     <!--                    <hr>-->
                     <!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
                     <!--                    <hr>-->

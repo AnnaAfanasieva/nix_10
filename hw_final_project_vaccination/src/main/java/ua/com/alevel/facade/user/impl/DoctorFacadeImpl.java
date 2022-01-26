@@ -5,6 +5,7 @@ import org.springframework.web.context.request.WebRequest;
 import ua.com.alevel.facade.user.DoctorFacade;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.service.user.DoctorService;
 import ua.com.alevel.util.WebUtil;
@@ -75,5 +76,20 @@ public class DoctorFacadeImpl implements DoctorFacade {
         doctor.setVaccinationPoint(doctorRequestDto.getVaccinationPoint());
         doctor.setRecords(doctorRequestDto.getRecords());
         return doctor;
+    }
+
+    @Override
+    public PageData<DoctorResponseDto> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint, WebRequest request) {
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
+        DataTableResponse<Doctor> tableResponse = doctorService.findAllByVaccinationPoint(dataTableRequest, vaccinationPoint);
+
+        List<DoctorResponseDto> doctorResponseDtos = tableResponse.getItems().stream().
+                map(DoctorResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<DoctorResponseDto> pageData = (PageData<DoctorResponseDto>) WebUtil.initPageData(tableResponse);
+        pageData.setItems(doctorResponseDtos);
+
+        return pageData;
     }
 }

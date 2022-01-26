@@ -4,15 +4,12 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.item.VaccinationPointFacade;
-import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.view.controller.BaseController;
+import ua.com.alevel.view.dto.request.VaccinationPointRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.VaccinationPointResponseDto;
 
@@ -20,6 +17,7 @@ import ua.com.alevel.view.dto.response.VaccinationPointResponseDto;
 @RequestMapping("/admin/vaccination_points")
 public class AdminVaccinationPointsController extends BaseController {
 
+    private long update_id;
     private final HeaderName[] columnNames = new HeaderName[] {
             new HeaderName("№", null, null),
             new HeaderName("Локація", "address", "address"),
@@ -52,5 +50,18 @@ public class AdminVaccinationPointsController extends BaseController {
     public String details(@PathVariable @NotNull() Long id, Model model) {
         model.addAttribute("vaccinationPoint", vaccinationPointFacade.findById(id));
         return "pages/admin/vaccination_points/vaccination_points_details";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateDoctorPage(@PathVariable Long id, Model model) {
+        update_id = id;
+        model.addAttribute("vaccination_point", vaccinationPointFacade.findById(id));
+        return "pages/admin/vaccination_points/vaccination_point_update";
+    }
+
+    @PostMapping("/update")
+    public String updateDoctor(@ModelAttribute("vaccination_point") VaccinationPointRequestDto dto) {
+        vaccinationPointFacade.update(dto, update_id);
+        return "redirect:/admin/vaccination_points/details/" + update_id;
     }
 }
