@@ -11,10 +11,23 @@
 <body>
 
 <div layout:fragment="admin_content">
-    <h1>
-        Admin
-        Logged user: <span sec:authentication="name"></span>
-    </h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    Інформація
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Email</th>
+                            <td sec:authentication="name"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

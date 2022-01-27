@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-12 mb-2 mt-2">
 
-                <div class="card text-white bg-danger mb-3">
+                <div class="card border-danger mb-3">
                     <div class="card-header">Виникла проблема?</div>
                     <div class="card-body">
                         <h5 class="card-title">Інформація про небезпеку</h5>
                         <p class="card-text" th:if="${showMessage}" th:text="${errorMessage}">Вибачте, щось пішло не так.</p>
                         <p class="card-text" th:unless="${showMessage}">Вибачте, щось пішло не так.</p>
                         <p class="card-text">
-                            Щоб повернутись на попередню сторінку - <a href="#" th:onclick="|back()|" type="button" class="btn btn-light">натисніть сюди</a>
+                            Щоб повернутись на попередню сторінку - <a href="#" th:onclick="|back()|" type="button" class="btn-outline-secondary">натисніть сюди</a>
                         </p>
                     </div>
                 </div>

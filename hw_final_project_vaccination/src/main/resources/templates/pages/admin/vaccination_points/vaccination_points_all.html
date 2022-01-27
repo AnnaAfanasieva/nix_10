@@ -15,10 +15,10 @@
         <td th:text="${vaccination_point.getAddress()}"></td>
 
         <td>
-            <a th:href="@{'/admin/vaccination_points/details/' + ${vaccination_point.getId()}}" type="button" class="btn btn-primary">Деталі</a>
+            <a th:href="@{'/admin/vaccination_points/details/' + ${vaccination_point.getId()}}" type="button" class="btn btn-outline-primary">Деталі</a>
         </td>
         <td>
-            <a th:href="@{'/admin/vaccination_points/delete/' + ${vaccination_point.getId()}}" type="button" class="btn btn-danger">Видалити</a>
+            <a th:href="@{'/admin/vaccination_points/delete/' + ${vaccination_point.getId()}}" type="button" class="btn btn-outline-secondary">Видалити</a>
         </td>
     </tr>
 </div>

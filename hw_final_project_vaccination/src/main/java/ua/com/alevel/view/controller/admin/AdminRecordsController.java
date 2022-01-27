@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.item.RecordFacade;
+import ua.com.alevel.persistence.entity.item.VaccinationPoint;
+import ua.com.alevel.persistence.entity.user.Doctor;
+import ua.com.alevel.persistence.repository.item.VaccinationPointRepository;
 import ua.com.alevel.persistence.repository.user.DoctorRepository;
 import ua.com.alevel.view.controller.BaseController;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
@@ -34,10 +37,12 @@ public class AdminRecordsController extends BaseController {
 
     private final RecordFacade recordFacade;
     private final DoctorRepository doctorRepository;
+    private final VaccinationPointRepository vaccinationPointRepository;
 
-    public AdminRecordsController(RecordFacade recordFacade, DoctorRepository doctorRepository) {
+    public AdminRecordsController(RecordFacade recordFacade, DoctorRepository doctorRepository, VaccinationPointRepository vaccinationPointRepository) {
         this.recordFacade = recordFacade;
         this.doctorRepository = doctorRepository;
+        this.vaccinationPointRepository = vaccinationPointRepository;
     }
 
     @GetMapping
@@ -53,6 +58,40 @@ public class AdminRecordsController extends BaseController {
     @PostMapping("/all")
     public ModelAndView findAllRedirect(WebRequest request, ModelMap model) {
         return findAllRedirect(request, model, "admin/records");
+    }
+
+    @GetMapping("/point/{id}")
+    public String findAllByVaccinationPoint(@PathVariable @NotNull() Long id, Model model, WebRequest request) {
+        VaccinationPoint vaccinationPoint = vaccinationPointRepository.getById(id);
+        update_id = id;
+        PageData<RecordResponseDto> response = recordFacade.findAllByVaccinationPoint(vaccinationPoint, request);
+        initDataTable(response, columnNames, model);
+        model.addAttribute("createUrl", "/admin/records/point");
+        model.addAttribute("createNew", "/admin/records/new");
+        model.addAttribute("cardHeader", "Усі записи");
+        return "pages/admin/records/records_all";
+    }
+
+    @PostMapping("/point")
+    public ModelAndView findAllByVaccinationPointRedirect(WebRequest request, ModelMap model) {
+        return findAllRedirect(request, model, "admin/records/point/" + update_id);
+    }
+
+    @GetMapping("/doctor/{id}")
+    public String findAllByDoctor(@PathVariable @NotNull() Long id, Model model, WebRequest request) {
+        Doctor doctor = doctorRepository.getById(id);
+        update_id = id;
+        PageData<RecordResponseDto> response = recordFacade.findAllByDoctor(doctor, request);
+        initDataTable(response, columnNames, model);
+        model.addAttribute("createUrl", "/admin/records/doctor");
+        model.addAttribute("createNew", "/admin/records/new");
+        model.addAttribute("cardHeader", "Усі записи");
+        return "pages/admin/records/records_all";
+    }
+
+    @PostMapping("/doctor")
+    public ModelAndView findAllByDoctorRedirect(WebRequest request, ModelMap model) {
+        return findAllRedirect(request, model, "admin/records/doctor/" + update_id);
     }
 
     @GetMapping("/details/{id}")

@@ -17,10 +17,10 @@
         <td th:text="${doctor.getPatronymic()}"></td>
         <td th:text="${doctor.getVaccinationPoint().getAddress()}"></td>
         <td>
-            <a th:href="@{'/admin/doctors/details/' + ${doctor.getId()}}" type="button" class="btn btn-primary">Деталі</a>
+            <a th:href="@{'/admin/doctors/details/' + ${doctor.getId()}}" type="button" class="btn btn-outline-primary">Деталі</a>
         </td>
         <td>
-            <a th:href="@{'/admin/doctors/delete/' + ${doctor.getId()}}" type="button" class="btn btn-danger">Видалити</a>
+            <a th:href="@{'/admin/doctors/delete/' + ${doctor.getId()}}" type="button" class="btn btn-outline-secondary">Видалити</a>
         </td>
     </tr>
 </div>

@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/admin_layout}">
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="utf-8">
     <title>Деталі локації</title>
 </head>
 <body>
 
-<div layout:fragment="admin_content">
+<div layout:fragment="doctor_content">
 
     <div class="row">
         <div class="col-12">
@@ -36,12 +36,6 @@
                             <td th:text="${#calendars.format(vaccinationPoint.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
-                    <hr>
-                    <a th:href="@{'/admin/vaccination_points/update/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-outline-primary">Редагувати</a>
-                    <hr>
-                    <a th:href="@{'/admin/doctors/point/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-outline-primary">Список лікарів у цій локації</a>
-                    <hr>
-                    <a th:href="@{'/admin/records/point/' + ${vaccinationPoint.getId()}}" type="button" class="btn btn-outline-primary">Список записів у цій локації</a>
                 </div>
             </div>
         </div>

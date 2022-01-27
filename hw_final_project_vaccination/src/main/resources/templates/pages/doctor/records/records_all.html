@@ -21,10 +21,10 @@
     <td th:text="${record.getRecordTime().getTime()}"></td>
 
     <td>
-      <a th:href="@{'/admin/records/details/' + ${record.getId()}}" type="button" class="btn btn-outline-primary">Деталі</a>
+      <a th:href="@{'/doctor/records/details/' + ${record.getId()}}" type="button" class="btn btn-outline-primary">Деталі</a>
     </td>
     <td>
-      <a th:href="@{'/admin/records/delete/' + ${record.getId()}}" type="button" class="btn btn-outline-secondary">Видалити</a>
+      <a th:href="@{'/doctor/records/delete/' + ${record.getId()}}" type="button" class="btn btn-outline-secondary">Видалити</a>
     </td>
   </tr>
 </div>

@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface DoctorService extends BaseService<Doctor> {
 
-    public DataTableResponse<Doctor> findAllByVaccinationPoint(DataTableRequest request, VaccinationPoint vaccinationPoint);
+    DataTableResponse<Doctor> findAllByVaccinationPoint(DataTableRequest request, VaccinationPoint vaccinationPoint);
 }

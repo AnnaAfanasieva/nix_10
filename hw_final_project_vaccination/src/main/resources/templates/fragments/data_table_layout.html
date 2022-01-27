@@ -48,7 +48,7 @@
             <div class="p-1">Showing [[${pageData.getCurrentShowFromEntries()}]] to [[${pageData.getCurrentShowToEntries()}]] of [[${pageData.getItemsSize()}]] entries</div>
             <div class="p-1">
               <div class="dropdown dropup">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span th:text="${pageData.getPageSize()}"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -92,7 +92,7 @@
       <div class="card mt-2 mb-2">
         <div class="card-header">
           <div th:if="${createNew != 'null'}">
-            <a type="button" class="btn btn-primary" th:href="@{${createNew}}">Add</a>
+            <a type="button" class="btn btn-outline-primary" th:href="@{${createNew}}">Створити</a>
           </div>
         </div>
       </div>

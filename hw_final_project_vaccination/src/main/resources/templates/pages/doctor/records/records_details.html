@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/admin_layout}">
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="utf-8">
     <title>Деталі запису</title>
 </head>
 <body>
 
-<div layout:fragment="admin_content">
+<div layout:fragment="doctor_content">
 
     <div class="row">
         <div class="col-12">
@@ -46,14 +46,12 @@
                         <tr>
                             <th>Локація</th>
                             <td>
-                                <a th:href="@{'/admin/vaccination_points/details/' + ${record.getDoctor().getVaccinationPoint().getId()}}" type="button" class="btn btn-link" th:text="${record.getDoctor().getVaccinationPoint().getAddress()}"></a>
+                                <a th:href="@{'/doctor/vaccination_points/details/' + ${record.getDoctor().getVaccinationPoint().getId()}}" type="button" class="btn btn-link" th:text="${record.getDoctor().getVaccinationPoint().getAddress()}"></a>
                             </td>
                         </tr>
                         <tr>
                             <th>Лікар</th>
-                            <td>
-                                <a th:href="@{'/admin/doctors/details/' + ${record.getDoctor().getId()}}" type="button" class="btn btn-link" th:text="${record.getDoctor().getSurname() + ' ' +record.getDoctor().getName() + ' ' + record.getDoctor().getPatronymic()}"></a>
-                            </td>
+                            <td th:text="${record.getDoctor().getSurname() + ' ' +record.getDoctor().getName() + ' ' + record.getDoctor().getPatronymic()}"></td>
                         </tr>
                         <tr>
                             <th>Вакцина</th>
@@ -76,8 +74,6 @@
                             <td th:text="${#calendars.format(record.getUpdated(),'dd MMMM yyyy')}"></td>
                         </tr>
                     </table>
-                    <hr>
-                    <a th:href="@{'/admin/records/update/' + ${record.getId()}}" type="button" class="btn btn-outline-primary">Редагувати</a>
                 </div>
             </div>
         </div>

@@ -51,13 +51,9 @@
                         </tr>
                     </table>
                     <hr>
-                    <a th:href="@{'/admin/doctors/update/' + ${doctor.getId()}}" type="button" class="btn btn-primary">Редагувати</a>
-<!--                    <hr>-->
-<!--                    <a th:href="@{'/transactions/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Show all transactions</a>-->
-<!--                    <hr>-->
-<!--                    <a th:href="@{'/transactions/download/account/' + ${account.getId()}}" type="button" class="btn btn-primary">Download all transactions</a>-->
-<!--                    <hr>-->
-<!--                    <a th:href="@{'/transactions/new/' + ${account.getId()}}" type="button" class="btn btn-success">Create transaction</a>-->
+                    <a th:href="@{'/admin/doctors/update/' + ${doctor.getId()}}" type="button" class="btn btn-outline-primary">Редагувати</a>
+                    <hr>
+                    <a th:href="@{'/admin/records/doctor/' + ${doctor.getId()}}" type="button" class="btn btn-outline-primary">Список записів у лікаря</a>
                 </div>
             </div>
         </div>

@@ -6,9 +6,12 @@ import ua.com.alevel.facade.item.RecordFacade;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.VaccinationPoint;
+import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.service.item.RecordService;
 import ua.com.alevel.util.WebUtil;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
+import ua.com.alevel.view.dto.response.DoctorResponseDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
 
@@ -79,5 +82,35 @@ public class RecordFacadeImpl implements RecordFacade {
         record.setRecordTime(recordRequestDto.getRecordTime());
         record.setDoctor(recordRequestDto.getDoctor());
         return record;
+    }
+
+    @Override
+    public PageData<RecordResponseDto> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint, WebRequest request) {
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
+        DataTableResponse<Record> tableResponse = recordService.findAllByVaccinationPoint(dataTableRequest, vaccinationPoint);
+
+        List<RecordResponseDto> recordResponseDtos = tableResponse.getItems().stream().
+                map(RecordResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<RecordResponseDto> pageData = (PageData<RecordResponseDto>) WebUtil.initPageData(tableResponse);
+        pageData.setItems(recordResponseDtos);
+
+        return pageData;
+    }
+
+    @Override
+    public PageData<RecordResponseDto> findAllByDoctor(Doctor doctor, WebRequest request) {
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
+        DataTableResponse<Record> tableResponse = recordService.findAllByDoctor(dataTableRequest, doctor);
+
+        List<RecordResponseDto> recordResponseDtos = tableResponse.getItems().stream().
+                map(RecordResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<RecordResponseDto> pageData = (PageData<RecordResponseDto>) WebUtil.initPageData(tableResponse);
+        pageData.setItems(recordResponseDtos);
+
+        return pageData;
     }
 }
