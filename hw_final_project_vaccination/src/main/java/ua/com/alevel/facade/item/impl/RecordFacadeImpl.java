@@ -1,5 +1,6 @@
 package ua.com.alevel.facade.item.impl;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.WebRequest;
 import ua.com.alevel.facade.item.RecordFacade;
@@ -9,6 +10,7 @@ import ua.com.alevel.persistence.entity.item.Record;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.service.item.RecordService;
+import ua.com.alevel.util.ConvertString;
 import ua.com.alevel.util.WebUtil;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
 import ua.com.alevel.view.dto.response.DoctorResponseDto;
@@ -16,8 +18,12 @@ import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,9 +82,17 @@ public class RecordFacadeImpl implements RecordFacade {
         record.setName(recordRequestDto.getName());
         record.setPatronymic(recordRequestDto.getPatronymic());
         record.setPhone(recordRequestDto.getPhone());
-        record.setDateOfBirth(recordRequestDto.getDateOfBirth());
+        try {
+            record.setDateOfBirth(ConvertString.convertStringToDate(recordRequestDto.getDateOfBirth()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         record.setVaccine(recordRequestDto.getVaccine());
-        record.setVaccineDate(recordRequestDto.getVaccineDate());
+        try {
+            record.setVaccineDate(ConvertString.convertStringToDate(recordRequestDto.getVaccineDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         record.setRecordTime(recordRequestDto.getRecordTime());
         record.setDoctor(recordRequestDto.getDoctor());
         return record;

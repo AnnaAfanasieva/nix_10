@@ -8,9 +8,13 @@ import org.springframework.stereotype.Repository;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.RecordTime;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.repository.BaseRepository;
+
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface RecordRepository extends BaseRepository<Record> {
@@ -20,4 +24,6 @@ public interface RecordRepository extends BaseRepository<Record> {
 
     Page<Record> findAllByDoctor(Doctor doctor, Pageable pageable);
 
+    @Query("select rt from RecordTime rt where rt not in (select r.recordTime from Record r where r.doctor = :doctor and r.vaccineDate = :vaccineDate)")
+    List<RecordTime> findAllRecordTimesByDoctorAndVaccineDate(@Param("doctor") Doctor doctor, @Param("vaccineDate") Date vaccineDate);
 }

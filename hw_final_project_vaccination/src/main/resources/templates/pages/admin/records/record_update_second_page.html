@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Редагування запису</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Редагування запису</h4>
+                </div>
+                <!--                <div th:if="${freeRecordTime.size() == 0}">-->
+                <!--                    <label>Вибачте, на цей час вільних місць немає.</label>-->
+                <!--                    <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
+                <!--                </div>-->
+                <!--                <div th:unless="${freeRecordTime.size() != 0}">-->
+
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/records/update}" th:object="${record}" method="post">
+                        <div class="form-group">
+
+                            <label for="vaccine">Час вакцинації</label>
+                            <select class="form-control" id="vaccine" th:field="*{recordTime}">
+                                <option th:each="type : ${freeRecordTime}"
+                                        th:value="${type.getId()}"
+                                        th:text="${type.getTime()}">
+                                </option>
+                            </select>
+
+                        </div>
+                        <!--                        <div th:if="${not #lists.isEmpty(showap)}">        -->
+
+                        <!--                        <div th:if="${freeRecordTime.size() == '0'}">-->
+                        <!--                        <div>-->
+                        <!--                            <div th:if="${#lists.isEmpty(freeRecordTime)}">-->
+                        <!--                                <label>Вибачте, на цей час вільних місць немає.</label>-->
+                        <!--                                <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
+                        <!--                            </div>-->
+                        <!--                            <div th:unless="${not #lists.isEmpty(freeRecordTime)}">-->
+                        <input type="hidden" th:field="*{surname}" id="surname" th:value="${record.getSurname()}">
+                        <input type="hidden" th:field="*{name}" id="name" th:value="${record.getName()}">
+                        <input type="hidden" th:field="*{patronymic}" id="patronymic" th:value="${record.getPatronymic()}">
+                        <input type="hidden" th:field="*{dateOfBirth}" id="dateOfBirth" th:value="${record.getDateOfBirth()}">
+                        <input type="hidden" th:field="*{phone}" id="phone" th:value="${record.getPhone()}">
+                        <input type="hidden" th:field="*{vaccine}" id="vacine" th:value="${record.getVaccine()}">
+                        <input type="hidden" th:field="*{vaccineDate}" id="vaccineDate" th:value="${record.getVaccineDate()}">
+                        <input type="hidden" th:field="*{doctor}" id="doctor" th:value="${record.getDoctor()}">
+
+                        <button type="submit" class="btn btn-outline-primary">Завершити редагування</button>
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                    </form>
+                </div>
+
+                <!--                </div>-->
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

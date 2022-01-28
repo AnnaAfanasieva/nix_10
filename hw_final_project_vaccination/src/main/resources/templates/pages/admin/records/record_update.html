@@ -18,7 +18,7 @@
                     <h4>Редагування запису</h4>
                 </div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/admin/records/update}" th:object="${record}" method="post">
+                    <form action="#" th:action="@{/admin/records/update/next}" th:object="${record}" method="get">
                         <div class="form-group">
                             <label for="surname">Прізвище пацієнта</label>
                             <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="Введіть нове прізвище" th:field="*{surname}">
@@ -28,7 +28,20 @@
                             <input type="text" class="form-control" id="patronymic" aria-describedby="patronymic" placeholder="Введіть нове по батькові" th:field="*{patronymic}">
                             <label for="phone">Номер телефона пацієнта</label>
                             <input type="tel" minlength="10" maxlength="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Введіть новий номер телефона" th:field="*{phone}">
-<!--дописать-->
+                            <label for="date">Дата народження:</label>
+                            <input type="date" class="form-control" id="date" name="date" th:field="*{dateOfBirth}"/>
+                            <div class="form-group">
+                                <label for="vaccine">Вакцина</label>
+                                <select class="form-control" id="vaccine" th:field="*{vaccine}">
+                                    <option th:each="type : ${vaccines}"
+                                            th:value="${type}"
+                                            th:text="${type.name()}">
+                                    </option>
+                                </select>
+                            </div>
+                            <label for="vaccDate">Дата вакцинації:</label>
+                            <input type="date" class="form-control" id="vaccDate" name="vaccDate" th:field="*{vaccineDate}"/>
+
                             <div class="form-group">
                                 <label for="type">Оберіть нового лікаря</label>
                                 <select class="form-control" id="type" th:field="*{doctor}">
@@ -39,7 +52,7 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                        <button type="submit" class="btn btn-outline-primary">Далі</button>
                     </form>
                 </div>
             </div>

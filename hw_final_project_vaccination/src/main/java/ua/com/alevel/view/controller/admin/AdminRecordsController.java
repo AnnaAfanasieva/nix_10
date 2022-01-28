@@ -8,14 +8,23 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.item.RecordFacade;
+import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.RecordTime;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
+import ua.com.alevel.persistence.repository.item.RecordRepository;
 import ua.com.alevel.persistence.repository.item.VaccinationPointRepository;
 import ua.com.alevel.persistence.repository.user.DoctorRepository;
+import ua.com.alevel.persistence.util.Vaccine;
+import ua.com.alevel.util.ConvertString;
 import ua.com.alevel.view.controller.BaseController;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/records")
@@ -38,11 +47,13 @@ public class AdminRecordsController extends BaseController {
     private final RecordFacade recordFacade;
     private final DoctorRepository doctorRepository;
     private final VaccinationPointRepository vaccinationPointRepository;
+    private final RecordRepository recordRepository;
 
-    public AdminRecordsController(RecordFacade recordFacade, DoctorRepository doctorRepository, VaccinationPointRepository vaccinationPointRepository) {
+    public AdminRecordsController(RecordFacade recordFacade, DoctorRepository doctorRepository, VaccinationPointRepository vaccinationPointRepository, RecordRepository recordRepository) {
         this.recordFacade = recordFacade;
         this.doctorRepository = doctorRepository;
         this.vaccinationPointRepository = vaccinationPointRepository;
+        this.recordRepository = recordRepository;
     }
 
     @GetMapping
@@ -105,7 +116,21 @@ public class AdminRecordsController extends BaseController {
         update_id = id;
         model.addAttribute("doctors", doctorRepository.findAll());
         model.addAttribute("record", recordFacade.findById(id));
+        model.addAttribute("vaccines", Vaccine.values());
         return "pages/admin/records/record_update";
+    }
+
+    @GetMapping("/update/next")
+    public String updateRecordNextPage(@ModelAttribute("record") RecordRequestDto dto, Model model) {
+        List<RecordTime> freeRecordTime = new ArrayList<>();
+        try {
+            freeRecordTime = recordRepository.findAllRecordTimesByDoctorAndVaccineDate(dto.getDoctor(), ConvertString.convertStringToDate(dto.getVaccineDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("freeRecordTime", freeRecordTime);
+//        model.addAttribute("record", dto);
+        return "pages/admin/records/record_update_second_page";
     }
 
     @PostMapping("/update")

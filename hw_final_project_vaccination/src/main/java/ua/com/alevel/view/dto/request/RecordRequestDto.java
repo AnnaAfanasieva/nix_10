@@ -12,9 +12,9 @@ public class RecordRequestDto extends RequestDto {
     private String name;
     private String patronymic;
     private String phone;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private Vaccine vaccine;
-    private Date vaccineDate;
+    private String vaccineDate;
     private RecordTime recordTime;
     private Doctor doctor;
 
@@ -50,11 +50,11 @@ public class RecordRequestDto extends RequestDto {
         this.phone = phone;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -66,11 +66,11 @@ public class RecordRequestDto extends RequestDto {
         this.vaccine = vaccine;
     }
 
-    public Date getVaccineDate() {
+    public String getVaccineDate() {
         return vaccineDate;
     }
 
-    public void setVaccineDate(Date vaccineDate) {
+    public void setVaccineDate(String vaccineDate) {
         this.vaccineDate = vaccineDate;
     }
 
