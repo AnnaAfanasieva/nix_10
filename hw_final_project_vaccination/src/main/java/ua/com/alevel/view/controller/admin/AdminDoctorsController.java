@@ -1,6 +1,7 @@
 package ua.com.alevel.view.controller.admin;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -9,7 +10,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.user.DoctorFacade;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
+import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.repository.item.VaccinationPointRepository;
+import ua.com.alevel.persistence.repository.user.DoctorRepository;
 import ua.com.alevel.view.controller.BaseController;
 import ua.com.alevel.view.dto.request.DoctorRequestDto;
 import ua.com.alevel.view.dto.response.DoctorResponseDto;
@@ -32,11 +35,15 @@ public class AdminDoctorsController extends BaseController {
 
     private final DoctorFacade doctorFacade;
     private final VaccinationPointRepository vaccinationPointRepository;
+    private final DoctorRepository doctorRepository;
+    private final BCryptPasswordEncoder encoder;
 
 
-    public AdminDoctorsController(DoctorFacade doctorFacade, VaccinationPointRepository vaccinationPointRepository) {
+    public AdminDoctorsController(DoctorFacade doctorFacade, VaccinationPointRepository vaccinationPointRepository, DoctorRepository doctorRepository, BCryptPasswordEncoder encoder) {
         this.doctorFacade = doctorFacade;
         this.vaccinationPointRepository = vaccinationPointRepository;
+        this.doctorRepository = doctorRepository;
+        this.encoder = encoder;
     }
 
     @GetMapping
@@ -44,7 +51,7 @@ public class AdminDoctorsController extends BaseController {
         PageData<DoctorResponseDto> response = doctorFacade.findAll(request);
         initDataTable(response, columnNames, model);
         model.addAttribute("createUrl", "/admin/doctors/all");
-        model.addAttribute("createNew", "/admin/doctors/new");
+        model.addAttribute("createNew", "null");
         model.addAttribute("cardHeader", "Усі лікарі");
         return "pages/admin/doctors/doctors_all";
     }
@@ -61,7 +68,7 @@ public class AdminDoctorsController extends BaseController {
         PageData<DoctorResponseDto> response = doctorFacade.findAllByVaccinationPoint(vaccinationPoint, request);
         initDataTable(response, columnNames, model);
         model.addAttribute("createUrl", "/admin/doctors/point");
-        model.addAttribute("createNew", "/admin/doctors/new");
+        model.addAttribute("createNew", "null");
         model.addAttribute("cardHeader", "Усі лікарі");
         return "pages/admin/doctors/doctors_all";
     }
@@ -85,7 +92,7 @@ public class AdminDoctorsController extends BaseController {
 
     @GetMapping("/new/{id}")
     public String redirectToNewDoctorPage(Model model, @PathVariable Long id) {
-        DoctorRequestDto doctor = new DoctorRequestDto();
+        Doctor doctor = new Doctor();
         VaccinationPoint vaccinationPoint = vaccinationPointRepository.getById(id);
         doctor.setVaccinationPoint(vaccinationPoint);
         model.addAttribute("doctor", doctor);
@@ -93,8 +100,9 @@ public class AdminDoctorsController extends BaseController {
     }
 
     @PostMapping("/new")
-    public String createNewDoctor(@ModelAttribute("doctor") DoctorRequestDto dto) {
-        doctorFacade.create(dto);
+    public String createNewDoctor(@ModelAttribute("doctor") Doctor dto) {
+        dto.setPassword(encoder.encode(dto.getPassword()));
+        doctorRepository.save(dto);
         return "redirect:/admin/doctors";
     }
 

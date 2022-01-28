@@ -78,7 +78,7 @@ public class AdminRecordsController extends BaseController {
         PageData<RecordResponseDto> response = recordFacade.findAllByVaccinationPoint(vaccinationPoint, request);
         initDataTable(response, columnNames, model);
         model.addAttribute("createUrl", "/admin/records/point");
-        model.addAttribute("createNew", "/admin/records/new");
+        model.addAttribute("createNew", "null");
         model.addAttribute("cardHeader", "Усі записи");
         return "pages/admin/records/records_all";
     }
@@ -95,7 +95,7 @@ public class AdminRecordsController extends BaseController {
         PageData<RecordResponseDto> response = recordFacade.findAllByDoctor(doctor, request);
         initDataTable(response, columnNames, model);
         model.addAttribute("createUrl", "/admin/records/doctor");
-        model.addAttribute("createNew", "/admin/records/new");
+        model.addAttribute("createNew", "null");
         model.addAttribute("cardHeader", "Усі записи");
         return "pages/admin/records/records_all";
     }
@@ -129,7 +129,6 @@ public class AdminRecordsController extends BaseController {
             e.printStackTrace();
         }
         model.addAttribute("freeRecordTime", freeRecordTime);
-//        model.addAttribute("record", dto);
         return "pages/admin/records/record_update_second_page";
     }
 
