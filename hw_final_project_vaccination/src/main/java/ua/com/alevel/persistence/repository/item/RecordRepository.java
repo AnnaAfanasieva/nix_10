@@ -26,4 +26,6 @@ public interface RecordRepository extends BaseRepository<Record> {
 
     @Query("select rt from RecordTime rt where rt not in (select r.recordTime from Record r where r.doctor = :doctor and r.vaccineDate = :vaccineDate)")
     List<RecordTime> findAllRecordTimesByDoctorAndVaccineDate(@Param("doctor") Doctor doctor, @Param("vaccineDate") Date vaccineDate);
+
+    void deleteAllByDoctorId(Long doctorId);
 }

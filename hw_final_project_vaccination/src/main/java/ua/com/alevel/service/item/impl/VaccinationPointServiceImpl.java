@@ -39,6 +39,9 @@ public class VaccinationPointServiceImpl implements VaccinationPointService {
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
+        //TODO сохранить в буферную таблицу записи, где доктор в списке тех, кого будем удалять
+        //TODO удалить все записи
+        //TODO удалить всех докторов
         crudRepositoryHelper.delete(vaccinationPointRepository, id);
     }
 

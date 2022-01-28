@@ -78,4 +78,10 @@ public class AdminVaccinationPointsController extends BaseController {
         vaccinationPointFacade.create(dto);
         return "redirect:/admin/vaccination_points";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        vaccinationPointFacade.delete(id);
+        return "redirect:/admin/vaccination_points";
+    }
 }

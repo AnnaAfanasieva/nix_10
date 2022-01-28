@@ -12,6 +12,8 @@ import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
+import ua.com.alevel.persistence.repository.item.DeletedRecordRepository;
+import ua.com.alevel.persistence.repository.item.RecordRepository;
 import ua.com.alevel.persistence.repository.user.DoctorRepository;
 import ua.com.alevel.service.user.DoctorService;
 
@@ -21,12 +23,16 @@ import java.util.Optional;
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private final DeletedRecordRepository deletedRecordRepository;
+    private final RecordRepository recordRepository;
     private final CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper;
 
     public DoctorServiceImpl(
             DoctorRepository doctorRepository,
-            CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper) {
+            DeletedRecordRepository deletedRecordRepository, RecordRepository recordRepository, CrudRepositoryHelper<Doctor, DoctorRepository> crudRepositoryHelper) {
         this.doctorRepository = doctorRepository;
+        this.deletedRecordRepository = deletedRecordRepository;
+        this.recordRepository = recordRepository;
         this.crudRepositoryHelper = crudRepositoryHelper;
     }
 
@@ -48,6 +54,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
+        System.out.println("удаление");
+        deletedRecordRepository.insertDeletedRecordsIntoTableByDoctor(id);
+        recordRepository.deleteAllByDoctorId(id);
         crudRepositoryHelper.delete(doctorRepository, id);
     }
 

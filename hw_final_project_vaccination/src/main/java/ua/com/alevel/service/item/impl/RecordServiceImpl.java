@@ -11,8 +11,10 @@ import ua.com.alevel.persistence.crud.CrudRepositoryHelper;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.RecordDeleted;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
+import ua.com.alevel.persistence.repository.item.DeletedRecordRepository;
 import ua.com.alevel.persistence.repository.item.RecordRepository;
 import ua.com.alevel.service.item.RecordService;
 
@@ -23,10 +25,12 @@ public class RecordServiceImpl implements RecordService {
 
     private final RecordRepository recordRepository;
     private final CrudRepositoryHelper<Record, RecordRepository> crudRepositoryHelper;
+    private final DeletedRecordRepository deletedRecordRepository;
 
-    public RecordServiceImpl(RecordRepository recordRepository, CrudRepositoryHelper<Record, RecordRepository> crudRepositoryHelper) {
+    public RecordServiceImpl(RecordRepository recordRepository, CrudRepositoryHelper<Record, RecordRepository> crudRepositoryHelper, DeletedRecordRepository deletedRecordRepository) {
         this.recordRepository = recordRepository;
         this.crudRepositoryHelper = crudRepositoryHelper;
+        this.deletedRecordRepository = deletedRecordRepository;
     }
 
     @Override
@@ -67,14 +71,6 @@ public class RecordServiceImpl implements RecordService {
         Page<Record> entityPage = recordRepository.findAllByVaccinationPoint(
                 vaccinationPoint,
                 PageRequest.of(request.getPage() - 1, request.getSize(), sort));
-//        DataTableResponse<Record> dataTableResponse = new DataTableResponse<>();
-//        dataTableResponse.setCurrentPage(request.getPage());
-//        dataTableResponse.setPageSize(request.getSize());
-//        dataTableResponse.setOrder(request.getOrder());
-//        dataTableResponse.setSort(request.getSort());
-//        dataTableResponse.setItemsSize(entityPage.getTotalElements());
-//        dataTableResponse.setTotalPages(entityPage.getTotalPages());
-//        dataTableResponse.setItems(entityPage.getContent());
         return createDataTableResponse(request, entityPage);
     }
 
@@ -87,6 +83,24 @@ public class RecordServiceImpl implements RecordService {
                 doctor,
                 PageRequest.of(request.getPage() - 1, request.getSize(), sort));
         return createDataTableResponse(request, entityPage);
+    }
+
+    @Override
+    public DataTableResponse<RecordDeleted> findAllDeleted(DataTableRequest request) {
+        Sort sort = request.getOrder().equals("desc")
+                ? Sort.by(request.getSort()).descending()
+                : Sort.by(request.getSort()).ascending();
+        Page<RecordDeleted> entityPage = deletedRecordRepository.findAll(
+                PageRequest.of(request.getPage() - 1, request.getSize(), sort));
+        DataTableResponse<RecordDeleted> dataTableResponse = new DataTableResponse<>();
+        dataTableResponse.setCurrentPage(request.getPage());
+        dataTableResponse.setPageSize(request.getSize());
+        dataTableResponse.setOrder(request.getOrder());
+        dataTableResponse.setSort(request.getSort());
+        dataTableResponse.setItemsSize(entityPage.getTotalElements());
+        dataTableResponse.setTotalPages(entityPage.getTotalPages());
+        dataTableResponse.setItems(entityPage.getContent());
+        return dataTableResponse;
     }
 
     private DataTableResponse createDataTableResponse (DataTableRequest request, Page<Record> entityPage) {

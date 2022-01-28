@@ -7,6 +7,7 @@ import ua.com.alevel.facade.item.RecordFacade;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.Record;
+import ua.com.alevel.persistence.entity.item.RecordDeleted;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.service.item.RecordService;
@@ -15,6 +16,7 @@ import ua.com.alevel.util.WebUtil;
 import ua.com.alevel.view.dto.request.RecordRequestDto;
 import ua.com.alevel.view.dto.response.DoctorResponseDto;
 import ua.com.alevel.view.dto.response.PageData;
+import ua.com.alevel.view.dto.response.RecordDeletedResponseDto;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
 
 import java.sql.Timestamp;
@@ -123,6 +125,21 @@ public class RecordFacadeImpl implements RecordFacade {
                 collect(Collectors.toList());
 
         PageData<RecordResponseDto> pageData = (PageData<RecordResponseDto>) WebUtil.initPageData(tableResponse);
+        pageData.setItems(recordResponseDtos);
+
+        return pageData;
+    }
+
+    @Override
+    public PageData<RecordDeletedResponseDto> findAllDeleted(WebRequest request) {
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
+        DataTableResponse<RecordDeleted> tableResponse = recordService.findAllDeleted(dataTableRequest);
+
+        List<RecordDeletedResponseDto> recordResponseDtos = tableResponse.getItems().stream().
+                map(RecordDeletedResponseDto::new)
+                .collect(Collectors.toList());
+
+        PageData<RecordDeletedResponseDto> pageData = (PageData<RecordDeletedResponseDto>) WebUtil.initPageData(tableResponse);
         pageData.setItems(recordResponseDtos);
 
         return pageData;
