@@ -51,7 +51,7 @@ public class OpenMainController {
             @ModelAttribute("record") RecordNewRequestDto dto) {
         model.addAttribute("record", dto);
         long vaccinationPointId = dto.getVaccinationPoint().getId();
-        if (dto.getVaccinationPoint() != null) {
+        if (dto.getVaccinationPoint().getId() != 0L) {
             vaccinationPoint = vaccinationPointRepository.getById(vaccinationPointId);
         }
         model.addAttribute("doctors", doctorRepository.findAllByVaccinationPoint(vaccinationPoint));
@@ -74,12 +74,12 @@ public class OpenMainController {
 
     @GetMapping("/success")
     public String endRegistration(Model model, @ModelAttribute("record") RecordNewRequestDto dto) {
+        recordFacade.create(dto);
         Pattern pattern = Pattern.compile("-");
         String[] dateArray = pattern.split(dto.getVaccineDate());
         String dateString = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
         dto.setVaccineDate(dateString);
         model.addAttribute("record", dto);
-        recordFacade.create(dto);
         vaccinationPoint = null;
         return "pages/open/end_registration";
     }

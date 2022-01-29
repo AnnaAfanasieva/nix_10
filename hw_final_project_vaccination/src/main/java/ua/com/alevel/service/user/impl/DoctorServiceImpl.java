@@ -54,7 +54,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
-        System.out.println("удаление");
         deletedRecordRepository.insertDeletedRecordsIntoTableByDoctor(id);
         recordRepository.deleteAllByDoctorId(id);
         crudRepositoryHelper.delete(doctorRepository, id);
