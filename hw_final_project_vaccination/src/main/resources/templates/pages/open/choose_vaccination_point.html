@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/open_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Запис на вакцинацію</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Запис на вакцинацію</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/open/second}" th:object="${record}" method="get">
+                        <div class="form-group">
+                            <label for="type">Оберіть локацію</label>
+                            <select class="form-control" id="type" th:field="*{vaccinationPoint}">
+                                <option th:each="type : ${vaccinationPoints}"
+                                        th:value="${type.getId()}"
+                                        th:text="${type.getAddress()}">
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">Далі</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

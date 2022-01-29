@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/open_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація завершена</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-2 mt-2">
+                <div class="card-header" style="text-align: center;">
+                    Реєстрація на вакцинацію успішно завершено!
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    <p>
+                        Очікуємо на вас
+                        <label th:text="${record.getVaccineDate()}"></label>
+                        о
+                        <label th:text="${record.getRecordTime().getTime()}"></label>
+                        за адресою
+                        <label th:text="${record.getDoctor().getVaccinationPoint().getAddress()}"></label>
+                    </p>
+                    <div style="text-align: center;">
+                        <hr>
+                        <a th:href="@{'/open'}" type="button" class="btn btn-outline-primary">Повернутись на початок</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

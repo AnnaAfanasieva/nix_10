@@ -90,4 +90,6 @@ public class DoctorServiceImpl implements DoctorService {
         dataTableResponse.setItems(entityPage.getContent());
         return dataTableResponse;
     }
+
+
 }
