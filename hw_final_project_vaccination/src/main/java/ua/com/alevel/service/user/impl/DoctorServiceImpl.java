@@ -40,7 +40,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void create(Doctor entity) {
         if (doctorRepository.existsByEmail(entity.getEmail())) {
-            throw new RuntimeException("doctor isn't exist");
+            throw new RuntimeException("doctor is exist");
         }
         crudRepositoryHelper.create(doctorRepository, entity);
     }

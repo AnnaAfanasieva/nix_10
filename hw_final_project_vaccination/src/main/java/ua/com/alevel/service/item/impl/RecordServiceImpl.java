@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.alevel.persistence.crud.CrudRepositoryHelper;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
+import ua.com.alevel.persistence.entity.BaseEntity;
 import ua.com.alevel.persistence.entity.item.Record;
 import ua.com.alevel.persistence.entity.item.RecordDeleted;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
@@ -92,19 +93,11 @@ public class RecordServiceImpl implements RecordService {
                 : Sort.by(request.getSort()).ascending();
         Page<RecordDeleted> entityPage = deletedRecordRepository.findAll(
                 PageRequest.of(request.getPage() - 1, request.getSize(), sort));
-        DataTableResponse<RecordDeleted> dataTableResponse = new DataTableResponse<>();
-        dataTableResponse.setCurrentPage(request.getPage());
-        dataTableResponse.setPageSize(request.getSize());
-        dataTableResponse.setOrder(request.getOrder());
-        dataTableResponse.setSort(request.getSort());
-        dataTableResponse.setItemsSize(entityPage.getTotalElements());
-        dataTableResponse.setTotalPages(entityPage.getTotalPages());
-        dataTableResponse.setItems(entityPage.getContent());
-        return dataTableResponse;
+        return  createDataTableResponse(request, entityPage);
     }
 
-    private DataTableResponse createDataTableResponse (DataTableRequest request, Page<Record> entityPage) {
-        DataTableResponse<Record> dataTableResponse = new DataTableResponse<>();
+    private<E extends BaseEntity> DataTableResponse createDataTableResponse (DataTableRequest request, Page<E> entityPage) {
+        DataTableResponse dataTableResponse = new DataTableResponse<E>();
         dataTableResponse.setCurrentPage(request.getPage());
         dataTableResponse.setPageSize(request.getSize());
         dataTableResponse.setOrder(request.getOrder());

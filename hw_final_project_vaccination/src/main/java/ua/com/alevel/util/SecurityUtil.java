@@ -11,7 +11,7 @@ public final class SecurityUtil {
     private SecurityUtil() { }
 
     public static boolean hasRole(String role) {
-        Authentication authentication = SecurityUtil.getAuthentication();
+        Authentication authentication = getAuthentication();
         AtomicBoolean result = new AtomicBoolean(false);
         authentication.getAuthorities().forEach(authority -> result.set(authority.getAuthority().equalsIgnoreCase(role)));
         return result.get();

@@ -13,7 +13,6 @@ import ua.com.alevel.view.controller.BaseController;
 @RequestMapping("/doctor/vaccination_points")
 public class DoctorController extends BaseController {
 
-    private long update_id;
     private final VaccinationPointFacade vaccinationPointFacade;
 
     public DoctorController(VaccinationPointFacade vaccinationPointFacade) {

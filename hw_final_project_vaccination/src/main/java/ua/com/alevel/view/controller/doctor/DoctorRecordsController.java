@@ -23,7 +23,6 @@ import ua.com.alevel.view.dto.response.RecordResponseDto;
 @RequestMapping("/doctor/records")
 public class DoctorRecordsController extends BaseController {
 
-    private long update_id;
     private final HeaderName[] columnNames = new HeaderName[] {
             new HeaderName("№", null, null),
             new HeaderName("Прізвище", "surname", "surname"),
