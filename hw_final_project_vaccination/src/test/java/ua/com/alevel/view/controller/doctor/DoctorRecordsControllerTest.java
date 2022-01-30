@@ -30,6 +30,7 @@ import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.repository.user.DoctorRepository;
 import ua.com.alevel.view.dto.response.PageData;
 import ua.com.alevel.view.dto.response.RecordResponseDto;
+import ua.com.alevel.view.dto.response.ResponseDto;
 
 @ExtendWith(SpringExtension.class)
 class DoctorRecordsControllerTest {
@@ -103,19 +104,12 @@ class DoctorRecordsControllerTest {
             .andExpect(status().is3xxRedirection())
             .andExpect(redirectedUrl("/doctor/records"))
             .andDo(print());
-    }
-
-    @Test
-    void testDelete() {
-        Long id = 4523452L;
-
-        controller.delete(id);
 
         verify(recordFacade, times(1)).delete(id);
     }
 
-    private PageData<RecordResponseDto> getResponse() {
-        PageData<RecordResponseDto> response = new PageData<>();
+    private <E extends ResponseDto> PageData<E> getResponse() {
+        PageData<E> response = new PageData<>();
         response.setOrder("desc");
         response.setSort("name");
         response.setPageSize(10);

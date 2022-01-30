@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,16 +12,24 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
 import java.util.Optional;
 
 import ua.com.alevel.persistence.crud.CrudRepositoryHelper;
 import ua.com.alevel.persistence.datatable.DataTableRequest;
 import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
+import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.repository.item.VaccinationPointRepository;
+import ua.com.alevel.persistence.repository.user.DoctorRepository;
+import ua.com.alevel.service.user.DoctorService;
 
 class VaccinationPointServiceImplTest {
 
+    @Mock
+    private DoctorService doctorService;
+    @Mock
+    private DoctorRepository doctorRepository;
     @Mock
     private VaccinationPointRepository vaccinationPointRepository;
     @Mock
@@ -54,9 +63,18 @@ class VaccinationPointServiceImplTest {
     @Test
     void testDelete() {
         Long id = 11234L;
+        VaccinationPoint point = new VaccinationPoint();
+        Doctor doctor = new Doctor();
+        doctor.setId(234L);
+        when(vaccinationPointRepository.getById(id)).thenReturn(point);
+        when(doctorRepository.findAllByVaccinationPoint(point)).thenReturn(List.of(doctor));
+        when(doctorRepository.existsById(doctor.getId())).thenReturn(true);
 
         service.delete(id);
-
+        verify(vaccinationPointRepository, times(1)).getById(id);
+        verify(doctorRepository, times(1)).findAllByVaccinationPoint(point);
+        verify(doctorRepository, times(1)).existsById(doctor.getId());
+        verify(doctorService, times(1)).delete(doctor.getId());
         verify(crudRepositoryHelper, times(1)).delete(vaccinationPointRepository, id);
     }
 

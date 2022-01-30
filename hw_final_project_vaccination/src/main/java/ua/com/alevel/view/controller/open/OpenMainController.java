@@ -29,7 +29,7 @@ public class OpenMainController {
     private final VaccinationPointRepository vaccinationPointRepository;
     private final RecordRepository recordRepository;
     private final RecordFacade recordFacade;
-    long vaccinationPointId;
+    private long vaccinationPointId;
 
     public OpenMainController(DoctorRepository doctorRepository, VaccinationPointRepository vaccinationPointRepository, RecordRepository recordRepository, RecordFacade recordFacade) {
         this.doctorRepository = doctorRepository;
