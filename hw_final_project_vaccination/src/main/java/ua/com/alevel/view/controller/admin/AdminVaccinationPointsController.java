@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.alevel.facade.item.VaccinationPointFacade;
-import ua.com.alevel.persistence.entity.item.VaccinationPoint;
-import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.view.controller.BaseController;
 import ua.com.alevel.view.dto.request.VaccinationPointRequestDto;
 import ua.com.alevel.view.dto.response.PageData;

@@ -4,8 +4,6 @@ import ua.com.alevel.persistence.entity.item.RecordTime;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.util.Vaccine;
 
-import java.util.Date;
-
 public class RecordRequestDto extends RequestDto {
 
     private String surname;

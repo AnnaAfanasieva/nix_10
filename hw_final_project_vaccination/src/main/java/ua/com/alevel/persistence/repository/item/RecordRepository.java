@@ -5,8 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ua.com.alevel.persistence.datatable.DataTableRequest;
-import ua.com.alevel.persistence.datatable.DataTableResponse;
 import ua.com.alevel.persistence.entity.item.Record;
 import ua.com.alevel.persistence.entity.item.RecordTime;
 import ua.com.alevel.persistence.entity.item.VaccinationPoint;
@@ -28,4 +26,7 @@ public interface RecordRepository extends BaseRepository<Record> {
     List<RecordTime> findAllRecordTimesByDoctorAndVaccineDate(@Param("doctor") Doctor doctor, @Param("vaccineDate") Date vaccineDate);
 
     void deleteAllByDoctorId(Long doctorId);
+
+    @Query("select r from Record r order by r.id desc")
+    List<Record> findAllRecordsBeforeInsert();
 }

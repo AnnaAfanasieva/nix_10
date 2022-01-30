@@ -54,7 +54,7 @@
                         <input type="hidden" th:field="*{doctor}" id="doctor" th:value="${record.getDoctor()}">
 
                         <hr>
-                        <a th:href="@{'/open/second'}" type="button" class="btn btn-outline-primary">Назад</a>
+                        <a th:href="@{'/open/second'}" type="button" class="btn btn-outline-primary" th:object="${record}">Назад</a>
                         <hr>
                         <button type="submit" class="btn btn-outline-primary">Завершити реєстрацію</button>
                         <!--                            </div>-->

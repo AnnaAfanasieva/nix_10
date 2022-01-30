@@ -6,8 +6,6 @@ import ua.com.alevel.persistence.entity.item.VaccinationPoint;
 import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.service.BaseService;
 
-import java.util.List;
-
 public interface DoctorService extends BaseService<Doctor> {
 
     DataTableResponse<Doctor> findAllByVaccinationPoint(DataTableRequest request, VaccinationPoint vaccinationPoint);

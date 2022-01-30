@@ -9,5 +9,5 @@ import ua.com.alevel.view.dto.response.PageData;
 
 public interface DoctorFacade extends BaseFacade<DoctorRequestDto, DoctorResponseDto> {
 
-    public PageData<DoctorResponseDto> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint, WebRequest request);
+    PageData<DoctorResponseDto> findAllByVaccinationPoint(VaccinationPoint vaccinationPoint, WebRequest request);
 }

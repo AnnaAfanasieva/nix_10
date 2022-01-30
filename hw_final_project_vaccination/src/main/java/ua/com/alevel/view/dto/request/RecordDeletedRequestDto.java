@@ -1,7 +1,6 @@
 package ua.com.alevel.view.dto.request;
 
 import ua.com.alevel.persistence.entity.item.RecordTime;
-import ua.com.alevel.persistence.entity.user.Doctor;
 import ua.com.alevel.persistence.util.Vaccine;
 
 public class RecordDeletedRequestDto extends RequestDto {
