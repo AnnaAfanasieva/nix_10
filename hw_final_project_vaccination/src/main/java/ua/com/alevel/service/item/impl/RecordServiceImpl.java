@@ -49,6 +49,7 @@ public class RecordServiceImpl implements RecordService {
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
+        deletedRecordRepository.insertDeletedRecordsIntoTableByRecordID(id);
         crudRepositoryHelper.delete(recordRepository, id);
     }
 

@@ -16,12 +16,6 @@
                 <div class="card-header">
                     <h4>Запис на вакцинацію</h4>
                 </div>
-                <!--                <div th:if="${freeRecordTime.size() == 0}">-->
-                <!--                    <label>Вибачте, на цей час вільних місць немає.</label>-->
-                <!--                    <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
-                <!--                </div>-->
-                <!--                <div th:unless="${freeRecordTime.size() != 0}">-->
-
                 <div class="card-body">
                     <form action="#" th:action="@{/open/success}" th:object="${record}" method="get">
                         <div class="form-group">
@@ -35,15 +29,6 @@
                             </select>
 
                         </div>
-                        <!--                        <div th:if="${not #lists.isEmpty(showap)}">        -->
-
-                        <!--                        <div th:if="${freeRecordTime.size() == '0'}">-->
-                        <!--                        <div>-->
-                        <!--                            <div th:if="${#lists.isEmpty(freeRecordTime)}">-->
-                        <!--                                <label>Вибачте, на цей час вільних місць немає.</label>-->
-                        <!--                                <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
-                        <!--                            </div>-->
-                        <!--                            <div th:unless="${not #lists.isEmpty(freeRecordTime)}">-->
                         <input type="hidden" th:field="*{surname}" id="surname" th:value="${record.getSurname()}">
                         <input type="hidden" th:field="*{name}" id="name" th:value="${record.getName()}">
                         <input type="hidden" th:field="*{patronymic}" id="patronymic" th:value="${record.getPatronymic()}">
@@ -52,19 +37,17 @@
                         <input type="hidden" th:field="*{vaccine}" id="vacine" th:value="${record.getVaccine()}">
                         <input type="hidden" th:field="*{vaccineDate}" id="vaccineDate" th:value="${record.getVaccineDate()}">
                         <input type="hidden" th:field="*{doctor}" id="doctor" th:value="${record.getDoctor()}">
-
                         <hr>
-                        <a th:href="@{'/open/second'}" type="button" class="btn btn-outline-primary" th:object="${record}">Назад</a>
-                        <hr>
-                        <button type="submit" class="btn btn-outline-primary">Завершити реєстрацію</button>
-                        <!--                            </div>-->
-                        <!--                        </div>-->
+                        <div>
+                            <div>
+                                <a style="float: left" th:href="@{'/open/second'}" type="button" class="btn btn-outline-primary" th:object="${record}">Назад</a>
+                            </div>
+                            <div>
+                                <button style="float: right" type="submit" class="btn btn-outline-primary">Завершити реєстрацію</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
-
-                <!--                </div>-->
-
-
             </div>
         </div>
     </div>

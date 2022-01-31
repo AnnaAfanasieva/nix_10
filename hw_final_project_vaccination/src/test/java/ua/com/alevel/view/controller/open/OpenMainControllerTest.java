@@ -103,7 +103,7 @@ class OpenMainControllerTest {
     void whenThirdPage() throws Exception {
         RecordNewRequestDto dto = new RecordNewRequestDto();
         dto.setDoctor(new Doctor());
-        dto.setVaccineDate("2001-04-24");
+        dto.setVaccineDate("2022-04-24");
         List<RecordTime> recordTimes = List.of(new RecordTime());
         when(recordRepository.findAllRecordTimesByDoctorAndVaccineDate(
             eq(dto.getDoctor()), eq(ConvertString.convertStringToDate(dto.getVaccineDate()))))

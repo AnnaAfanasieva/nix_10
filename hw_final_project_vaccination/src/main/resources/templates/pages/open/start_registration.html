@@ -48,16 +48,20 @@
                                     </option>
                                 </select>
                             </div>
-
                             <label for="vaccDate">Дата вакцинації:</label>
                             <input type="date" class="form-control" id="vaccDate" name="vaccDate" th:field="*{vaccineDate}"/>
-
                         </div>
-                        <hr>
-                        <a th:href="@{'/open'}" type="button" class="btn btn-outline-primary">Назад</a>
-                        <hr>
                         <input type="hidden" th:field="*{vaccinationPoint}" id="vacinationPoint" th:value="${record.getVaccinationPoint()}">
-                        <button type="submit" class="btn btn-outline-primary">Далі</button>
+
+                        <hr>
+                        <div>
+                            <div>
+                                <a style="float: left" th:href="@{'/open'}" type="button" class="btn btn-outline-primary">Назад</a>
+                            </div>
+                            <div>
+                                <button style="float: right" type="submit" class="btn btn-outline-primary">Далі</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

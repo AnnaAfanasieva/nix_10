@@ -30,7 +30,7 @@ public class AuthController extends BaseController {
             }
         }
         if (error != null) {
-            showError(model, "Your email and password is invalid.");
+            showError(model, "Невірний логін або пароль");
         }
         if (logout != null) {
             showInfo(model, "You have been logged out successfully.");

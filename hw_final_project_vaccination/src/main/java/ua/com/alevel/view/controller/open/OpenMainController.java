@@ -18,6 +18,7 @@ import ua.com.alevel.view.dto.request.RecordNewRequestDto;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -62,6 +63,16 @@ public class OpenMainController {
     @GetMapping("/third")
     public String thirdPage(Model model, @ModelAttribute("record") RecordNewRequestDto dto) {
         model.addAttribute("record", dto);
+        Date vaccinationDate = null;
+        try {
+            vaccinationDate = ConvertString.convertStringToDate(dto.getVaccineDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (vaccinationDate == null || vaccinationDate.getTime() < System.currentTimeMillis()) {
+            return "redirect:/open/second";
+        }
         List<RecordTime> freeRecordTime = new ArrayList<>();
         try {
             freeRecordTime = recordRepository.findAllRecordTimesByDoctorAndVaccineDate(dto.getDoctor(), ConvertString.convertStringToDate(dto.getVaccineDate()));

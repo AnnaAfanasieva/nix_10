@@ -29,15 +29,6 @@
                             <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Введіть email" th:field="*{email}">
                             <label for="password">Пароль</label>
                             <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Введіть пароль" th:field="*{password}">
-<!--                            <div class="form-group">-->
-<!--                                <label for="type">Оберіть локацію</label>-->
-<!--                                <select class="form-control" id="type" th:field="*{vaccinationPoint}">-->
-<!--                                    <option th:each="type : ${vaccinationPoints}"-->
-<!--                                            th:value="${type.getId()}"-->
-<!--                                            th:text="${type.getAddress()}">-->
-<!--                                    </option>-->
-<!--                                </select>-->
-<!--                            </div>-->
                         </div>
                         <input type="hidden" th:field="*{vaccinationPoint}" id="user" th:value="${doctor.getVaccinationPoint()}">
                         <button type="submit" class="btn btn-primary">Створити</button>

@@ -17,12 +17,6 @@
                 <div class="card-header">
                     <h4>Редагування запису</h4>
                 </div>
-                <!--                <div th:if="${freeRecordTime.size() == 0}">-->
-                <!--                    <label>Вибачте, на цей час вільних місць немає.</label>-->
-                <!--                    <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
-                <!--                </div>-->
-                <!--                <div th:unless="${freeRecordTime.size() != 0}">-->
-
                 <div class="card-body">
                     <form action="#" th:action="@{/admin/records/update}" th:object="${record}" method="post">
                         <div class="form-group">
@@ -36,15 +30,6 @@
                             </select>
 
                         </div>
-                        <!--                        <div th:if="${not #lists.isEmpty(showap)}">        -->
-
-                        <!--                        <div th:if="${freeRecordTime.size() == '0'}">-->
-                        <!--                        <div>-->
-                        <!--                            <div th:if="${#lists.isEmpty(freeRecordTime)}">-->
-                        <!--                                <label>Вибачте, на цей час вільних місць немає.</label>-->
-                        <!--                                <label>Будь ласка, поверніться на попередню сторінку та оберіть іншу дату</label>-->
-                        <!--                            </div>-->
-                        <!--                            <div th:unless="${not #lists.isEmpty(freeRecordTime)}">-->
                         <input type="hidden" th:field="*{surname}" id="surname" th:value="${record.getSurname()}">
                         <input type="hidden" th:field="*{name}" id="name" th:value="${record.getName()}">
                         <input type="hidden" th:field="*{patronymic}" id="patronymic" th:value="${record.getPatronymic()}">
@@ -55,14 +40,8 @@
                         <input type="hidden" th:field="*{doctor}" id="doctor" th:value="${record.getDoctor()}">
 
                         <button type="submit" class="btn btn-outline-primary">Завершити редагування</button>
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                     </form>
                 </div>
-
-                <!--                </div>-->
-
-
             </div>
         </div>
     </div>
