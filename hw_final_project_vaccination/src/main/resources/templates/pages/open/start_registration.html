@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/open_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Запис на вакцинацію</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Запис на вакцинацію</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/open/third}" th:object="${record}" method="get">
+                        <div class="form-group">
+                            <label for="surname">Прізвище</label>
+                            <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="Введіть прізвище" th:field="*{surname}">
+                            <label for="name">Ім'я</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Введіть ім'я" th:field="*{name}">
+                            <label for="patronymic">По батькові</label>
+                            <input type="text" class="form-control" id="patronymic" aria-describedby="patronymic" placeholder="Введіть по батькові" th:field="*{patronymic}">
+                            <label for="date">Дата народження:</label>
+                            <input type="date" class="form-control" id="date" name="date" placeholder="Введіть дату народження" th:field="*{dateOfBirth}"/>
+                            <label for="phone">Номер телефона пацієнта</label>
+                            <input type="tel" minlength="10" maxlength="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Введіть номер телефона" th:field="*{phone}">
+                            <div class="form-group">
+                                <label for="type">Оберіть лікаря</label>
+                                <select class="form-control" id="type" th:field="*{doctor}">
+                                    <option th:each="type : ${doctors}"
+                                            th:value="${type.getId()}"
+                                            th:text="${type.getSurname() + ' ' + type.getName() + ' ' + type.getPatronymic()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vaccine">Оберіть вакцину</label>
+                                <select class="form-control" id="vaccine" th:field="*{vaccine}">
+                                    <option th:each="type : ${vaccines}"
+                                            th:value="${type}"
+                                            th:text="${type.name()}">
+                                    </option>
+                                </select>
+                            </div>
+                            <label for="vaccDate">Дата вакцинації:</label>
+                            <input type="date" class="form-control" id="vaccDate" name="vaccDate" th:field="*{vaccineDate}"/>
+                        </div>
+                        <input type="hidden" th:field="*{vaccinationPoint}" id="vacinationPoint" th:value="${record.getVaccinationPoint()}">
+
+                        <hr>
+                        <div>
+                            <div>
+                                <a style="float: left" th:href="@{'/open'}" type="button" class="btn btn-outline-primary">Назад</a>
+                            </div>
+                            <div>
+                                <button style="float: right" type="submit" class="btn btn-outline-primary">Далі</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

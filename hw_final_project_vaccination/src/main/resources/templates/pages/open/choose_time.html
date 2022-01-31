@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/open_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Запис на вакцинацію</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Запис на вакцинацію</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/open/success}" th:object="${record}" method="get">
+                        <div class="form-group">
+
+                            <label for="vaccine">Час вакцинації</label>
+                            <select class="form-control" id="vaccine" th:field="*{recordTime}">
+                                <option th:each="type : ${freeRecordTime}"
+                                        th:value="${type.getId()}"
+                                        th:text="${type.getTime()}">
+                                </option>
+                            </select>
+
+                        </div>
+                        <input type="hidden" th:field="*{surname}" id="surname" th:value="${record.getSurname()}">
+                        <input type="hidden" th:field="*{name}" id="name" th:value="${record.getName()}">
+                        <input type="hidden" th:field="*{patronymic}" id="patronymic" th:value="${record.getPatronymic()}">
+                        <input type="hidden" th:field="*{dateOfBirth}" id="dateOfBirth" th:value="${record.getDateOfBirth()}">
+                        <input type="hidden" th:field="*{phone}" id="phone" th:value="${record.getPhone()}">
+                        <input type="hidden" th:field="*{vaccine}" id="vacine" th:value="${record.getVaccine()}">
+                        <input type="hidden" th:field="*{vaccineDate}" id="vaccineDate" th:value="${record.getVaccineDate()}">
+                        <input type="hidden" th:field="*{doctor}" id="doctor" th:value="${record.getDoctor()}">
+                        <hr>
+                        <div>
+                            <div>
+                                <a style="float: left" th:href="@{'/open/second'}" type="button" class="btn btn-outline-primary" th:object="${record}">Назад</a>
+                            </div>
+                            <div>
+                                <button style="float: right" type="submit" class="btn btn-outline-primary">Завершити реєстрацію</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>Редагування локації</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Редагування локації</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/vaccination_points/update}" th:object="${vaccination_point}" method="post">
+                        <div class="form-group">
+                            <label for="address">Адреса</label>
+                            <input type="text" class="form-control" id="address" aria-describedby="address" placeholder="Введіть нову адресу" th:field="*{address}">
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

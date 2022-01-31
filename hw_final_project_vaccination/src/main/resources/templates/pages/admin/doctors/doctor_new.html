@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>Новий лікар</h4>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/doctors/new}" th:object="${doctor}" method="post">
+                        <div class="form-group">
+                            <label for="surname">Прізвище</label>
+                            <input type="text" class="form-control" id="surname" aria-describedby="surname" placeholder="Введіть прізвище" th:field="*{surname}">
+                            <label for="name">Ім'я</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Введіть ім'я" th:field="*{name}">
+                            <label for="patronymic">По батькові</label>
+                            <input type="text" class="form-control" id="patronymic" aria-describedby="patronymic" placeholder="Введіть по батькові" th:field="*{patronymic}">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Введіть email" th:field="*{email}">
+                            <label for="password">Пароль</label>
+                            <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Введіть пароль" th:field="*{password}">
+                        </div>
+                        <input type="hidden" th:field="*{vaccinationPoint}" id="user" th:value="${doctor.getVaccinationPoint()}">
+                        <button type="submit" class="btn btn-primary">Створити</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>

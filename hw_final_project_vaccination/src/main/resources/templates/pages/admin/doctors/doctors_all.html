@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>doctors</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+    <tr th:each="doctor,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${doctor.getSurname()}"></td>
+        <td th:text="${doctor.getName()}"></td>
+        <td th:text="${doctor.getPatronymic()}"></td>
+        <td th:text="${doctor.getVaccinationPoint().getAddress()}"></td>
+        <td>
+            <a th:href="@{'/admin/doctors/details/' + ${doctor.getId()}}" type="button" class="btn btn-outline-primary">Деталі</a>
+        </td>
+        <td>
+            <a th:href="@{'/admin/doctors/delete/' + ${doctor.getId()}}" type="button" class="btn btn-outline-secondary">Видалити</a>
+        </td>
+    </tr>
+</div>
+
+</body>
+</html>
